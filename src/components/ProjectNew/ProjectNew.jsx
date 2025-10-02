@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 export const ProjectContext = createContext(null);
 export const useProjectIconContext = () => useContext(ProjectContext);
 const ProjectNew = () => {  
-  const [selectedIcon,setSelectedIcon] = useState(null);
+  const [selectedIcon,setSelectedIcon] = useState("microchip");
  
   const hiddenIconInputRef = useRef(null); 
  const {
@@ -28,6 +28,7 @@ const setIconAndHiddenRef = (iconData) => {
     
     // (C) Context Değeri: Child'a sadece eylem fonksiyonunu veriyoruz
     const contextValue = {
+       selectedIcon: selectedIcon, 
         setSelectedIcon: setIconAndHiddenRef // Child'ın kullanacağı fonksiyon
         // selectedIcon'u göndermeye gerek yok, sadece aksiyonu gönderiyoruz
     };

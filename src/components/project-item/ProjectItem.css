@@ -8,6 +8,7 @@
             padding: 5px;
             border: 1px dashed transparent;
             transition: all 0.2s ease-in-out;
+            cursor:pointer;
         }
 
         .project-item:hover {
@@ -15,7 +16,7 @@
             border: 1px dashed #00ff66;
             color:#00ff99;
         }
-
+        
         .item-icon {
             margin-top: 10px;
             font-size: 2em;
