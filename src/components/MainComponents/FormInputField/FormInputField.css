@@ -1,0 +1,75 @@
+input[type='text']{
+    background-color: transparent;
+    border:none;
+   border-bottom: #00ffbb solid 2px;
+   color:#00ffbb;
+}
+input[type='submit']
+{
+   justify-content: flex-end;
+   margin:10px;
+   padding:8px;
+   background-color: transparent;
+   border: #00dd00 solid 2px;
+   border-radius: 3px;
+   color:#00dd00;
+}
+input[type='submit']:hover
+{
+   border: #00ffbb solid 2px;
+   color:#00ffbb;
+}
+input[type='submit']:active
+{
+   border: #ffffff solid 2px;
+   color:#ffffff;
+}
+.textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    box-sizing: border-box; 
+    /* Scrollbar'ı uygulayabilmek için overflow: auto olmalı */
+    overflow: auto; 
+    /* Arka plan ve kenarlık rengi isteğiniz */
+    background-color:transparent; /* Arkaplan rengi: #00ffbb */
+    border: 2px solid #00ffbb; /* Kenarlık rengi: #00ffbb */
+    color:#00ffbb;
+}
+
+/* ---------------------------------- */
+/* 2. Scrollbar Biçimlendirme (WebKit Tarayıcılar: Chrome, Safari, Edge) */
+/* ---------------------------------- */
+/* Scrollbar'ın genişliğini/kalınlığını belirler */
+.textarea::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Scrollbar'ın yolunu (track) biçimlendirir */
+.textarea::-webkit-scrollbar-track {
+    background: green; /* Açık gri bir yol */
+    border-radius: 10px;
+}
+
+/* Scrollbar'ın hareket eden çubuğunu (thumb) biçimlendirir */
+.textarea::-webkit-scrollbar-thumb {
+    background:green; /* Koyu gri çubuk */
+    border-radius: 10px;
+    border: 2px solid #00ffbb; /* Çubuğa kenarlık vererek daha ince görünmesini sağlar */
+}
+
+/* Scrollbar çubuğunun üzerine gelindiğinde rengini değiştirir */
+.textarea::-webkit-scrollbar-thumb:hover {
+    background: #00ffbb;
+}
+
+/* ---------------------------------- */
+/* 3. Scrollbar Biçimlendirme (Firefox) */
+/* ---------------------------------- */
+/* Firefox, WebKit'teki gibi ayrıntılı biçimlendirmeye izin vermez,
+   ancak scrollbar'ın rengini ve kalınlığını ayarlar. */
+.textarea {
+  scrollbar-width: thin; /* 'auto' veya 'thin' olabilir */
+  scrollbar-color: #00ffbb  green; /* thumb color track color */
+}

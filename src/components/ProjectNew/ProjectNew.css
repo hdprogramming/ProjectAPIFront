@@ -1,0 +1,10 @@
+.MainWindow{
+   text-align: start;
+    display: flex;
+    flex-direction: column;
+    width:500px;
+}
+.Contents{
+    padding: 5px;    
+    border: #00ffbb solid 2px;      
+}

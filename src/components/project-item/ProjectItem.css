@@ -1,0 +1,27 @@
+.project-item {
+            display: flex;
+            color:#00ff66;
+            flex-direction: column;
+            max-height: fit-content;
+            align-items: center;
+            margin: 2px;
+            padding: 5px;
+            border: 1px dashed transparent;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .project-item:hover {
+            background-color: rgba(0, 255, 102, 0.1);
+            border: 1px dashed #00ff66;
+            color:#00ff99;
+        }
+
+        .item-icon {
+            margin-top: 10px;
+            font-size: 2em;
+        }
+
+        .item-text {
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
