@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: column;
     width:500px;
+     border:#00ffbb 2px solid;  
 }
 .Contents{
-    padding: 5px;    
-    border: #00ffbb solid 2px;      
+    padding: 5px 20px;
 }

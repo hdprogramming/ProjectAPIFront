@@ -1,14 +1,26 @@
 .Icons-Box {  
             display: flex;
+            flex-direction: column;
+            flex-wrap:wrap;
+            padding: 10px; 
+            color: #00ff66;            
+        }
+        .Icons-Head{
+         text-align: center;
+         border-bottom:#00ffbb 2px solid;
+        }
+        .Icons {  
+            
+            display: flex;            
             flex-direction: row;
             flex-wrap:wrap;
             padding: 10px;        
-            border: #00ffbb solid 2px;
             color: #00ff66;            
         }
         .IconsBox-Header{
             padding-left:3px;
-            text-align: start;
-            border: #00ffbb solid 2px;
+            text-align: center;
+            font-weight: 600;
+          
             border-bottom:none;
         }

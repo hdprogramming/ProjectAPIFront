@@ -3,11 +3,15 @@ import IconsBox from "../IconsBox/IconsBox";
 import "../ProjectNew/ProjectNew.css"
 import FormInputField from "../MainComponents/FormInputField/FormInputField";
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom'; 
 export const ProjectContext = createContext(null);
 export const useProjectIconContext = () => useContext(ProjectContext);
-const ProjectNew = () => {  
-  const [selectedIcon,setSelectedIcon] = useState("microchip");
- 
+
+const ProjectNew = ({onAdd}) => { 
+  const [selectedIcon,setSelectedIcon] = useState("microchip"); 
+  const [date,setDate]=useState(Date.now());
+   const [status,setStatus]=useState("Devam Ediyor...");
+    const navigate = useNavigate(); // Yönlendirme için hook
   const hiddenIconInputRef = useRef(null); 
  const {
     register,
@@ -32,13 +36,19 @@ const setIconAndHiddenRef = (iconData) => {
         setSelectedIcon: setIconAndHiddenRef // Child'ın kullanacağı fonksiyon
         // selectedIcon'u göndermeye gerek yok, sadece aksiyonu gönderiyoruz
     };
-  const onSubmit = (data) => {
+ const onSubmit = (data) => {
     // Veriler otomatik olarak toplanır
    
-    const finalData = { ...data, icon: selectedIcon };
+    const finalData = { ...data, icon: selectedIcon,date:date,status:status };
     const jsonString = JSON.stringify(finalData, null, 2); 
         console.log('Gönderilen Final Veri:', jsonString);
+        
+        onAdd(finalData); 
+        
+        // 3. Kullanıcıyı Deney Listesi sayfasına yönlendir
+        navigate('/deneyler'); 
   };
+ 
 useEffect(() => {
       if (hiddenIconInputRef.current && selectedIcon) {
           // İkon objesini string'e (JSON) dönüştürüp input'a yazıyoruz
@@ -49,14 +59,15 @@ useEffect(() => {
   }, [selectedIcon]); 
   return (
     <ProjectContext.Provider value={contextValue}>
-    <form onSubmit={handleSubmit(onSubmit)}>  
+    <form onSubmit={ handleSubmit(onSubmit)} >  
       
     <div className="MainWindow">
+      
       <IconsBox  />
       <div className="Contents">
        <FormInputField
         labeltext="Proje Adı"
-        name="projectName"
+        name="title"
         type="text"
         register={register}
         errors={errors}
@@ -68,7 +79,7 @@ useEffect(() => {
       />
        <FormInputField
         labeltext="Proje Açıklama"
-        name="projectDescription"
+        name="description"
         type="textarea"
         register={register}
         errors={errors}        
@@ -76,7 +87,7 @@ useEffect(() => {
       />
       <FormInputField
         labeltext="Proje Yayındamı?"
-        name="projectIsAlive"
+        name="isAlive"
         type="checkbox"
         checktext="Evet"
         register={register}

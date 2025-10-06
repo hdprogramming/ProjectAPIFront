@@ -1,0 +1,46 @@
+.modern-navbar {
+    display: flex; /* Flexbox ile içerikleri hizala */
+    justify-content:space-around; /* Logo sola, linkler sağa */
+    align-items: center; /* Dikeyde merkezle */
+    padding: 15px 50px; /* İç boşluklar */
+    position: fixed; /* Sayfanın en üstünde sabit kalması için */
+    width: 80%; /* Tam genişlik */
+    top: 0;
+    left: 0;    
+    z-index: 1000; /* Diğer içeriklerin üstünde kalması için */
+    background-color: rgba(0, 0, 0, 0); /* İstenen **ŞEFFAF ARKA PLAN** */
+    transition: background-color 0.3s ease; /* Scroll ile renk değişimi için geçiş efekti */
+}
+.nav-links {
+    list-style: none; /* Liste işaretlerini kaldır */
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 30px; /* Linkler arası boşluk */
+}
+
+/* Link (a) Stilleri */
+.nav-logo a,
+.nav-links a {
+    text-decoration: none; /* Alt çizgiyi kaldır */
+    color: #00ff66; /* İstenen **YAZI RENGİ** */
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    transition: color 0.3s ease, transform 0.2s ease; /* Hover için yumuşak geçiş */
+    letter-spacing: 0.5px;
+}
+
+/* Logo Stili */
+.nav-logo a {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+/* Link Mouse Üzerine Gelme (Hover) Stilleri */
+.nav-links a:hover {
+    color: #00ff99; /* İstenen **HOVER YAZI RENGİ** */
+    /* Mouse üzerine gelince hafif yukarı kalkma efekti */
+    transform: translateY(-2px); 
+}

@@ -1,8 +1,12 @@
 import FormInputField from '../MainComponents/FormInputField/FormInputField';
 import './ProjectItem.css'; // Opsiyonel: Kendi CSS dosyanızı import edebilirsiniz
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
  import { useProjectIconContext } from '../ProjectNew/ProjectNew';  
-const ProjectItem = ({ name,icon}) => { 
+
+ 
+const ProjectItem = ({ icon}) => { 
+  let name=icon.iconName.replace('fa-', '');
   const { selectedIcon,setSelectedIcon} = useProjectIconContext(); 
   const handleClick = () => {
         // Parent'taki state'i güncelliyoruz
