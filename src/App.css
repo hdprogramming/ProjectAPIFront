@@ -10,9 +10,11 @@ flex-direction: column;
 }
 
 .MainContentArea {
+  display:flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
   margin-top:10vh;
-  /* Geri kalan boşluğun hepsini kapla */
   flex-grow: 1; 
-  /* İçeriği içten hizala */
   padding: 20px;
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Detay sayfasına gitmek için
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
 import {IconsTable,DEFAULT_ICON} from '../utils/ExperimentIcons';
-
+import styles from '../pages/styles/ExperimentList.module.css'
 const getExperimentIcon = (iconName) => {
     return IconsTable[iconName] || DEFAULT_ICON;
 };
@@ -43,19 +43,12 @@ const ExperimentList = ({ experiments }) => {
     }
 
     return (
-        <div style={{ padding: '20px' }}>
+        <div className={styles.ExperimentList}>
             <h1>Deney Listesi</h1>
             
             {/* Yeni Deney Ekleme Butonu */}
-            <Link to="/deney/yeni" style={{ 
-                display: 'inline-block', 
-                padding: '10px 20px', 
-                backgroundColor: '#00ff66', 
-                color: 'black', 
-                textDecoration: 'none', 
-                marginBottom: '20px'
-            }}>
-                + Yeni Deney Ekle
+            <Link to="/deney/yeni" className={styles.NewExperimentButton}
+            >+ Yeni Deney Ekle
             </Link>
 
             {/* Deneyleri Listeleme */}
@@ -101,6 +94,15 @@ const ExperimentList = ({ experiments }) => {
                         <Link to={`/deneyler/${exp.id}`} style={{ color: '#00ffff', textDecoration: 'none', fontWeight: 'bold' }}>
                             Dökümantasyonu Görüntüle →
                         </Link>
+                    </div>
+                     <div style={{ display:'flex',flexDirection:'row-reverse',marginTop: '10px' }}>
+                       <Link to={`/deney/del/${exp.id}`} className={styles.DelLink}>
+                            Sil
+                        </Link>
+                        <Link to={`/deney/mod/${exp.id}`} className={styles.ModLink}>
+                            Düzenle
+                        </Link>
+                        
                     </div>
                 </li>
             ))}

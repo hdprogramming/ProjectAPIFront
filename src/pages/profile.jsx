@@ -34,7 +34,7 @@ const Profile = () => {
 
     // 4. Veri Yüklendikten Sonra İçeriği Gösterme
     return (
-        <div style={{ padding: '20px', border: '1px solid #00ff66' }}>
+        <div style={{ width:'50%',padding: '20px', border: '1px solid #00ff66' }}>
             <h1>Kullanıcı Profili</h1>
             <p><strong>Adı:</strong> {userData.name}</p>
             <p><strong>E-posta:</strong> {userData.email}</p>

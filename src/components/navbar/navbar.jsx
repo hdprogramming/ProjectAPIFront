@@ -2,29 +2,29 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
+import styles from './Navbar.module.css';
 const Navbar = () => {
 
 
   return (
-    <nav className='modern-navbar'>
-        <div className="nav-logo">
-            <Link to="/" className='Link' >
+    <nav className={styles.modernNavBar}>
+        <div className={styles.navLogo}>
+            <Link to="/"  >
         LOGO
       </Link>
         </div>
-        <div className='nav-links'>
-      <Link to="/" className='Link' >
+        <div className={styles.navLinks}>
+      <Link to="/"  >
         Ana Sayfa
       </Link>
-      <Link to="/hakkimizda" className='Link'>
+      <Link to="/hakkimizda" >
         Hakkımızda
       </Link>
       {/* Dinamik bir URL'e yönlendiren bir örnek bağlantı */}
-      <Link to="/profile" className='Link'>
+      <Link to="/profile" >
         Profil
       </Link>
-      <Link to="/deneyler" className='Link'>
+      <Link to="/deneyler" >
         Deneyler
       </Link>
       </div>

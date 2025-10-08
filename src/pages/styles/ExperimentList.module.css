@@ -1,0 +1,43 @@
+.NewExperimentButton
+{
+   display:flex;
+   background-color: transparent;
+width:220px;
+   border: #00dd00 solid 2px;
+   border-radius: 3px;
+   color:#00dd00;  
+   padding: 10px 20px; 
+   text-decoration: none; 
+   margin: 20px 0 20px 0;
+}
+.NewExperimentButton:hover
+{
+   border: #00ffbb solid 2px;
+   color:#00ffbb;
+}
+.ExperimentList{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width:80%;
+    padding: 20px;
+}
+a{
+    font-weight: 600;
+}
+.ModLink{
+    color:#cdcd00;
+    text-decoration: none;
+}
+.ModLink:hover{
+    color:#ffff00;
+}
+.DelLink{
+    margin-left:10px;
+    color:#cd0000;
+    text-decoration: none;
+}
+.DelLink:hover{
+    color:#ff0000;
+}

@@ -1,23 +1,41 @@
 import React, {useState,useEffect,useRef,useContext,createContext } from "react";
 import IconsBox from "../IconsBox/IconsBox";
-import "../ProjectNew/ProjectNew.css"
+import styles from "./ProjectForm.module.css"
 import FormInputField from "../MainComponents/FormInputField/FormInputField";
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom'; 
 export const ProjectContext = createContext(null);
 export const useProjectIconContext = () => useContext(ProjectContext);
-
-const ProjectNew = ({onAdd}) => { 
+const getTodayDate = () => {
+    const today = new Date();
+    // Ay ve günün başına sıfır ekleyelim (tek haneli ise)
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Ay 0'dan başlar, bu yüzden +1
+    const day = String(today.getDate()).padStart(2, '0');
+    
+    // YYYY-MM-DD formatını döndür
+    return `${year}-${month}-${day}`; 
+};
+const ProjectForm = ({onAdd,onUpdate,project}) => { 
+  const isEditing = !!project; 
+  const ProjectHead=isEditing?"Düzenleme":"Yeni";
   const [selectedIcon,setSelectedIcon] = useState("microchip"); 
-  const [date,setDate]=useState(Date.now());
-   const [status,setStatus]=useState("Devam Ediyor...");
     const navigate = useNavigate(); // Yönlendirme için hook
   const hiddenIconInputRef = useRef(null); 
- const {
+ const { 
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm(); // TypeScript tipleri olmadan çağırdık
+  } = useForm({ defaultValues: {
+            // project objesi varsa, project.title'ı al, yoksa boş string kullan.
+            id:isEditing?project.id:'',
+            title: isEditing ? project.title : '', 
+            description: isEditing ? project.description : '',
+            isAlive:isEditing?project.isAlive:true,
+            status:isEditing?project.Status:'Devam Ediyor...',
+            date:isEditing?project.date:getTodayDate()
+        },}); // TypeScript tipleri olmadan çağırdık
 const setIconAndHiddenRef = (iconData) => {
         // 1. Icon State'ini güncelle
         setSelectedIcon(iconData); 
@@ -39,12 +57,13 @@ const setIconAndHiddenRef = (iconData) => {
  const onSubmit = (data) => {
     // Veriler otomatik olarak toplanır
    
-    const finalData = { ...data, icon: selectedIcon,date:date,status:status };
+    const finalData = { ...data, icon: selectedIcon };
     const jsonString = JSON.stringify(finalData, null, 2); 
         console.log('Gönderilen Final Veri:', jsonString);
-        
+        if(!isEditing)
         onAdd(finalData); 
-        
+        else
+        onUpdate(finalData);
         // 3. Kullanıcıyı Deney Listesi sayfasına yönlendir
         navigate('/deneyler'); 
   };
@@ -60,11 +79,14 @@ useEffect(() => {
   return (
     <ProjectContext.Provider value={contextValue}>
     <form onSubmit={ handleSubmit(onSubmit)} >  
+      <input 
+        type="hidden" // Gizli input
+        {...register("id")} // RHF'ye kaydediyoruz
+    /> 
+    <div className={styles.MainWindow}>
       
-    <div className="MainWindow">
-      
-      <IconsBox  />
-      <div className="Contents">
+      <IconsBox headertext={ProjectHead} />
+      <div className={styles.Contents}>
        <FormInputField
         labeltext="Proje Adı"
         name="title"
@@ -91,8 +113,27 @@ useEffect(() => {
         type="checkbox"
         checktext="Evet"
         register={register}
-        errors={errors}        
-        
+        errors={errors} 
+      />
+      <FormInputField
+      labeltext="Tarih"
+      name="date"
+      type="date"
+      register={register}
+      errors={errors}
+      />
+      <FormInputField
+      labeltext="Durum"
+      name="status"
+      type="select"
+      options={[
+        {label:"Planlandı",value:"Planlandı"},
+        {label:"DevamEdiyor...",value:"DevamEdiyor..."},
+        {label:"İptal Edildi",value:"İptalEdildi"},
+        {label:"Tamamlandı",value:"Tamamlandı"} 
+      ]}     
+      register={register}
+      errors={errors}
       />
       <div style={{
         display:'flex',
@@ -110,4 +151,4 @@ useEffect(() => {
   );
 };
 
-export default ProjectNew;
+export default ProjectForm;

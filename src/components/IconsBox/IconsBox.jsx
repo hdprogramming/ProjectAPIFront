@@ -1,16 +1,15 @@
 
-import './IconsBox.css'; // Opsiyonel: Kendi CSS dosyanızı import edebilirsiniz
-import ProjectItem from '../project-item/Project-item';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
+import styles from './IconsBox.module.css'; 
 import { IconsTable } from '../../utils/ExperimentIcons';
+import ProjectItem from '../project-item/Project-item';
  const Icons= Object.keys(IconsTable);
-const IconsBox = () => {  
+const IconsBox = ({headertext}) => {  
 
   return (
     <div>     
-       <div className='IconsBox-Header'> <h2>Yeni Proje</h2></div>
-    <div className="Icons-Box" >
-      <div className='Icons-Head'>Icon Seçiniz</div><div className='Icons'>
+       <div className={styles.IconsBoxHeader}> <h2>{headertext}</h2></div>
+    <div className={styles.IconsBox}>
+      <div className={styles.IconsHead}>Icon Seçiniz</div><div className={styles.Icons}>
      {/* Dizideki her bir ikon için ProjectItem bileşeni oluşturuyoruz */}
       {Icons.map((key) => {
         const icon=IconsTable[key];

@@ -1,8 +1,8 @@
 import FormInputField from '../MainComponents/FormInputField/FormInputField';
-import './ProjectItem.css'; // Opsiyonel: Kendi CSS dosyanızı import edebilirsiniz
+import styles from './ProjectItem.module.css'; // Opsiyonel: Kendi CSS dosyanızı import edebilirsiniz
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
- import { useProjectIconContext } from '../ProjectNew/ProjectNew';  
+ import { useProjectIconContext } from '../ProjectForm/ProjectForm';  
 
  
 const ProjectItem = ({ icon}) => { 
@@ -19,9 +19,9 @@ const ProjectItem = ({ icon}) => {
       border:isSelected?"1px green dashed":"1px solid transparent"
     };
   return (
-   <div className="project-item" onClick={handleClick} style={iconStyle}>             
-      <FontAwesomeIcon icon={icon} className="item-icon" />
-      <span className="item-text">
+   <div className={styles.projectitem} onClick={handleClick} style={iconStyle}>             
+      <FontAwesomeIcon icon={icon} className={styles.itemicon} />
+      <span className={styles.itemtext}>
         {name}       
       </span>
     </div>
