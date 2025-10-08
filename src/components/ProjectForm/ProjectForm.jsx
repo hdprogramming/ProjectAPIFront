@@ -110,7 +110,7 @@ useEffect(() => {
       <FormInputField
         labeltext="Proje Yayındamı?"
         name="isAlive"
-        type="checkbox"
+        type="checkbox"        
         checktext="Evet"
         register={register}
         errors={errors} 

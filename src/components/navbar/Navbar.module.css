@@ -1,14 +1,18 @@
-.modernNavBar {
+.Navbar {
     display: flex; /* Flexbox ile içerikleri hizala */
     justify-content:space-around; /* Logo sola, linkler sağa */
     align-items: center; /* Dikeyde merkezle */
     padding: 15px 50px; /* İç boşluklar */
     position: fixed; /* Sayfanın en üstünde sabit kalması için */
-    width: 80%; /* Tam genişlik */
+    width: 100%; /* Tam genişlik */
     top: 0;
     left: 0;    
     z-index: 1000; /* Diğer içeriklerin üstünde kalması için */
     background-color: rgba(0, 0, 0, 0); /* İstenen **ŞEFFAF ARKA PLAN** */
+    transition: background-color 0.3s ease; /* Scroll ile renk değişimi için geçiş efekti */
+}
+.NavbarScrolled {
+    background-color: rgba(19, 124, 57, 0.627); /* İstenen **ŞEFFAF ARKA PLAN** */
     transition: background-color 0.3s ease; /* Scroll ile renk değişimi için geçiş efekti */
 }
 .navLinks {

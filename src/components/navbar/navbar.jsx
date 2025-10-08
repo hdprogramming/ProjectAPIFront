@@ -1,13 +1,27 @@
 // Navbar.js
 
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 const Navbar = () => {
 
-
+ const [scrolled,setScrolled]=useState(false);
+ const handleScrolled=()=>{
+  const offset=window.scrollY;
+ if(offset>50)
+ {
+  setScrolled(true);
+ }else setScrolled(false);
+ }
+ useEffect(()=>{
+ window.addEventListener('scroll',handleScrolled);
+ return () => {
+      window.removeEventListener('scroll', handleScrolled);
+    };
+ },[])
+ const navbarClasses = `${styles.Navbar} ${scrolled ? styles.NavbarScrolled : ''}`;
   return (
-    <nav className={styles.modernNavBar}>
+    <nav className={navbarClasses}>
         <div className={styles.navLogo}>
             <Link to="/"  >
         LOGO

@@ -77,7 +77,23 @@ const FormInputField = ({
         </div>
       );
       break;
-    // Varsayılan durum: 'text', 'number', 'email', 'password' vb. standart input'lar
+    case 'checkbox':
+  element = (
+    <label className={styles['custom-checkbox-container']}>
+      {/* Gizli input */}
+      <input
+        id={name}
+        type='checkbox'
+        {...register(name, validationRules)}
+      />
+      {/* Görsel kutu */}
+      <span className={styles['checkmark']}></span>
+      {/* Onay kutusu metni */}
+      {checktext}
+    </label>
+  );
+  break;
+      // Varsayılan durum: 'text', 'number', 'email', 'password' vb. standart input'lar
     case 'text':
     case 'number':
     case 'email':
@@ -100,7 +116,7 @@ const FormInputField = ({
 
       {element}
 
-      {checktext && <label>{checktext}</label>}
+      
 
       {/* Hata prop'u varsa hata mesajını gösteriyoruz */}
       {error && (
