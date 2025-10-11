@@ -1,8 +1,8 @@
 // ProductDetail.js
 
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useState,useEffect } from 'react';
+import useFetchSim from '../utils/useFetchSim';
+import StatusRenderer from '../utils/StatusRenderer';
    // API'den gelebilecek bir kullanıcı objesi simülasyonu
 const FAKE_USER_DATA = {
     name: "Gemini Asistanı",
@@ -13,25 +13,21 @@ const FAKE_USER_DATA = {
 
 const Profile = () => {
     // 1. Veri ve Yükleme Durumları İçin State Tanımlama
-    const [userData, setUserData] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-
-    // 2. Bileşen Yüklendiğinde (mount) Veri Çekme İşlemini Başlatma
-    useEffect(() => {
-        // Normalde burada fetch('https://api.siteniz.com/profile/1') yapılırdı.
-        
-        // Simülasyon: 1.5 saniyelik bir gecikme ile veriyi yüklüyoruz
-        setTimeout(() => {
-            setUserData(FAKE_USER_DATA); // Veriyi state'e kaydet
-            setIsLoading(false);      // Yükleme bitti
-        }, 800); 
-    }, []); // Boş dizi ([]) sayesinde sadece BİR KEZ çalışır (bileşen yüklendiğinde).
-
+    const [userData, isLoading,errors] = useFetchSim(FAKE_USER_DATA);  
     // 3. Yükleme Durumuna Göre Kullanıcıya Geri Bildirim
-    if (isLoading) {
-        return <h2 style={{ color: 'yellow' }}>Profil yükleniyor...</h2>;
-    }
-
+    const statusContent = (
+    <StatusRenderer 
+      isLoading={isLoading} 
+      error={errors} 
+      loadingMessage="Profil Yükleniyor..." // Mesajı dinamik olarak veriyoruz
+      // errorMessage'i opsiyonel bırakabiliriz.
+    />
+  );
+  
+  // 2. Eğer yükleniyor veya hata varsa, sadece durumu göster
+  if (isLoading || errors) {
+      return statusContent;
+  }       
     // 4. Veri Yüklendikten Sonra İçeriği Gösterme
     return (
         <div style={{ width:'50%',padding: '20px', border: '1px solid #00ff66' }}>

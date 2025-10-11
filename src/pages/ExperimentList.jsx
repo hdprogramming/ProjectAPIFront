@@ -3,44 +3,27 @@ import { Link } from 'react-router-dom'; // Detay sayfasına gitmek için
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
 import {IconsTable,DEFAULT_ICON} from '../utils/ExperimentIcons';
 import styles from '../pages/styles/ExperimentList.module.css'
+import useFetchSim from '../utils/useFetchSim';
+import StatusRenderer from '../utils/StatusRenderer';
 const getExperimentIcon = (iconName) => {
     return IconsTable[iconName] || DEFAULT_ICON;
 };
 const ExperimentList = ({ experiments }) => {
-   const [experimentsmain,setExperiments] =useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        // Gerçek API isteği (GET /api/experiments)
-        const fetchExperiments = async () => {
-            try {
-                // *** GERÇEK API UCU BURAYA GELECEK ***
-                // const response = await fetch('/api/experiments');
-                // const data = await response.json();
-                
-                // SIMÜLASYON: 1 saniye bekleyip sahte veriyi yüklüyoruz
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                
-                setExperiments(experiments);
-                setIsLoading(false);
-
-            } catch (err) {
-                setError("Deneyler yüklenirken bir hata oluştu.");
-                setIsLoading(false);
-            }
-        };
-
-        fetchExperiments();
-    }, []); // Bileşen yüklendiğinde bir kez çalışır
-    
-    if (isLoading) {
-        return <h2 style={{ color: 'yellow' }}>Deney listesi yükleniyor...</h2>;
-    }
-
-    if (error) {
-        return <h2 style={{ color: 'red' }}>Hata: {error}</h2>;
-    }
+    const [experimentsmain,isLoading,error]=useFetchSim(experiments);
+       
+    const statusContent = (
+    <StatusRenderer 
+      isLoading={isLoading} 
+      error={error} 
+      loadingMessage="Deneyler Yükleniyor..." // Mesajı dinamik olarak veriyoruz
+      // errorMessage'i opsiyonel bırakabiliriz.
+    />
+  );
+  
+  // 2. Eğer yükleniyor veya hata varsa, sadece durumu göster
+  if (isLoading || error) {
+      return statusContent;
+  }       
 
     return (
         <div className={styles.ExperimentList}>
