@@ -1,0 +1,47 @@
+.Window{
+    border:#00ff11 1px solid;
+    padding:10px;
+}
+.Window-Header{    
+    margin:-10px -10px 10px -10px;
+    background-color: #00aa11;
+    font-weight: 600;
+    color:#ffffff;
+    padding:5px;
+    display:flex;
+    justify-content: space-between;
+}
+.Window-Header-Minimalize{
+    cursor:pointer;
+    color:#00ff11;
+}
+.Window-Header-Minimalize:hover{
+    color:white;
+}
+.Project{
+    width:95%;
+    margin-top:10px;
+       display:flex;
+      flex-direction:row;
+      justify-content: space-between;
+      flex-wrap:wrap;     
+}
+.Project a{
+    color:#00ff66;
+    text-decoration: none;
+}
+.Project a:hover{
+    color:aqua;
+}
+.item{
+    cursor:pointer;
+    font-weight: 600;
+    margin:5px;
+}
+.item p {
+    width:100px;
+    font-weight: 300;
+}
+.item-icon{
+    font-size: 2em;
+}

@@ -2,7 +2,7 @@
     display: flex; /* Flexbox ile içerikleri hizala */
     justify-content:space-around; /* Logo sola, linkler sağa */
     align-items: center; /* Dikeyde merkezle */
-    padding: 15px 50px; /* İç boşluklar */
+    padding: 5px 10px; /* İç boşluklar */
     position: fixed; /* Sayfanın en üstünde sabit kalması için */
     width: 100%; /* Tam genişlik */
     top: 0;
@@ -12,12 +12,15 @@
     transition: background-color 0.3s ease; /* Scroll ile renk değişimi için geçiş efekti */
 }
 .NavbarScrolled {
-    background-color: rgba(19, 124, 57, 0.627); /* İstenen **ŞEFFAF ARKA PLAN** */
-    transition: background-color 0.3s ease; /* Scroll ile renk değişimi için geçiş efekti */
+background: #1A8A44;
+background: linear-gradient(175deg,rgba(26, 138, 68, 0.80) 0%, rgba(18, 115, 52, 0.81) 35%, rgba(8, 99, 42, 0.81) 62%, rgba(16, 89, 42, 0.81) 100%);
+/*background-image:url('/public/back.svg');'*/
 }
-.navLinks {
+
+.navLinks {    
     list-style: none; /* Liste işaretlerini kaldır */
-    display: flex;
+    display: flex;    
+    padding-right:15%;
 }
 
 .navLinks li {
@@ -43,9 +46,15 @@
     /* Mouse üzerine gelince hafif yukarı kalkma efekti */
     transform: translateY(-2px); 
 }
+.navLogo{
+    display: flex;
+    flex-direction:column;
+}
 .navLogo a {
+    position:relative;
     font-size: 1.5rem;
     text-transform: uppercase;
+    left:10vw;
 }
 
 

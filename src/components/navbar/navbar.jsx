@@ -22,9 +22,11 @@ const Navbar = () => {
  const navbarClasses = `${styles.Navbar} ${scrolled ? styles.NavbarScrolled : ''}`;
   return (
     <nav className={navbarClasses}>
-        <div className={styles.navLogo}>
+      
+         <div className={styles.navLogo}>
             <Link to="/"  >
-        LOGO
+        <img width='50px'src='./public/logo.png'></img>
+        <div  >Project Explorer</div>
       </Link>
         </div>
         <div className={styles.navLinks}>
@@ -42,6 +44,8 @@ const Navbar = () => {
         Deneyler
       </Link>
       </div>
+     
+       
     </nav>
   );
 };

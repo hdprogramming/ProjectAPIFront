@@ -12,12 +12,15 @@ import NewExperiment from './pages/NewExperiment';
 import { useState } from 'react';
 import ModExperiment from './pages/ModExperiment';
 import DelExperiment from './pages/DelExperiment';
+import ViewProject from './pages/ViewProject';
+//Burada örnek deney verileri tanımlıyoruz
 let initialExperiments = [
   {
     id: 1,
     icon: null, // "none" yerine genellikle null veya boş string kullanılır
     title: "Plazma Fizik Deneyi",
-    description: "Yüksek enerji yoğunluğunda plazma üretimi, kararlılığı ve manyetik hapsi incelenmiştir. Deneyde helyum gazı kullanılmıştır.",
+    description:"",
+    content: "Yüksek enerji yoğunluğunda plazma üretimi, kararlılığı ve manyetik hapsi incelenmiştir. Deneyde helyum gazı kullanılmıştır.",
     isAlive: true, // Deneyin aktif olarak takip edildiğini belirtir
     date: "2025-09-15",
     status: "Tamamlandı"
@@ -26,7 +29,8 @@ let initialExperiments = [
     id: 2,
     icon: 'atom',
     title: "Kuantum Algoritma Testi",
-    description: "Küçük ölçekli kuantum bilgisayarlar üzerinde Shor ve Grover algoritmalarının performans karşılaştırması yapıldı. Örnek veri seti rastgele oluşturulmuştur.",
+    description:"",
+    content: "Küçük ölçekli kuantum bilgisayarlar üzerinde Shor ve Grover algoritmalarının performans karşılaştırması yapıldı. Örnek veri seti rastgele oluşturulmuştur.",
     isAlive: true,
     date: "2023-02-23",
     status: "Devam Ediyor"
@@ -35,7 +39,8 @@ let initialExperiments = [
     id: 3,
     icon: 'flask',
     title: "Nanomalzeme Sentezi",
-    description: "Kimyasal buhar biriktirme (CVD) yöntemiyle grafen oksit (GO) sentezi ve karakterizasyonu hedeflenmektedir. Isı ve basınç parametreleri optimize edilmiştir.",
+    description:"",
+    content: "Kimyasal buhar biriktirme (CVD) yöntemiyle grafen oksit (GO) sentezi ve karakterizasyonu hedeflenmektedir. Isı ve basınç parametreleri optimize edilmiştir.",
     isAlive: true,
     date: "2025-12-22",
     status: "Planlandı"
@@ -44,12 +49,18 @@ let initialExperiments = [
     id: 4,
     icon: 'rocket',
     title: "Yüksek İtici Güç Denemesi",
-    description: "Yeni nesil katı yakıtlı roket motoru bileşenlerinin yanma verimliliği test edildi. Motor 5 saniye boyunca çalıştırılmıştır.",
+    description:"",
+    content: "Yeni nesil katı yakıtlı roket motoru bileşenlerinin yanma verimliliği test edildi. Motor 5 saniye boyunca çalıştırılmıştır.",
     isAlive: false, // Arşivlenmiş veya iptal edilmiş deney
     date: "2025-08-11",
     status: "İptal Edildi"
   }
 ];
+//description kısmını şimdilik böyle yapıyoruz
+initialExperiments.map((exp)=>{
+let description=exp.content.substring(0,100);
+exp.description=description;
+})
 function App() {
   // Liste ve listeyi güncelleme fonksiyonu (setter) App'te tutulur
   const [experiments, setExperiments] = useState(initialExperiments);
@@ -112,7 +123,7 @@ function App() {
           <Routes>
 
             {/* 1. Statik Rota: Tam "/" yolu eşleştiğinde <Home> gösterilir. */}
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home experiments={experiments}/>} />
 
             {/* 2. Statik Rota: "/hakkimizda" yolu eşleştiğinde <About> gösterilir. */}
             <Route path="/hakkimizda" element={<About />} />
@@ -122,6 +133,7 @@ function App() {
            Bu değeri <ProductDetail> bileşeni useParams ile kullanır. */}
             <Route path="/profile" element={<Profile />} />
             <Route path="/deneyler" element={<ExperimentList experiments={experiments} />} /> {/* Tüm listeyi gösterir */}
+            <Route path="/deneyler/:id" element={<ViewProject  getExperimentById={getExperimentById}  />} /> 
             <Route path="/deney/yeni" element={<NewExperiment onAdd={handleAddExperiment} />} /> {/* Yeni proje ekleme */}
             <Route path="/deney/mod/:id" element={<ModExperiment onUpdate={handleUpdateExperiment} getExperimentById={getExperimentById} />} /> {/* Yeni proje güncelleme */}
             <Route path="/deney/del/:id" element={<DelExperiment onDelete={handleDeleteExperiment} />} /> {/* Yeni proje güncelleme */}

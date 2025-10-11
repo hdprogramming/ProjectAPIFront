@@ -62,12 +62,12 @@ const ExperimentList = ({ experiments }) => {
                         padding: '15px', 
                         textAlign: 'left',
                         // isAlive durumuna göre arka plan rengi ayarla
-                        backgroundColor: exp.isAlive ? 'rgba(0, 255, 102, 0.05)' : 'rgba(255, 0, 0, 0.05)' 
+                        backgroundColor: exp.isAlive ? 'rgba(0, 255, 102, 0.1)' : 'rgba(45, 0, 27, 0.3)' 
                     }}
                 >
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         
-                       <FontAwesomeIcon icon={getExperimentIcon(exp.icon)} className="item-icon" />
+                       <FontAwesomeIcon icon={getExperimentIcon(exp.icon)}  />
                         
                         <div>
                             {/* BAŞLIK VE DURUM GÖSTERİMİ */}
@@ -86,7 +86,7 @@ const ExperimentList = ({ experiments }) => {
 
                     {/* Deneyin Kısa Açıklaması */}
                     <p style={{ marginTop: '10px', fontSize: '0.9em', color: '#cccccc' }}>
-                        {exp.description.substring(0, 100)}... 
+                        {exp.description}... 
                     </p>
                     
                     <div style={{ marginTop: '10px' }}>

@@ -4,13 +4,16 @@
     box-sizing: border-box; /* Bu, genişlik ve yükseklik hesaplamasını kolaylaştırır */
 }
 body{
-  background-color: #1a2a1a;
+  /*background-color: #1a2a1a;
             background-image:
                 linear-gradient(to right, rgba(0, 255, 102, 0.1) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(0, 255, 102, 0.1) 1px, transparent 1px),
                 radial-gradient(circle at 10% 20%, rgba(0, 255, 153, 0.1) 0%, transparent 50%);
             background-size: 30px 30px, 30px 30px, cover;
-            background-attachment: fixed;
+            background-attachment: fixed;*/
+            background-image: url('/public/background2.jpg');
+            background-repeat: repeat;
+            
             color: #00ff66;
             /* Parlak ZnO:Zn fosfor yeşili */
             font-family: 'Courier New', Courier, monospace;

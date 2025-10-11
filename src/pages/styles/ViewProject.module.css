@@ -1,0 +1,17 @@
+.ExperimentContent
+{
+  display:flex;
+  flex-direction: column;
+   color:#00ff66;
+}
+.ExperimentContent a{
+  margin-top:10px;  
+  text-decoration: none;
+  color:#00ff66;
+}
+.ExperimentContent a:hover{
+  color:#00ffbb;
+}
+.ExperimentContent h2{
+    margin-bottom:10px;
+}
