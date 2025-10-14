@@ -7,11 +7,26 @@
 .ExperimentContent a{
   margin-top:10px;  
   text-decoration: none;
-  color:#00ff66;
+  color:#00ffdd;
 }
 .ExperimentContent a:hover{
-  color:#00ffbb;
+  color:#00ffff;
 }
 .ExperimentContent h2{
     margin-bottom:10px;
+}
+.ExperimentContent .ModLink{
+    color:#cdcd00;
+    text-decoration: none;
+}
+.ExperimentContent .ModLink:hover{
+    color:#ffff00;
+}
+.ExperimentContent .DelLink{
+    margin-left:10px;
+    color:#cd0000;
+    text-decoration: none;
+}
+.ExperimentContent .DelLink:hover{
+    color:#ff0000;
 }

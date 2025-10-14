@@ -19,6 +19,7 @@ const getTodayDate = () => {
 const ProjectForm = ({onAdd,onUpdate,project}) => { 
   const isEditing = !!project; 
   const ProjectHead=isEditing?"Düzenleme":"Yeni";
+  const [isFinalPage,setFinalPage]=useState(false);
   const [selectedIcon,setSelectedIcon] = useState("microchip"); 
     const navigate = useNavigate(); // Yönlendirme için hook
   const hiddenIconInputRef = useRef(null); 
@@ -27,11 +28,13 @@ const ProjectForm = ({onAdd,onUpdate,project}) => {
     handleSubmit,
     reset,
     formState: { errors },
+    trigger,
   } = useForm({ defaultValues: {
             // project objesi varsa, project.title'ı al, yoksa boş string kullan.
             id:isEditing?project.id:'',
             title: isEditing ? project.title : '', 
             description: isEditing ? project.description : '',
+            content: isEditing ? project.description : '',
             isAlive:isEditing?project.isAlive:true,
             status:isEditing?project.Status:'Devam Ediyor...',
             date:isEditing?project.date:getTodayDate()
@@ -65,9 +68,35 @@ const setIconAndHiddenRef = (iconData) => {
         else
         onUpdate(finalData);
         // 3. Kullanıcıyı Deney Listesi sayfasına yönlendir
-        navigate('/deneyler'); 
+        navigate('/deneyler');
+       
   };
+ const onClick=async(event)=>{ 
+  event.preventDefault(); 
+  // 2. Sadece ilk sayfanın alanlarını (title, description, isAlive, date, status, icon) doğrula
+    // 'icon' alanı gizli olduğu ve 'title' alanı zorunlu olduğu için sadece onları doğrulamak yeterli olabilir.
+    // Ancak tüm ilk sayfa alanlarını (title, description, isAlive, date, status) doğrulamak daha güvenlidir.
+    // Alan isimlerini bir dizi olarak trigger'a veriyoruz.
+    const fieldsToValidate = ['title', 'description', 'isAlive', 'date', 'status'];
+    const isValid = await trigger(fieldsToValidate);
+
+    // 3. Doğrulama başarılıysa ikinci sayfaya geç
+    if (isValid) {
+      setFinalPage(true);
+    } else {
+      // Hata varsa bir şey yapabilirsiniz (örneğin scroll'u en üste taşımak)
+      console.log('Doğrulama hatası! İkinci sayfaya geçilemedi.');
+    }
  
+ }
+ const onBackClick=async(event)=>{ 
+  event.preventDefault(); 
+
+ 
+      setFinalPage(false);
+   
+ 
+ }
 useEffect(() => {
       if (hiddenIconInputRef.current && selectedIcon) {
           // İkon objesini string'e (JSON) dönüştürüp input'a yazıyoruz
@@ -78,14 +107,14 @@ useEffect(() => {
   }, [selectedIcon]); 
   return (
     <ProjectContext.Provider value={contextValue}>
-    <form onSubmit={ handleSubmit(onSubmit)} >  
+    <form onSubmit={handleSubmit(onSubmit)} >  
       <input 
         type="hidden" // Gizli input
         {...register("id")} // RHF'ye kaydediyoruz
-    /> 
-    <div className={styles.MainWindow}>
-      
-      <IconsBox headertext={ProjectHead} />
+    />   <div className={styles.FormBoxHeader}> <h2>{ProjectHead}</h2></div>
+    
+    <div className={styles.MainWindow} style={{display:!isFinalPage?'flex':'none'}}>
+       <IconsBox />
       <div className={styles.Contents}>
        <FormInputField
         labeltext="Proje Adı"
@@ -100,7 +129,7 @@ useEffect(() => {
         }}
       />
        <FormInputField
-        labeltext="Proje Açıklama"
+        labeltext="Proje Açıklaması"
         name="description"
         type="textarea"
         register={register}
@@ -135,19 +164,38 @@ useEffect(() => {
       register={register}
       errors={errors}
       />
+      
+      </div> 
       <div style={{
         display:'flex',
         justifyContent: 'flex-end' }}>
-       <input type="submit" ></input>
-      <input
+          <input
           type="hidden" // Görünmez yapar
           ref={hiddenIconInputRef} // Manuel erişim için ref atadık
           // RHF'ye kaydediyoruz. data objesinde bu isimle yer alacak.
           {...register('icon')} 
         />
+        <button type="button" onClick={onClick}>İlerle</button></div>      
+       </div>
+       <div className={styles.SecondWindow} style={{display:isFinalPage?'flex':'none'}}>
+      
+       
+       <FormInputField
+        labeltext="Proje İçeriği"
+        name="content"
+        type="textarea"
+        register={register}
+        errors={errors}        
+        
+      />
+        <div style={{
+        display:'flex',
+        justifyContent: 'flex-end' }}>
+          <button onClick={onBackClick}>Geri Dön</button>
+       <input type="submit"  ></input>
+      
         </div>
-      </div>       
-       </div></form></ProjectContext.Provider>
+        </div></form></ProjectContext.Provider>
   );
 };
 

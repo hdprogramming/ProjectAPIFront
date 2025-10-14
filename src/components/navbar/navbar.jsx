@@ -3,8 +3,10 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
-const Navbar = () => {
+import { useAuth } from '../../contexts/AuthContext';
 
+const Navbar = () => {
+ const { isLogin, Login,Logoff } = useAuth();
  const [scrolled,setScrolled]=useState(false);
  const handleScrolled=()=>{
   const offset=window.scrollY;
@@ -40,11 +42,17 @@ const Navbar = () => {
       <Link to="/profile" >
         Profil
       </Link>
-      <Link to="/deneyler" >
+      {isLogin?<><Link to="/deneyler" >
         Deneyler
-      </Link>
+        </Link> 
+        <Link to="/logout" >
+        Çıkış Yap
+        </Link>
+        </>       
+        :<Link to="/login">Giriş Yap</Link>}
+       
       </div>
-     
+   
        
     </nav>
   );

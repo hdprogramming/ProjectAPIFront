@@ -16,7 +16,7 @@ const Home = ({experiments}) => {
     <StatusRenderer 
       isLoading={isLoading} 
       error={error} 
-      loadingMessage="Deney Yükleniyor..." // Mesajı dinamik olarak veriyoruz
+      loadingMessage="Deneyler Yükleniyor..." // Mesajı dinamik olarak veriyoruz
       // errorMessage'i opsiyonel bırakabiliriz.
     />
   );

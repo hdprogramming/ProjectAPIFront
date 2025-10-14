@@ -3,11 +3,11 @@ import styles from './IconsBox.module.css';
 import { IconsTable } from '../../utils/ExperimentIcons';
 import ProjectItem from '../project-item/Project-item';
  const Icons= Object.keys(IconsTable);
-const IconsBox = ({headertext}) => {  
+const IconsBox = () => {  
 
   return (
     <div>     
-       <div className={styles.IconsBoxHeader}> <h2>{headertext}</h2></div>
+      
     <div className={styles.IconsBox}>
       <div className={styles.IconsHead}>Icon Seçiniz</div><div className={styles.Icons}>
      {/* Dizideki her bir ikon için ProjectItem bileşeni oluşturuyoruz */}

@@ -9,10 +9,13 @@ import Profile from './pages/Profile';
 import Navbar from './components/navbar/navbar';
 import ExperimentList from './pages/ExperimentList';
 import NewExperiment from './pages/NewExperiment';
-import { useState } from 'react';
+import { createContext,useContext , useState } from 'react';
 import ModExperiment from './pages/ModExperiment';
 import DelExperiment from './pages/DelExperiment';
 import ViewProject from './pages/ViewProject';
+import { AuthProvider,useAuth } from './contexts/AuthContext';
+import LoginWindow from './pages/Login';
+import LogoffWindow from './pages/Logoff';
 //Burada örnek deney verileri tanımlıyoruz
 let initialExperiments = [
   {
@@ -61,6 +64,7 @@ initialExperiments.map((exp)=>{
 let description=exp.content.substring(0,100);
 exp.description=description;
 })
+
 function App() {
   // Liste ve listeyi güncelleme fonksiyonu (setter) App'te tutulur
   const [experiments, setExperiments] = useState(initialExperiments);
@@ -113,25 +117,20 @@ function App() {
   };
   return (
     <>
+    <AuthProvider>
       <div className="App" >
         <Navbar />
-
         {/* <Routes> içine tanımladığımız tüm <Route> bileşenleri
         gözetim altında tutulur ve URL'ye göre eşleştirilir.
       */}
         <div className="MainContentArea">
           <Routes>
 
-            {/* 1. Statik Rota: Tam "/" yolu eşleştiğinde <Home> gösterilir. */}
             <Route path="/" element={<Home experiments={experiments}/>} />
-
-            {/* 2. Statik Rota: "/hakkimizda" yolu eşleştiğinde <About> gösterilir. */}
             <Route path="/hakkimizda" element={<About />} />
-
-            {/* 3. Dinamik Rota: "/urunler/" ile başlayan, ardından 
-           herhangi bir değeri (ID'yi) yakalayan rota.
-           Bu değeri <ProductDetail> bileşeni useParams ile kullanır. */}
             <Route path="/profile" element={<Profile />} />
+            <Route path="/login" element={<LoginWindow />} />
+             <Route path="/logout" element={<LogoffWindow />} />
             <Route path="/deneyler" element={<ExperimentList experiments={experiments} />} /> {/* Tüm listeyi gösterir */}
             <Route path="/deneyler/:id" element={<ViewProject  getExperimentById={getExperimentById}  />} /> 
             <Route path="/deney/yeni" element={<NewExperiment onAdd={handleAddExperiment} />} /> {/* Yeni proje ekleme */}
@@ -142,7 +141,7 @@ function App() {
 
           </Routes>
         </div>
-      </div>
+      </div></AuthProvider>
     </>
   )
 }

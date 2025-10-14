@@ -71,7 +71,7 @@ input{
    border-bottom: #00ffbb solid 2px;
    color:#00ffbb;
 }
-input[type='submit']
+button,input[type='submit']
 {
    justify-content: flex-end;
    margin:10px;
@@ -81,12 +81,12 @@ input[type='submit']
    border-radius: 3px;
    color:#00dd00;
 }
-input[type='submit']:hover
+button:hover,input[type='submit']:hover
 {
    border: #00ffbb solid 2px;
    color:#00ffbb;
 }
-input[type='submit']:active
+button:active,input[type='submit']:active
 {
    border: #ffffff solid 2px;
    color:#ffffff;
@@ -143,8 +143,12 @@ input[type='submit']:active
 .select{
     border: #00dd00 1px solid;
     border-radius: 2px;
+    padding: 6px 10px;
     background-color: RGB(0,50,0);
     color:#00ffbb;
+}
+.select::selection:hover{
+  background-color: RGB(0,50,0);
 }
 .customdateinput::-webkit-calendar-picker-indicator {
     opacity: 0; /* Simgeyi tamamen şeffaf yapar */

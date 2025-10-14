@@ -5,6 +5,21 @@
     width:500px;
      border:#00ffbb 2px solid;  
 }
+.SecondWindow{
+     display:none;
+     padding:10px;
+   text-align: start;  
+    flex-direction: column;
+    width:500px;
+     border:#00ffbb 2px solid;  
+}
 .Contents{
     padding: 5px 20px;
 }
+ .FormBoxHeader{
+            padding-left:3px;
+            text-align: center;
+            font-weight: 600;
+             border:#00ffbb 2px solid; 
+             border-bottom: none;
+        }

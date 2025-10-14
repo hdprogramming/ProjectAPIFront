@@ -16,7 +16,8 @@ const ProjectItem = ({ icon}) => {
     const isSelected = selectedIcon && (selectedIcon === name);
     const iconStyle={
       backgroundColor:isSelected?"#005500aa":"transparent",
-      border:isSelected?"1px green dashed":"1px solid transparent"
+      border:isSelected?"1px #00ffa988 dashed":"1px solid transparent",
+      color:isSelected&&"#00ffa9"
     };
   return (
    <div className={styles.projectitem} onClick={handleClick} style={iconStyle}>             
