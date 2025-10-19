@@ -34,7 +34,7 @@ const ProjectForm = ({onAdd,onUpdate,project}) => {
             id:isEditing?project.id:'',
             title: isEditing ? project.title : '', 
             description: isEditing ? project.description : '',
-            content: isEditing ? project.description : '',
+            content: isEditing ? project.content : '',
             isAlive:isEditing?project.isAlive:true,
             status:isEditing?project.Status:'Devam Ediyor...',
             date:isEditing?project.date:getTodayDate()
@@ -63,11 +63,13 @@ const setIconAndHiddenRef = (iconData) => {
     const finalData = { ...data, icon: selectedIcon };
     const jsonString = JSON.stringify(finalData, null, 2); 
         console.log('Gönderilen Final Veri:', jsonString);
+        let success=false;
         if(!isEditing)
         onAdd(finalData); 
         else
-        onUpdate(finalData);
+        success=onUpdate(finalData);
         // 3. Kullanıcıyı Deney Listesi sayfasına yönlendir
+        if(success)
         navigate('/deneyler');
        
   };

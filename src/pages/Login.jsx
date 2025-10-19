@@ -2,22 +2,12 @@ import { useForm } from "react-hook-form";
 import FormInputField from "../components/MainComponents/FormInputField/FormInputField"
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from 'react-router-dom'; 
-const PassControl = (formdata) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            if (formdata.email == "deneme@com" && formdata.pass == "1234") {
-                // Başarılıysa Promise'ı true ile çözümle
-                resolve(true); 
-            } else {
-                // Başarısızsa Promise'ı false ile çözümle
-                resolve(false); 
-            }
-        }, 800); // 800 milisaniye gecikme
-    });
-};
+
+ 
+
 const LoginWindow = () => {
     const navigate = useNavigate(); // Yönlendirme için hook
-    const { isLogin,Login,Logoff } = useAuth();
+    const { Login } = useAuth();
     const {
         register,
         handleSubmit,
@@ -25,9 +15,9 @@ const LoginWindow = () => {
         formState: { errors },
         trigger,
     } = useForm();
-    const onSubmit=(formdata)=>{   
+    const onSubmit=async(formdata)=>{   
          
-     if (Login(formdata)) {        
+     if (await Login(formdata)) {        
         navigate("/");
         // Başarılı giriş sonrası yönlendirme/state güncelleme yapılabilir
     } else {
@@ -46,12 +36,12 @@ const LoginWindow = () => {
                 // Kuralları doğrudan JS objesi olarak gönderiyoruz
                 validationRules={{
                     required: 'Email adı zorunludur!',
-                    minLength: { value: 10, message: 'Minimum 10 karakter olmalı.' }
+                    minLength: { value: 3, message: 'Minimum 3 karakter olmalı.' }
                 }}
             />
             <FormInputField
                 labeltext="Şifre"
-                name="pass"
+                name="password"
                 type="text"
                 register={register}
                 errors={errors}

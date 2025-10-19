@@ -118,6 +118,7 @@ function App() {
   return (
     <>
     <AuthProvider>
+      
       <div className="App" >
         <Navbar />
         {/* <Routes> içine tanımladığımız tüm <Route> bileşenleri

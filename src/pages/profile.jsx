@@ -3,6 +3,8 @@
 import React from 'react';
 import useFetchSim from '../utils/useFetchSim';
 import StatusRenderer from '../utils/StatusRenderer';
+import { useAuth } from "../contexts/AuthContext";
+
    // API'den gelebilecek bir kullanıcı objesi simülasyonu
 const FAKE_USER_DATA = {
     name: "Gemini Asistanı",
@@ -13,6 +15,7 @@ const FAKE_USER_DATA = {
 
 const Profile = () => {
     // 1. Veri ve Yükleme Durumları İçin State Tanımlama
+    const {isLogin,Token,RToken,UserID} = useAuth();
     const [userData, isLoading,errors] = useFetchSim(FAKE_USER_DATA);  
     // 3. Yükleme Durumuna Göre Kullanıcıya Geri Bildirim
     const statusContent = (
@@ -32,6 +35,7 @@ const Profile = () => {
     return (
         <div style={{ width:'50%',padding: '20px', border: '1px solid #00ff66' }}>
             <h1>Kullanıcı Profili</h1>
+            <p>{UserID}</p>
             <p><strong>Adı:</strong> {userData.name}</p>
             <p><strong>E-posta:</strong> {userData.email}</p>
             <p><strong>Hakkında:</strong> {userData.bio}</p>

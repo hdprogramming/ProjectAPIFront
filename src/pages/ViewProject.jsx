@@ -6,12 +6,31 @@ import styles from '../pages/styles/ViewProject.module.css'
 import StatusRenderer from "../utils/StatusRenderer";
 import { useAuth } from "../contexts/AuthContext";
 
-const ViewProject=({ getExperimentById })=>{
+const ViewProject=()=>{
     const params=useParams(); 
     const id=params.id;
-    const { isLogin, toggleLogin } = useAuth();
-    const [experiment,isLoading,error]=useFetchSim(getExperimentById(id));
-       // 1. Durumu render et
+    const { isLogin, api } = useAuth();
+    const [isLoading,setIsLoading]=useState(true);
+    const [experiment,setExperiment]=useState(null);
+    const [error,setError]=useState(null);
+    useEffect(()=>{
+        const FetchProject=async(id)=>{
+          try {
+            const response=await api.get("projects/"+id);
+          if(response&&response.data)
+          {
+             setExperiment(response.data);
+             setIsLoading(false);
+          }
+          } catch (error) {
+            setError(error);
+          }
+          
+        }
+      FetchProject(id);
+      setIsLoading(true);
+    },[api,id])
+    // 1. Durumu render et
   const statusContent = (
     <StatusRenderer 
       isLoading={isLoading} 
