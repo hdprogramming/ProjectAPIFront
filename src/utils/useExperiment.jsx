@@ -7,7 +7,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
     const [experiment, setExperiment] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true); // Başlangıçta true olmalı
-
+     
     // 1. VERİ ÇEKME İŞLEMİNİ useEffect İÇİNDE OTOMATİK BAŞLAT
     useEffect(() => {
         const fetchProject = async () => {
@@ -34,16 +34,20 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
     }, [api, id]);
 
     // 2. KAYDETME/GÜNCELLEME FONKSİYONU
-    const saveProject = async (newProjectData, isCreate = false) => {
+    const saveProject = async (newExp, isCreate = false) => {
         setIsLoading(true);
         setError(null);
-
+        const newProjectData=MapExperiment(newExp);
+        console.log(newProjectData);
         try {
             let response;
             if (isCreate)
-                response = await api.post("/projects", newProjectData); // POST: ID genellikle dışarıda kalır
+                response = await api.post("/Projects", newProjectData); // POST: ID genellikle dışarıda kalır
             else
-                response = await api.put(`/projects/${id}`, newProjectData); // PUT: Güncel veriyi kullan
+            {
+                newProjectData.id=id;
+                response = await api.put(`/projects/${id}`, newProjectData);
+            }                
               
             // API'den dönen veriyi (veya gönderdiğimiz veriyi) state'e set et
             setExperiment(response.data || newProjectData);
@@ -62,7 +66,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
         setError(null);
 
         try {
-         response = await api.delete(`/projects/${id}`);
+         let response = await api.delete(`/projects/${id}`);
          if(response)
             return true;
         }
@@ -75,14 +79,92 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
             setIsLoading(false);
         }
     }
-
+    const GetProjects=async()=>{
+      setIsLoading(true);
+       try {
+         let response = await api.get(`/Projects`);
+         if(response&&response.data)
+            {
+                setIsLoading(false);
+                return response.data;              
+            }
+            else return [];
+        }
+        catch (error) {
+             console.error("Projeler getirilemedi:", error);
+            setError(error);
+            return [] // Başarısız olduğunu belirt
+        }
+        finally{
+            setIsLoading(false);
+        }
+    }
+    const GetStatusMessages=async()=>{
+      setIsLoading(true);
+       try {
+         let response = await api.get(`/ProjectStatusMessages`);
+         if(response&&response.data)
+            {
+                setIsLoading(false);
+                return response.data;              
+            }
+            else return null;
+        }
+        catch (error) {
+             console.error("Proje Durum Bilgileri getirilemedi:", error);
+            setError(error);
+            return null // Başarısız olduğunu belirt
+        }
+        finally{
+            setIsLoading(false);
+        }
+    }
+    const GetStatusCategories=async()=>{
+      setIsLoading(true);
+       try {
+         let response = await api.get(`/ProjectCategories`);
+         if(response&&response.data)
+            {
+                setIsLoading(false);
+                return response.data;              
+            }
+            else return null;
+        }
+        catch (error) {
+             console.error("Proje Kategori Bilgileri getirilemedi:", error);
+            setError(error);
+            return null // Başarısız olduğunu belirt
+        }
+        finally{
+            setIsLoading(false);
+        }
+    }
+    function MapExperiment(newExp)
+    {
+         const ExpDTO={
+       "id": newExp.id?Number(newExp.id):0,
+  "icon": newExp.icon,
+  "title": newExp.title,
+  "description": newExp.description,
+  "content": newExp.content,
+  "isAlive": newExp.isAlive,
+  "statusID": Number(newExp.statusID),
+  "date": newExp.date
+    }
+    return ExpDTO;
+    }
     // Çıktı isimlerini mantıklı hale getirdik
     return {
-        project: experiment,
+        experiment,
         isLoading,
         error,
         // Dışarıya sadece kaydetme fonksiyonunu veriyoruz
+        GetProjects,
+        GetStatusMessages,
+        GetStatusCategories,
+        setExperiment,
         saveProject,
         deleteProject,
+        MapExperiment
     };
 }

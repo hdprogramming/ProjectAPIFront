@@ -67,54 +67,7 @@ exp.description=description;
 
 function App() {
   // Liste ve listeyi güncelleme fonksiyonu (setter) App'te tutulur
-  const [experiments, setExperiments] = useState(initialExperiments);
-  const getExperimentById = (id) => {
-    // find() metodu, koşulu sağlayan İLK öğeyi döndürür.
-    return experiments.find(experiment => {
-      // ID'lerin tipini kontrol edin (biri string, diğeri number olabilir). 
-      // Güvenli karşılaştırma için == veya String/Number dönüşümü kullanabilirsiniz.
-      return experiment.id == id;
-    });
-  };
-  // Yeni deney ekleme fonksiyonu
-  const handleAddExperiment = (newExp) => {
-    // Yeni ID oluştur ve listeye ekle
-    const newId = experiments.length > 0 ? Math.max(...experiments.map(e => e.id)) + 1 : 1;
-    setExperiments(prevExps => [
-      ...prevExps,
-      { ...newExp, id: newId }
-    ]);
-  };
-  const handleUpdateExperiment = (newExp) => {
-    // setExperiments'a bir fonksiyon (updater function) gönderiyoruz.
-    // Bu, her zaman en güncel (oldExp) state'i almamızı sağlar.
-    setExperiments(oldExp => {
-      return oldExp.map(experiment => {
-        // Kontrolü newExp.id ile yaparız:
-        if (experiment.id === newExp.id) {
-          // Direkt newExp'i döndürebiliriz:
-          return newExp;
-        }
-        return experiment;
-      });
-    });
-
-  };
-  const handleDeleteExperiment = (id) => {
-    // setExperiments'a en güncel state'i almak için updater fonksiyonu gönderiyoruz.
-    setExperiments(oldExp => {
-
-      // 1. Array.prototype.filter() metodu kullanılır.
-      //    Bu metod, geriye sadece koşulu (return true) sağlayan öğeleri döndürerek
-      //    yeni bir dizi oluşturur.
-      return oldExp.filter(experiment => {
-
-        // 2. Silinmesini İstemediğimiz öğeleri döndürüyoruz.
-        //    Yani, ID'si, silmek istediğimiz ID'ye EŞİT OLMAYAN her şeyi döndür.
-        return Number(experiment.id) != Number(id);
-      });
-    });
-  };
+  
   return (
     <>
     <AuthProvider>
@@ -127,16 +80,16 @@ function App() {
         <div className="MainContentArea">
           <Routes>
 
-            <Route path="/" element={<Home experiments={experiments}/>} />
+            <Route path="/" element={<Home />} />
             <Route path="/hakkimizda" element={<About />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<LoginWindow />} />
              <Route path="/logout" element={<LogoffWindow />} />
-            <Route path="/deneyler" element={<ExperimentList experiments={experiments} />} /> {/* Tüm listeyi gösterir */}
-            <Route path="/deneyler/:id" element={<ViewProject  getExperimentById={getExperimentById}  />} /> 
-            <Route path="/deney/yeni" element={<NewExperiment onAdd={handleAddExperiment} />} /> {/* Yeni proje ekleme */}
-            <Route path="/deney/mod/:id" element={<ModExperiment onUpdate={handleUpdateExperiment} getExperimentById={getExperimentById} />} /> {/* Yeni proje güncelleme */}
-            <Route path="/deney/del/:id" element={<DelExperiment onDelete={handleDeleteExperiment} />} /> {/* Yeni proje güncelleme */}
+            <Route path="/deneyler" element={<ExperimentList  />} /> {/* Tüm listeyi gösterir */}
+            <Route path="/deneyler/:id" element={<ViewProject  />} /> 
+            <Route path="/deney/yeni" element={<NewExperiment  />} /> {/* Yeni proje ekleme */}
+            <Route path="/deney/mod/:id" element={<ModExperiment />} /> {/* Yeni proje güncelleme */}
+            <Route path="/deney/del/:id" element={<DelExperiment  />} /> {/* Yeni proje güncelleme */}
             {/* 4. Opsiyonel: Eşleşen bir rota bulunamazsa (404 Not Found) gösterilir. */}
             <Route path="*" element={<h2 style={{ color: 'red' }}>404 - Sayfa Bulunamadı</h2>} />
 

@@ -5,41 +5,21 @@ import {IconsTable,DEFAULT_ICON} from '../utils/ExperimentIcons';
 import styles from '../pages/styles/ExperimentList.module.css'
 import useFetchSim from '../utils/useFetchSim';
 import StatusRenderer from '../utils/StatusRenderer';
-import { useAuth } from '../contexts/AuthContext';
+import useExperiment from '../utils/useExperiment';
+import { useLocation } from 'react-router-dom';
 const getExperimentIcon = (iconName) => {
     return IconsTable[iconName] || DEFAULT_ICON;
 };
 const ExperimentList = () => {
-    const {api,Token,UserID} = useAuth();
-    const [experiments, setExperiments] = useState(null);
-    const [isLoading, setIsLoading] = useState(true); // 👈 BURASI TRUE OLMALI
-    const [error, setError] = useState(null);
+    const {experiment,isLoading,error,GetProjects}=useExperiment();
+    const [experiments,setExperiments]=useState(null);
     useEffect(()=>{
-        
-          const fetchData = async () => {
-        try {
-                // Burada 401 hatası (Token süresi doldu) oluşursa, 
-                // hata yakalama bloğuna atlar.
-                const response = await api.get("/Projects"); 
-               if (response && response.data) {
-    // response.data'da veri varsa direkt atama yapılır
-    setExperiments(response.data);
-    setIsLoading(false);
-} else {
-    // Veri gelmezse veya boş gelirse boş dizi ayarlanır
-    setExperiments([]); 
-}
-            } catch (err) {
-                // Hata oluştuğunda (Örn: 401, 404, Ağ Hatası)
-                console.error("Proje yüklenirken hata oluştu:", err);
-                // Burada kullanıcıya hata mesajını gösterebilirsin.
-                // setError(err.message); 
-                // setExperiments(null) kalır.
-            }
-        
-    };
-    fetchData();
-    },[api])   
+        async function FetchProjects()
+        {        
+        setExperiments(await GetProjects());
+        }
+        FetchProjects();       
+    },[])   
 
     const statusContent = (
     <StatusRenderer 

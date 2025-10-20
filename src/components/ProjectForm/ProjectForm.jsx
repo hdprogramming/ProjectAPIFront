@@ -4,6 +4,7 @@ import styles from "./ProjectForm.module.css"
 import FormInputField from "../MainComponents/FormInputField/FormInputField";
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom'; 
+import useExperiment from "../../utils/useExperiment";
 export const ProjectContext = createContext(null);
 export const useProjectIconContext = () => useContext(ProjectContext);
 const getTodayDate = () => {
@@ -21,6 +22,18 @@ const ProjectForm = ({onAdd,onUpdate,project}) => {
   const ProjectHead=isEditing?"Düzenleme":"Yeni";
   const [isFinalPage,setFinalPage]=useState(false);
   const [selectedIcon,setSelectedIcon] = useState("microchip"); 
+  const [StatusMessages,setStatusMessages]=useState([]);
+  const [Categories,setCategories]=useState([]);
+  useEffect(() => {
+        async function FetchMessages() {
+            let fetchedMessages = await GetStatusMessages();
+            if (fetchedMessages)
+                setStatusMessages(fetchedMessages); // State'i güncelliyoruz
+        }
+        FetchMessages();
+    }, []);
+   let experiments;
+   const {isLoading,error,GetProjects,GetStatusMessages}=useExperiment();
     const navigate = useNavigate(); // Yönlendirme için hook
   const hiddenIconInputRef = useRef(null); 
  const { 
@@ -57,7 +70,7 @@ const setIconAndHiddenRef = (iconData) => {
         setSelectedIcon: setIconAndHiddenRef // Child'ın kullanacağı fonksiyon
         // selectedIcon'u göndermeye gerek yok, sadece aksiyonu gönderiyoruz
     };
- const onSubmit = (data) => {
+ const onSubmit = async(data) => {
     // Veriler otomatik olarak toplanır
    
     const finalData = { ...data, icon: selectedIcon };
@@ -65,12 +78,16 @@ const setIconAndHiddenRef = (iconData) => {
         console.log('Gönderilen Final Veri:', jsonString);
         let success=false;
         if(!isEditing)
-        onAdd(finalData); 
+        success=onAdd(finalData); 
         else
         success=onUpdate(finalData);
         // 3. Kullanıcıyı Deney Listesi sayfasına yönlendir
         if(success)
-        navigate('/deneyler');
+        {
+          experiments=await GetProjects();
+          navigate('/deneyler',{state:{experiments,error,isLoading}});
+        }
+        
        
   };
  const onClick=async(event)=>{ 
@@ -107,6 +124,7 @@ useEffect(() => {
         }
          console.log(selectedIcon);
   }, [selectedIcon]); 
+  
   return (
     <ProjectContext.Provider value={contextValue}>
     <form onSubmit={handleSubmit(onSubmit)} >  
@@ -155,14 +173,12 @@ useEffect(() => {
       />
       <FormInputField
       labeltext="Durum"
-      name="status"
+      name="statusID"
       type="select"
-      options={[
-        {label:"Planlandı",value:"Planlandı"},
-        {label:"DevamEdiyor...",value:"DevamEdiyor..."},
-        {label:"İptal Edildi",value:"İptalEdildi"},
-        {label:"Tamamlandı",value:"Tamamlandı"} 
-      ]}     
+      options={StatusMessages.map(s=>({
+        label:s.name,
+        value:s.id
+      }))}     
       register={register}
       errors={errors}
       />

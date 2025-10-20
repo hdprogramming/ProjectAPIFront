@@ -2,28 +2,30 @@ import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form'; // Bu artık sadece `id`'yi almak için kalabilir, formsubmit için şart değil.
 import { useNavigate } from 'react-router-dom'; 
 import styles from '../pages/styles/DelExperiment.module.css'
-
-const DelExperiment = ({ onDelete }) => { 
+import useExperiment from '../utils/useExperiment';
+const DelExperiment = () => { 
     // const params = useParams(); // Zaten altta `id`'yi aldığınız için buna gerek yok.
     const { id } = useParams();
     const navigate = useNavigate(); 
-    
+    const {isLoading,error,deleteProject,GetProjects} =useExperiment(id);
     // "Evet" butonuna basılınca çalışacak fonksiyon
-    const handleDelete = () => {
+    const handleDelete = async() => {
         const isConfirmed = window.confirm(
             'Bu deneyi kalıcı olarak silmek istediğinizden emin misiniz?'
         );
         if (isConfirmed) {
-            onDelete(id); // Silme işlemini yap
+            deleteProject();
         }
         // Silme onaylansın veya onaylanmasın, kullanıcıyı yönlendir
-        navigate('/deneyler'); 
+        let experiments=await GetProjects();
+          navigate('/deneyler',{state:{experiments,error,isLoading}});
     };  
 
     // "Hayır" butonuna basılınca çalışacak fonksiyon
-    const handleCancel = () => {
+    const handleCancel = async() => {
         // Doğrudan Deney Listesi sayfasına yönlendir
-        navigate('/deneyler'); 
+        
+          navigate('/deneyler');
     };
 
     return(
