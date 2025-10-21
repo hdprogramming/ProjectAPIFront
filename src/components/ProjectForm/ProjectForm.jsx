@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef, useContext, createContext } from "react";
+import { useState, useEffect, useRef, useContext, createContext } from "react";
 import IconsBox from "../IconsBox/IconsBox";
 import styles from "./ProjectForm.module.css"
 import FormInputField from "../MainComponents/FormInputField/FormInputField";
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import useExperiment from "../../utils/useExperiment";
 import TagsBox from "../TagsBox/TagsBox"
 import { useFetchUtils } from "../../contexts/FetchUtils";
 export const ProjectContext = createContext(null);
@@ -30,7 +29,6 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
     trigger,
     control,

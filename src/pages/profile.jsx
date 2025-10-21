@@ -1,7 +1,6 @@
 // ProductDetail.js
 
-import React, { useEffect, useState } from 'react';
-import useFetchSim from '../utils/useFetchSim';
+import  { useEffect, useState } from 'react';
 import StatusRenderer from '../utils/StatusRenderer';
 import { useAuth } from "../contexts/AuthContext";
 import useExperiment from "../utils/useExperiment";

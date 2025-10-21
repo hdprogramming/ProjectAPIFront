@@ -1,4 +1,3 @@
-import FormInputField from '../MainComponents/FormInputField/FormInputField';
 import styles from './ProjectItem.module.css'; // Opsiyonel: Kendi CSS dosyanızı import edebilirsiniz
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import React, { createContext, useContext, useState, useEffect } from 'react';
+
+import { createContext, useContext, useState, useEffect } from 'react';
 import useExperiment from '../utils/useExperiment';
 const FetchUtilsContext = createContext({
 

@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect,useState,useContext } from "react";
 import { Link } from 'react-router-dom'; 
-import useFetchSim from "../utils/useFetchSim";
 import styles from '../pages/styles/ViewProject.module.css'
 import StatusRenderer from "../utils/StatusRenderer";
 import { useAuth } from "../contexts/AuthContext";

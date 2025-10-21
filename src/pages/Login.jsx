@@ -11,9 +11,7 @@ const LoginWindow = () => {
     const {
         register,
         handleSubmit,
-        reset,
         formState: { errors },
-        trigger,
     } = useForm();
     const onSubmit=async(formdata)=>{   
          

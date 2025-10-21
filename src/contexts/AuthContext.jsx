@@ -1,10 +1,10 @@
 import axios from 'axios';
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 export const domain = "http://localhost:5098/api"
 // 1. Context objesini oluştur
 // createContext'e başlangıç değeri olarak bir obje veriyoruz
 // Bu obje, bileşenlerin tüketeceği veriyi ve fonksiyonları içerir.
-import { useNavigate } from 'react-router-dom';
+
 const api = axios.create({
   baseURL: domain,
   withCredentials: true,

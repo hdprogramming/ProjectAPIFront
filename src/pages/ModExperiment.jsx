@@ -1,18 +1,12 @@
 import ProjectForm from '../components/ProjectForm/ProjectForm';
 import styles from '../pages/styles/NewExperiment.module.css'
 import { useParams } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { useEffect, useState } from 'react';
 import useExperiment from '../utils/useExperiment';
 const ModExperiment = () => { 
-  const params=useParams();
   const { id } = useParams();
    const{experiment,
         isLoading,
-        error,
-        setExperiment,
-        saveProject,
-        deleteProject}=useExperiment(id);
+        saveProject}=useExperiment(id);
 
   async function  onUpdate(newExp){
     

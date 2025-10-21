@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import { useForm } from 'react-hook-form'; // Bu artık sadece `id`'yi almak için kalabilir, formsubmit için şart değil.
 import { useNavigate } from 'react-router-dom'; 
 import styles from '../pages/styles/DelExperiment.module.css'
 import useExperiment from '../utils/useExperiment';

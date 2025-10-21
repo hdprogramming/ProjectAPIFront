@@ -1,18 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect} from 'react';
 import { Link } from 'react-router-dom'; // Detay sayfasına gitmek için
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconsTable, DEFAULT_ICON } from '../utils/ExperimentIcons';
 import styles from '../pages/styles/ExperimentList.module.css'
-import useFetchSim from '../utils/useFetchSim';
 import StatusRenderer from '../utils/StatusRenderer';
 import useExperiment from '../utils/useExperiment';
-import { useLocation } from 'react-router-dom';
 import { useFetchUtils } from '../contexts/FetchUtils';
 const getExperimentIcon = (iconName) => {
     return IconsTable[iconName] || DEFAULT_ICON;
 };
 const ExperimentList = () => {
-    const { experiment, isLoading, error, GetProjects } = useExperiment();
+    const { isLoading, error, GetProjects } = useExperiment();
     const [experiments, setExperiments] = useState(null);
     const { getCategoryNameById, getStatusMessageNameById } = useFetchUtils();
     useEffect(() => {

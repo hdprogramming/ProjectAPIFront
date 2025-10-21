@@ -1,12 +1,12 @@
 // Navbar.js
 
-import React, { useState,useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Navbar = () => {
- const { isLogin, Login,Logoff,Token } = useAuth();
+ const { isLogin} = useAuth();
  const [scrolled,setScrolled]=useState(false);
  const handleScrolled=()=>{
   const offset=window.scrollY;

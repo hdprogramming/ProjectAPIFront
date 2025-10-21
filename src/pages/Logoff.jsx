@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'; // useEffect'i import etmeyi unutmayın
+import { useEffect } from 'react'; // useEffect'i import etmeyi unutmayın
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from 'react-router-dom'; 
 

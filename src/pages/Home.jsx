@@ -1,21 +1,18 @@
 // Home.js
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {IconsTable,DEFAULT_ICON} from '../utils/ExperimentIcons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
 import styles from '../pages/styles/Home.module.css'
-import useFetchSim from '../utils/useFetchSim';
 import StatusRenderer from '../utils/StatusRenderer';
 import useExperiment from '../utils/useExperiment';
-import { useLocation } from 'react-router-dom';
 const getExperimentIcon = (iconName) => {
     return IconsTable[iconName] || DEFAULT_ICON;
 };
 const Home = () => {
   const {isLoading,error,GetProjects}=useExperiment();
   const [experiments,setExperiments]=useState([]);
-  const location = useLocation();
   let exp=null;
   useEffect(()=>{
     async function FetchProjects()
