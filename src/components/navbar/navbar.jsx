@@ -39,10 +39,12 @@ const Navbar = () => {
         Hakkımızda
       </Link>
       {/* Dinamik bir URL'e yönlendiren bir örnek bağlantı */}
+      
+      {isLogin?<>
       <Link to="/profile" >
         Profil
       </Link>
-      {isLogin?<><Link to="/deneyler" >
+      <Link to="/deneyler" >
         Deneyler
         </Link> 
         <Link to="/logout" >

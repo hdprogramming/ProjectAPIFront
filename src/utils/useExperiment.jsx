@@ -139,6 +139,26 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
             setIsLoading(false);
         }
     }
+    const GetUserData=async(id)=>{
+     setIsLoading(true);
+       try {
+         let response = await api.get(`/Users/`+id);
+         if(response&&response.data)
+            {
+                setIsLoading(false);
+                return response.data;              
+            }
+            else return null;
+        }
+        catch (error) {
+             console.error("Kullanıcı Bilgileri getirilemedi:", error);
+            setError(error);
+            return null // Başarısız olduğunu belirt
+        }
+        finally{
+            setIsLoading(false);
+        }
+    }
     function MapExperiment(newExp)
     {
          const ExpDTO={
@@ -163,6 +183,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
         GetProjects,
         GetStatusMessages,
         GetCategories,
+        GetUserData,
         setExperiment,
         saveProject,
         deleteProject,
