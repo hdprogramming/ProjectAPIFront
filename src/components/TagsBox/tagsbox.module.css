@@ -1,0 +1,27 @@
+.MainBox {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #00ffbb;
+}
+
+.TagsBox {
+    display: inline-block;
+    margin: 5px;
+    padding: 3px 8px;
+    border: 1px solid lime;
+    border-radius: 12px;
+    background-color: transparent;
+    cursor: pointer; 
+
+}
+
+.select{
+    border: #00dd00 1px solid;
+    border-radius: 2px;
+    padding: 6px 10px;
+    background-color: RGB(0,50,0);
+    color:#00ffbb;
+}
+.select::selection:hover{
+  background-color: RGB(0,50,0);
+}

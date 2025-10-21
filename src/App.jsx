@@ -16,6 +16,7 @@ import ViewProject from './pages/ViewProject';
 import { AuthProvider,useAuth } from './contexts/AuthContext';
 import LoginWindow from './pages/Login';
 import LogoffWindow from './pages/Logoff';
+import { FetchUtilsProvider } from './contexts/FetchUtils';
 //Burada örnek deney verileri tanımlıyoruz
 let initialExperiments = [
   {
@@ -71,7 +72,7 @@ function App() {
   return (
     <>
     <AuthProvider>
-      
+      <FetchUtilsProvider>
       <div className="App" >
         <Navbar />
         {/* <Routes> içine tanımladığımız tüm <Route> bileşenleri
@@ -95,7 +96,7 @@ function App() {
 
           </Routes>
         </div>
-      </div></AuthProvider>
+      </div></FetchUtilsProvider></AuthProvider>
     </>
   )
 }

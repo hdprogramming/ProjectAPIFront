@@ -119,7 +119,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
             setIsLoading(false);
         }
     }
-    const GetStatusCategories=async()=>{
+    const GetCategories=async()=>{
       setIsLoading(true);
        try {
          let response = await api.get(`/ProjectCategories`);
@@ -149,7 +149,8 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
   "content": newExp.content,
   "isAlive": newExp.isAlive,
   "statusID": Number(newExp.statusID),
-  "date": newExp.date
+  "date": newExp.date,
+  "categoryIds":newExp.categoryIds
     }
     return ExpDTO;
     }
@@ -161,7 +162,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
         // Dışarıya sadece kaydetme fonksiyonunu veriyoruz
         GetProjects,
         GetStatusMessages,
-        GetStatusCategories,
+        GetCategories,
         setExperiment,
         saveProject,
         deleteProject,
