@@ -25,8 +25,6 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
   const [isFinalPage, setFinalPage] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState("microchip");
   const {StatusMessages,Categories}=useFetchUtils();
-   let experiments;
-  const { isLoading, error, GetProjects } = useExperiment();
   const navigate = useNavigate(); // Yönlendirme için hook
   const hiddenIconInputRef = useRef(null);
   const {
@@ -77,13 +75,12 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
     console.log('Gönderilen Final Veri:', jsonString);
     let success = false;
     if (!isEditing)
-      success = onAdd(finalData);
+      success = await onAdd(finalData);
     else
-      success = onUpdate(finalData);
+      success = await onUpdate(finalData);
     // 3. Kullanıcıyı Deney Listesi sayfasına yönlendir
     if (success) {
-      experiments = await GetProjects();
-      navigate('/deneyler', { state: { experiments, error, isLoading } });
+      navigate('/deneyler');
     }
 
 
