@@ -15,7 +15,7 @@ const TagsBox = ({ name, TagsIDs, value, onChange }) => {
 
     // TagsIDs'yi Tags durumuna aktar.
     useEffect(() => {
-        console.log(value);
+        
         if (Array.isArray(TagsIDs)) {
             setTags(TagsIDs);
         }

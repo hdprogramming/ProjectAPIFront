@@ -22,7 +22,7 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
   const isEditing = !!project;
   const ProjectHead = isEditing ? "Düzenleme" : "Yeni";
   const [isFinalPage, setFinalPage] = useState(false);
-  const [selectedIcon, setSelectedIcon] = useState("microchip");
+  const [selectedIcon, setSelectedIcon] = useState(project.icon?project.icon:"microchip");
   const {StatusMessages,Categories}=useFetchUtils();
   const navigate = useNavigate(); // Yönlendirme için hook
   const hiddenIconInputRef = useRef(null);
@@ -36,6 +36,7 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
     defaultValues: {
       // project objesi varsa, project.title'ı al, yoksa boş string kullan.
       id: isEditing ? project.id : '',
+      icon:isEditing?project.icon:"vial",
       title: isEditing ? project.title : '',
       description: isEditing ? project.description : '',
       content: isEditing ? project.content : '',
@@ -55,7 +56,6 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
       // İkon objesini JSON string'ine dönüştürüp input'a yaz
       hiddenIconInputRef.current.value = JSON.stringify(iconData);
     }
-
   };
 
   // (C) Context Değeri: Child'a sadece eylem fonksiyonunu veriyoruz
@@ -103,20 +103,14 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
   }
   const onBackClick = async (event) => {
     event.preventDefault();
-
-
     setFinalPage(false);
-
-
   }
   useEffect(() => {
     if (hiddenIconInputRef.current && selectedIcon) {
       // İkon objesini string'e (JSON) dönüştürüp input'a yazıyoruz
       hiddenIconInputRef.current.value = JSON.stringify(selectedIcon);
-
-    }
-   
-    console.log(selectedIcon);
+    }   
+    
   }, [selectedIcon]);
 
   return (
@@ -148,7 +142,6 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
               type="textarea"
               register={register}
               errors={errors}
-
             />
             <Controller
               name="categoryIds" // Form state'inde bu verinin tutulacağı key
@@ -175,8 +168,6 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
               register={register}
               errors={errors}
             />
-
-
           </div>
           <div style={{
             display: 'flex',
@@ -192,15 +183,12 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
             <button type="button" onClick={onClick}>İlerle</button></div>
         </div>
         <div className={styles.SecondWindow} style={{ display: isFinalPage ? 'flex' : 'none' }}>
-
-
           <FormInputField
             labeltext="Proje İçeriği"
             name="content"
             type="textarea"
             register={register}
             errors={errors}
-
           />
           <FormInputField
             labeltext="Tarih"
@@ -226,7 +214,6 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
           }}>
             <button onClick={onBackClick}>Geri Dön</button>
             <input type="submit"  ></input>
-
           </div>
         </div></form></ProjectContext.Provider>
   );
