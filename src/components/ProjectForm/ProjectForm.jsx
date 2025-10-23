@@ -80,7 +80,10 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
     if (success) {
       navigate('/deneyler');
     }
-
+    else
+    {
+      alert("Kayıt işleminde hata oluştu");
+    }
 
   };
   const onClick = async (event) => {

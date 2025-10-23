@@ -1,0 +1,31 @@
+.Filter-Label{
+    margin-top:5px;
+    margin-right:5px;
+}
+.FilterBar{
+    padding-top:5px;    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.FilterHead{    
+    display: flex;
+    justify-content: right;
+    padding: 10px;    
+}
+.Filter-Select
+{
+   border: #00dd00 1px solid;
+    border-radius: 2px;
+    padding: 6px 10px;
+    background-color: RGB(0,50,0);
+    color:#00ffbb;
+}
+
+.Filter-Select:focus
+{
+    border-color: #00ffbb;
+}
+.Filter-Select::selection:hover{
+  background-color: RGB(0,50,0);
+}

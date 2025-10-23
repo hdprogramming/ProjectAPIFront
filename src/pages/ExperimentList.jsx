@@ -6,6 +6,7 @@ import styles from '../pages/styles/ExperimentList.module.css'
 import StatusRenderer from '../utils/StatusRenderer';
 import useExperiment from '../utils/useExperiment';
 import { useFetchUtils } from '../contexts/FetchUtils';
+import FilterBar from '../components/FilterBar/FilterBar';
 const getExperimentIcon = (iconName) => {
     return IconsTable[iconName] || DEFAULT_ICON;
 };
@@ -43,9 +44,10 @@ const ExperimentList = () => {
             >+ Yeni Deney Ekle
             </Link>
 
-            {/* Deneyleri Listeleme */}
+            <FilterBar contents={experiments}>
+            {(sortedExperiments) => (
             <ul style={{ listStyle: 'none', padding: 0 }}>
-                {experiments.map((exp) => (
+                {sortedExperiments.map((exp) => (
                     <li
                         key={exp.id}
                         style={{
@@ -103,6 +105,8 @@ const ExperimentList = () => {
                     </li>
                 ))}
             </ul>
+            )}
+            </FilterBar>
         </div>
     );
 };

@@ -71,7 +71,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
             return true;
         }
         catch (error) {
-             console.error("Proje silinemedi:", error);
+            console.error("Proje silinemedi:", error);
             setError(error);
             return false; // Başarısız olduğunu belirt
         }
@@ -91,7 +91,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
             else return [];
         }
         catch (error) {
-             console.error("Projeler getirilemedi:", error);
+            console.error("Projeler getirilemedi:", error);
             setError(error);
             return [] // Başarısız olduğunu belirt
         }
@@ -111,7 +111,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
             else return null;
         }
         catch (error) {
-             console.error("Proje Durum Bilgileri getirilemedi:", error);
+            console.error("Proje Durum Bilgileri getirilemedi:", error);
             setError(error);
             return null // Başarısız olduğunu belirt
         }
