@@ -89,7 +89,7 @@ const ExperimentList = () => {
                                 Dökümantasyonu Görüntüle →
                             </Link>
                             <div className={styles.CategoryBox}>{exp.categoryIds.map(t=>{
-                            return <div className={styles.CategoryBoxes}>{getCategoryNameById(t)}</div>
+                            return <div key={t} className={styles.CategoryBoxes}>{getCategoryNameById(t)}</div>
                             })}
                         </div>
                         </div>
