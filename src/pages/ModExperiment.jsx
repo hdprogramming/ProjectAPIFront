@@ -1,9 +1,10 @@
 import ProjectForm from '../components/ProjectForm/ProjectForm';
 import styles from '../pages/styles/NewExperiment.module.css'
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import useExperiment from '../utils/useExperiment';
 const ModExperiment = () => { 
-  const { id } = useParams();
+  const location = useLocation();
+  const id=location.state?.id;
    const{experiment,
         isLoading,
         saveProject}=useExperiment(id);

@@ -44,7 +44,7 @@ const Home = () => {
       
       <div className={styles["Project"]}>{experiments.map((exp)=>{
         return <div key={`DeneyNo${exp.id}`} className={styles['item']}> 
-          <Link to={`/deneyler/${exp.id}`} ><FontAwesomeIcon icon={getExperimentIcon(exp.icon)} className={styles['item-icon']} />
+          <Link to={`/deney/`} state={{id:exp.id}}  ><FontAwesomeIcon icon={getExperimentIcon(exp.icon)} className={styles['item-icon']} />
           <p>{exp.title}</p>
           </Link></div>
       })}

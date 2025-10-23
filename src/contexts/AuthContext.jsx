@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate} from 'react-router-dom';
 export const domain = "http://localhost:5098/api"
 // 1. Context objesini oluştur
 // createContext'e başlangıç değeri olarak bir obje veriyoruz
@@ -22,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(!!initialToken);
   const [Token, setToken] = useState(initialToken);
   const [UserID, setUserID] = useState(initialUserID);
-
+  const Navigate=useNavigate();
   const Login = async (user) => {
     let state = false;
     await axios.post(domain + "/Auth/login", user, state).then
@@ -47,6 +48,7 @@ export const AuthProvider = ({ children }) => {
     // Session Storage'ı temizle
     sessionStorage.removeItem(TOKEN_KEY);
     sessionStorage.removeItem(USERID_KEY);
+    Navigate("/login");
   };
   useEffect(() => {
     const interceptor = api.interceptors.request.use(

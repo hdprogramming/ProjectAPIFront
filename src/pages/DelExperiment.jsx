@@ -1,11 +1,12 @@
 import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom'; 
+import { useLocation,useNavigate } from 'react-router-dom'; 
 import styles from '../pages/styles/DelExperiment.module.css'
 import useExperiment from '../utils/useExperiment';
 const DelExperiment = () => { 
     // const params = useParams(); // Zaten altta `id`'yi aldığınız için buna gerek yok.
-    const { id } = useParams();
-    const navigate = useNavigate(); 
+      const location = useLocation();
+      const navigate=useNavigate();
+        const id=location.state?.id;
     const {isLoading,error,deleteProject,GetProjects} =useExperiment(id);
     // "Evet" butonuna basılınca çalışacak fonksiyon
     const handleDelete = async() => {

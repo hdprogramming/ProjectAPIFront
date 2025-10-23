@@ -85,7 +85,7 @@ const ExperimentList = () => {
 
                         <div style={{ marginTop: '10px' }}>
                             {/* Detay sayfasına yönlendirme */}
-                            <Link to={`/deneyler/${exp.id}`} style={{ color: '#00ffff', textDecoration: 'none', fontWeight: 'bold' }}>
+                            <Link to={`/deney/`} state={{id:exp.id}} style={{ color: '#00ffff', textDecoration: 'none', fontWeight: 'bold' }}>
                                 Dökümantasyonu Görüntüle →
                             </Link>
                             <div className={styles.CategoryBox}>{exp.categoryIds.map(t=>{
@@ -94,10 +94,10 @@ const ExperimentList = () => {
                         </div>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'row-reverse', marginTop: '10px' }}>
-                            <Link to={`/deney/del/${exp.id}`} className={styles.DelLink}>
+                            <Link to={`/deney/del/`} state={{id:exp.id}}  className={styles.DelLink}>
                                 Sil
                             </Link>
-                            <Link to={`/deney/mod/${exp.id}`} className={styles.ModLink}>
+                            <Link to={`/deney/mod/`} state={{id:exp.id}}  className={styles.ModLink}>
                                 Düzenle
                             </Link>
 

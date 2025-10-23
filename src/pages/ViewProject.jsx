@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import styles from '../pages/styles/ViewProject.module.css'
 import StatusRenderer from "../utils/StatusRenderer";
 import { useAuth } from "../contexts/AuthContext";
-
+import { useLocation} from "react-router-dom";
 const ViewProject=()=>{
-    const params=useParams(); 
-    const id=params.id;
+    const location=useLocation();
+    const id=location.state?.id;
     const { isLogin, api } = useAuth();
     const [isLoading,setIsLoading]=useState(true);
     const [experiment,setExperiment]=useState(null);
@@ -49,10 +49,10 @@ const ViewProject=()=>{
        <h2>{experiment.title} </h2> 
        <p>{experiment.content}</p>
        {isLogin&&<div style={{ display:'flex',flexDirection:'row-reverse',marginTop: '10px'}}>
-                       <Link to={`/deney/del/${experiment.id}`} className={styles.DelLink}>
+                       <Link to={`/deney/del/`} state={{id:experiment.id}}  className={styles.DelLink}>
                             Sil
                         </Link>
-                        <Link to={`/deney/mod/${experiment.id}`} className={styles.ModLink}>
+                        <Link to={`/deney/mod/`} state={{id:experiment.id}} className={styles.ModLink}>
                             Düzenle
                         </Link>
                         

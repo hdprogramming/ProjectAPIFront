@@ -39,10 +39,10 @@ function App() {
             <Route path="/login" element={<LoginWindow />} />
              <Route path="/logout" element={<LogoffWindow />} />
             <Route path="/deneyler" element={<ExperimentList  />} /> {/* Tüm listeyi gösterir */}
-            <Route path="/deneyler/:id" element={<ViewProject  />} /> 
+            <Route path="/deney/" element={<ViewProject  />} /> 
             <Route path="/deney/yeni" element={<NewExperiment  />} /> {/* Yeni proje ekleme */}
-            <Route path="/deney/mod/:id" element={<ModExperiment />} /> {/* Yeni proje güncelleme */}
-            <Route path="/deney/del/:id" element={<DelExperiment  />} /> {/* Yeni proje güncelleme */}
+            <Route path="/deney/mod/" element={<ModExperiment />} /> {/* Yeni proje güncelleme */}
+            <Route path="/deney/del/" element={<DelExperiment  />} /> {/* Yeni proje güncelleme */}
             {/* 4. Opsiyonel: Eşleşen bir rota bulunamazsa (404 Not Found) gösterilir. */}
             <Route path="*" element={<h2 style={{ color: 'red' }}>404 - Sayfa Bulunamadı</h2>} />
 

@@ -8,9 +8,9 @@ import useExperiment from "../utils/useExperiment";
 
 const Profile = () => {
     const [UserData,setUserData]=useState();
-    const {isLoading,errors, GetUserData } = useExperiment();
     // 1. Veri ve Yükleme Durumları İçin State Tanımlama
-    const {  UserID } = useAuth();
+    const {  UserID} = useAuth();
+    const {GetUserData,isLoading,errors }=useExperiment();
     useEffect(()=>{
      async function FetchUserData(id) {
         const response=await GetUserData(id);
