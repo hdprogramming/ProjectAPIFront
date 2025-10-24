@@ -22,7 +22,7 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
   const isEditing = !!project;
   const ProjectHead = isEditing ? "Düzenleme" : "Yeni";
   const [isFinalPage, setFinalPage] = useState(false);
-  const [selectedIcon, setSelectedIcon] = useState(project.icon?project.icon:"microchip");
+  const [selectedIcon, setSelectedIcon] = useState(project?.icon?project.icon:"microchip");
   const {StatusMessages,Categories}=useFetchUtils();
   const navigate = useNavigate(); // Yönlendirme için hook
   const hiddenIconInputRef = useRef(null);
