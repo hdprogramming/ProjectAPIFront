@@ -5,17 +5,19 @@ import StatusRenderer from '../utils/StatusRenderer';
 import { useAuth } from "../contexts/AuthContext";
 import useExperiment from "../utils/useExperiment";
 
-
 const Profile = () => {
     const [UserData,setUserData]=useState();
     // 1. Veri ve Yükleme Durumları İçin State Tanımlama
-    const {  UserID} = useAuth();
+    const {  UserID,Logoff} = useAuth();
     const {GetUserData,isLoading,errors }=useExperiment();
     useEffect(()=>{
      async function FetchUserData(id) {
         const response=await GetUserData(id);
         if(response)
             setUserData(response);
+        else{
+             Logoff();
+        }
      }
      FetchUserData(UserID);
     },[]);

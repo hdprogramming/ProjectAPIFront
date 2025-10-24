@@ -50,6 +50,7 @@ export const AuthProvider = ({ children }) => {
     sessionStorage.removeItem(USERID_KEY);
     Navigate("/login");
   };
+  
   useEffect(() => {
     const interceptor = api.interceptors.request.use(
       async(config) => {
@@ -77,7 +78,7 @@ export const AuthProvider = ({ children }) => {
         try {
           // 1. Yeni Access Token alma isteği
           // Axios, bu isteğe HttpOnly Cookie içindeki Refresh Token'ı otomatik ekler!
-          const refreshResponse = await axios.post(`${domain}/Auth/Refresh`);
+          const refreshResponse = await axios.post(`${domain}/Auth/refresh`);
 
           const newAccessToken = refreshResponse.data.Token;
 
@@ -88,14 +89,14 @@ export const AuthProvider = ({ children }) => {
           // 3. Orijinal isteğin başlığını güncelle
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
           sessionStorage.setItem(TOKEN_KEY, newAccessToken);
-          sessionStorage.setItem(USERID_KEY, newUserID);
+          sessionStorage.setItem(USERID_KEY, UserID);
           // 4. Orijinal isteği tekrarla
           return api(originalRequest);
 
         } catch (refreshError) {
           // Refresh Token da süresi dolduysa veya geçersizse: Logoff
           console.error("Refresh Token Başarısız. Kullanıcı çıkış yapıyor.", refreshError);
-          Logoff();
+          Logoff();         
           // Kullanıcıyı Login sayfasına yönlendir
           return Promise.reject(refreshError);
         }

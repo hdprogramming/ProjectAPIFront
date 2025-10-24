@@ -153,6 +153,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
         catch (error) {
              console.error("Kullanıcı Bilgileri getirilemedi:", error);
             setError(error);
+                        
             return null // Başarısız olduğunu belirt
         }
         finally{

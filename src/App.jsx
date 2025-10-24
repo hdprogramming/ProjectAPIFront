@@ -12,14 +12,15 @@ import NewExperiment from './pages/NewExperiment';
 import ModExperiment from './pages/ModExperiment';
 import DelExperiment from './pages/DelExperiment';
 import ViewProject from './pages/ViewProject';
-import { AuthProvider } from './contexts/AuthContext';
+import { AuthProvider,useAuth} from './contexts/AuthContext';
 import LoginWindow from './pages/Login';
 import LogoffWindow from './pages/Logoff';
 import { FetchUtilsProvider } from './contexts/FetchUtils';
-
+import { useState,useEffect } from 'react';
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 function App() {
-  // Liste ve listeyi güncelleme fonksiyonu (setter) App'te tutulur
   
   return (
     <>
