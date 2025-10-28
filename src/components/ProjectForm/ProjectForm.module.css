@@ -23,3 +23,58 @@
              border:#00ffbb 2px solid; 
              border-bottom: none;
         }
+/* Controller için genel bir sarmalayıcı (FormInputField'e benzesin) */
+.formFieldContainer {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.formFieldContainer label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+   color: #00ffbb;
+}
+
+/* Editör içeriğinin önizleme alanı */
+.contentPreview {
+  width: 100%;
+  min-height: 150px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  resize: vertical;
+  overflow-y: auto;
+  margin-bottom: 0.5rem;
+}
+
+/* Önizleme alanı içindeki Tiptap içeriği için temel stiller */
+.contentPreview p,
+.contentPreview h2,
+.contentPreview ul {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+/* "İçeriği Düzenle" butonu */
+.openEditorBtn {
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background-color: transparent;
+  color: #00ffbb;
+  border: 1px solid #15ff00;
+  border-radius: 4px;
+}
+
+.openEditorBtn:hover {
+   border: 1px solid #00ffbb;
+}
+
+/* RHF Hata Mesajı Stili */
+.errorMessage {
+  color: #d9534f;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}

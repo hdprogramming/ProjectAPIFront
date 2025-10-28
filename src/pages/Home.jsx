@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from '../pages/styles/Home.module.css'
 import StatusRenderer from '../utils/StatusRenderer';
 import useExperiment from '../utils/useExperiment';
+
 const getExperimentIcon = (iconName) => {
     return IconsTable[iconName] || DEFAULT_ICON;
 };
@@ -40,6 +41,7 @@ const Home = () => {
   }       
   return (
     <div className={styles['Window']}>
+     
      <div className={styles['Window-Header']}><label>Projeler </label><span className={styles['Window-Header-Minimalize']}>-</span></div>
       
       <div className={styles["Project"]}>{experiments.map((exp)=>{

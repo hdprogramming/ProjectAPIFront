@@ -1,0 +1,155 @@
+/* ... Önceki Tiptap stilleriniz (.ProseMirror, .menu-bar vb.) burada kalacak ... */
+
+/* --- YENİ Stiller --- */
+
+/* Ana Uygulama Konteyneri */
+.app-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+/* İçeriği gösteren Textarea */
+.content-textarea {
+  width: 100%;
+  min-height: 150px;
+  border: 1px solid #00ffbb;
+  border-radius: 4px;
+  padding: 0.5rem;
+  background-color: transparent;
+  font-family: monospace; /* HTML'i daha okunaklı yapar */
+  resize: vertical;
+  margin-bottom: 1rem;
+}
+
+/* Editörü Açma Butonu */
+.open-editor-btn {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.open-editor-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Modal Arka Planı */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal İçerik Penceresi */
+.modal-content {
+  background: #005511;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 900px; /* Editörün genişlemesi için yer */
+  overflow: hidden;
+  /* Yüksekliği ekranın %80'i ile sınırlar ve kaydırma ekleriz */
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modal içindeki Tiptap editörü için özel ayar */
+.modal-content .ProseMirror {
+  min-height: 300px;
+  max-height: 50vh; /* Editör alanını sınırlar */
+  overflow-y: auto; /* Gerektiğinde kaydırma çubuğu çıkar */
+  border: none; /* Modal içinde sınıra gerek yok */
+  border-top: 1px solid #00ffbb; /* Menü çubuğundan ayırır */
+  border-bottom: 1px solid #00ffbb;
+}
+
+/* Modal içindeki menü bar */
+.modal-content .menu-bar {
+  border: none; /* Modal içinde sınıra gerek yok */
+  border-radius: 0;
+}
+
+/* Modal Eylem (Kaydet/İptal) Butonları */
+.modal-actions {
+  padding: 1rem;
+  text-align: right;
+  background-color:#005511;;
+}
+
+.modal-actions button {
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.modal-actions .btn-save {
+  background-color: #005511;;
+  color: #00ffbb;
+  border-color: #28a745;
+}
+.btn-save:hover{
+  border-color: #00ffbb;
+}
+
+/* Menü Bar Stilleri */
+.menu-bar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  border: 1px solid#00ffbb;
+  border-bottom: none;
+  background-color: #005511;
+  border-radius: 4px 4px 0 0;
+}
+
+/* BUTONLAR İÇİN GÜNCELLENMİŞ STİL */
+.menu-bar button {
+  margin: 0.01rem;
+  border: 1px solid #00ffbb;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 4px;
+  
+  /* İkonların düzgün görünmesi için ayarlar */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem; /* Sabit genişlik */
+  height: 2.2rem; /* Sabit yükseklik */
+  padding: 0; /* İç padding'i sıfırla */
+}
+
+/* SELECT (Dropdown) menülerin stili aynı */
+.menu-bar select {
+  margin: 0.25rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #00ffbb;
+  background:#005511;
+  cursor: pointer;
+  border-radius: 4px;
+  color:#00ffbb;
+}
+
+.menu-bar button:hover, .menu-bar select:hover {
+  background-color: #005511;
+}
+
+/* Aktif butonun stili aynı */
+.menu-bar button.is-active {
+  background-color: #333;
+ 
+}

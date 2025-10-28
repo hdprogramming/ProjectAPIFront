@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, useContext, createContext } from "react";
 import IconsBox from "../IconsBox/IconsBox";
+import EditorModal from '../EditorModal/EditorModal';
 import styles from "./ProjectForm.module.css"
 import FormInputField from "../MainComponents/FormInputField/FormInputField";
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import TagsBox from "../TagsBox/TagsBox"
 import { useFetchUtils } from "../../contexts/FetchUtils";
+
 export const ProjectContext = createContext(null);
 export const useProjectIconContext = () => useContext(ProjectContext);
 const getTodayDate = () => {
@@ -21,6 +23,7 @@ const getTodayDate = () => {
 const ProjectForm = ({ onAdd, onUpdate, project }) => {
   const isEditing = !!project;
   const ProjectHead = isEditing ? "Düzenleme" : "Yeni";
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFinalPage, setFinalPage] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState(project?.icon?project.icon:"microchip");
   const {StatusMessages,Categories}=useFetchUtils();
@@ -186,13 +189,55 @@ const ProjectForm = ({ onAdd, onUpdate, project }) => {
             <button type="button" onClick={onClick}>İlerle</button></div>
         </div>
         <div className={styles.SecondWindow} style={{ display: isFinalPage ? 'flex' : 'none' }}>
-          <FormInputField
-            labeltext="Proje İçeriği"
-            name="content"
-            type="textarea"
-            register={register}
-            errors={errors}
-          />
+         <div className={styles.formFieldContainer}> {/* Stiller için bir sarmalayıcı */}
+            <label>Proje İçeriği</label>
+
+            {/* RHF'nin 'content' alanını kontrol etmek için Controller kullanıyoruz */}
+            <Controller
+              name="content"
+              control={control}
+              rules={{ required: 'Proje içeriği zorunludur.' }}
+              render={({ field, fieldState }) => (
+                <>
+                  {/* 1. İçeriğin bir önizlemesini gösteriyoruz (textarea yerine) */}
+                  <div
+                    className={styles.contentPreview} // (Bunu CSS'e ekleyeceğiz)
+                    dangerouslySetInnerHTML={{ __html: field.value || '<p>İçerik girmek için editörü açın...</p>' }}
+                  />
+
+                  {/* 2. Modal'ı açacak olan buton */}
+                  <button
+                    type="button" // Formu submit etmemesi önemli!
+                    className={styles.openEditorBtn} // (Bunu CSS'e ekleyeceğiz)
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsModalOpen(true);
+                    }}
+                  >
+                    İçeriği Düzenle
+                  </button>
+                  
+                  {/* 3. Hata Mesajı */}
+                  {fieldState.error && (
+                    <p className={styles.errorMessage}>{fieldState.error.message}</p>
+                  )}
+                  
+                  {/* 4. Modal'ın kendisi. 
+                    RHF'den (field) gelen veriyi modal'a bağlıyoruz.
+                  */}
+                  <EditorModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    initialContent={field.value} // RHF'deki mevcut 'content'i editöre yükle
+                    onSave={(newContent) => {
+                      field.onChange(newContent); // RHF'nin 'content' state'ini güncelle
+                      setIsModalOpen(false);      // Modalı kapat
+                    }}
+                  />
+                </>
+              )}
+            />
+          </div>
           <FormInputField
             labeltext="Tarih"
             name="date"
