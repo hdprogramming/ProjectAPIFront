@@ -1,7 +1,9 @@
 /* ... Önceki Tiptap stilleriniz (.ProseMirror, .menu-bar vb.) burada kalacak ... */
 
 /* --- YENİ Stiller --- */
-
+:root{
+--background-color:RGB(0,50,0);
+}
 /* Ana Uygulama Konteyneri */
 .app-container {
   padding: 2rem;
@@ -15,9 +17,9 @@
   width: 100%;
   min-height: 150px;
   border: 1px solid #00ffbb;
+  background-color: var(--background-color);
   border-radius: 4px;
-  padding: 0.5rem;
-  background-color: transparent;
+  padding: 0.5rem;  
   font-family: monospace; /* HTML'i daha okunaklı yapar */
   resize: vertical;
   margin-bottom: 1rem;
@@ -28,14 +30,14 @@
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
   cursor: pointer;
-  background-color: #007bff;
+   background-color: var(--background-color);
   color: white;
   border: none;
   border-radius: 4px;
 }
 
 .open-editor-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--background-color);
 }
 
 /* Modal Arka Planı */
@@ -54,7 +56,7 @@
 
 /* Modal İçerik Penceresi */
 .modal-content {
-  background: #005511;
+  
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   width: 90%;
@@ -64,6 +66,7 @@
   max-height: 80vh;
   display: flex;
   flex-direction: column;
+   background-color: var(--background-color);
 }
 
 /* Modal içindeki Tiptap editörü için özel ayar */
@@ -71,9 +74,9 @@
   min-height: 300px;
   max-height: 50vh; /* Editör alanını sınırlar */
   overflow-y: auto; /* Gerektiğinde kaydırma çubuğu çıkar */
-  border: none; /* Modal içinde sınıra gerek yok */
-  border-top: 1px solid #00ffbb; /* Menü çubuğundan ayırır */
-  border-bottom: 1px solid #00ffbb;
+  border: 1px solid #00ffbb; ; /* Modal içinde sınıra gerek yok */
+  margin: 5px;
+  padding:5px;
 }
 
 /* Modal içindeki menü bar */
@@ -86,7 +89,7 @@
 .modal-actions {
   padding: 1rem;
   text-align: right;
-  background-color:#005511;;
+   background-color: var(--background-color);
 }
 
 .modal-actions button {
@@ -97,9 +100,8 @@
 }
 
 .modal-actions .btn-save {
-  background-color: #005511;;
-  color: #00ffbb;
-  border-color: #28a745;
+  background-color: var(--background-color);
+  border-color: #00ff3c;
 }
 .btn-save:hover{
   border-color: #00ffbb;
@@ -112,15 +114,15 @@
   padding: 0.5rem;
   border: 1px solid#00ffbb;
   border-bottom: none;
-  background-color: #005511;
+  background-color: var(--background-color);
   border-radius: 4px 4px 0 0;
 }
 
 /* BUTONLAR İÇİN GÜNCELLENMİŞ STİL */
 .menu-bar button {
-  margin: 0.01rem;
+  margin: 0.15rem;
   border: 1px solid #00ffbb;
-  background: transparent;
+   
   cursor: pointer;
   border-radius: 4px;
   
@@ -138,18 +140,18 @@
   margin: 0.25rem;
   padding: 0.4rem 0.6rem;
   border: 1px solid #00ffbb;
-  background:#005511;
+   background-color: var(--background-color);
   cursor: pointer;
   border-radius: 4px;
   color:#00ffbb;
 }
 
 .menu-bar button:hover, .menu-bar select:hover {
-  background-color: #005511;
+  background-color: var(--background-color);
 }
 
 /* Aktif butonun stili aynı */
 .menu-bar button.is-active {
-  background-color: #333;
+  background-color: RGB(0,80,0);
  
 }
