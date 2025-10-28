@@ -52,7 +52,7 @@ const ViewProject=()=>{
                        <Link to={`/deney/del/`} state={{id:experiment.id}}  className={styles.DelLink}>
                             Sil
                         </Link>
-                        <Link to={`/deney/mod/`} state={{id:experiment.id}} className={styles.ModLink}>
+                        <Link to={`/deney/modifycontent/`} state={{id:experiment.id,content:experiment.content}} className={styles.ModLink}>
                             Düzenle
                         </Link>
                         

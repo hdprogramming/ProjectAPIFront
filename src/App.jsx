@@ -18,6 +18,7 @@ import LogoffWindow from './pages/Logoff';
 import { FetchUtilsProvider } from './contexts/FetchUtils';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
+import ModifyPage from './pages/Modify';
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             <Route path="/deney/" element={<ViewProject  />} /> 
             <Route path="/deney/yeni" element={<NewExperiment  />} /> {/* Yeni proje ekleme */}
             <Route path="/deney/mod/" element={<ModExperiment />} /> {/* Yeni proje güncelleme */}
+            <Route path="/deney/modifycontent/" element={<ModifyPage />} /> {/* Yeni proje içerik güncelleme */}
             <Route path="/deney/del/" element={<DelExperiment  />} /> {/* Yeni proje güncelleme */}
             {/* 4. Opsiyonel: Eşleşen bir rota bulunamazsa (404 Not Found) gösterilir. */}
             <Route path="*" element={<h2 style={{ color: 'red' }}>404 - Sayfa Bulunamadı</h2>} />

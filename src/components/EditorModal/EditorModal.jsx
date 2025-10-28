@@ -103,11 +103,11 @@ const MenuBar = ({ editor }) => {
         }}
       >
         <option value="p">Paragraf</option>
-        <option value="h1">Başlık 1</option>
-        <option value="h2">Başlık 2</option>
-         <option value="h3">Başlık 3</option>
-          <option value="h4">Başlık 4</option>
-           <option value="h5">Başlık 5</option>
+        <option value="h1">H1</option>
+        <option value="h2">H2</option>
+         <option value="h3">H3</option>
+          <option value="h4">H4</option>
+           <option value="h5">H5</option>
       </select>
         <select
         value={editor.getAttributes('paragraph').lineHeight || 'normal'}
@@ -142,7 +142,7 @@ const MenuBar = ({ editor }) => {
 };
 
 // --- Modal İçindeki Editör Bileşeni (Güncellendi) ---
-const EditorComponent = ({ initialContent, onClose, onSave }) => {
+export const EditorComponent = ({ initialContent, onClose, onSave }) => {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ paragraph: false }),

@@ -2,7 +2,7 @@
 
 /* --- YENİ Stiller --- */
 :root{
---background-color:RGB(0,50,0);
+--background-color:RGBA(0,50,0,0.6);
 }
 /* Ana Uygulama Konteyneri */
 .app-container {
@@ -88,8 +88,7 @@
 /* Modal Eylem (Kaydet/İptal) Butonları */
 .modal-actions {
   padding: 1rem;
-  text-align: right;
-   background-color: var(--background-color);
+  text-align: right; 
 }
 
 .modal-actions button {
@@ -100,7 +99,7 @@
 }
 
 .modal-actions .btn-save {
-  background-color: var(--background-color);
+  
   border-color: #00ff3c;
 }
 .btn-save:hover{

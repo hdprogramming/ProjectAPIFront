@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import ModifyPage from "../pages/Modify";
 
 export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
     const { api } = useAuth();
@@ -7,7 +8,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
     const [experiment, setExperiment] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true); // Başlangıçta true olmalı
-     
+
     // 1. VERİ ÇEKME İŞLEMİNİ useEffect İÇİNDE OTOMATİK BAŞLAT
     useEffect(() => {
         const fetchProject = async () => {
@@ -37,18 +38,17 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
     const saveProject = async (newExp, isCreate = false) => {
         setIsLoading(true);
         setError(null);
-        const newProjectData=MapExperiment(newExp);
+        const newProjectData = MapExperiment(newExp);
         console.log(newProjectData);
         try {
             let response;
             if (isCreate)
                 response = await api.post("/Projects", newProjectData); // POST: ID genellikle dışarıda kalır
-            else
-            {
-                newProjectData.id=id;
+            else {
+                newProjectData.id = id;
                 response = await api.put(`/projects/${id}`, newProjectData);
-            }                
-              
+            }
+
             // API'den dönen veriyi (veya gönderdiğimiz veriyi) state'e set et
             setExperiment(response.data || newProjectData);
             return true; // Başarılı olduğunu belirt
@@ -66,27 +66,26 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
         setError(null);
 
         try {
-         let response = await api.delete(`/projects/${id}`);
-         if(response)
-            return true;
+            let response = await api.delete(`/projects/${id}`);
+            if (response)
+                return true;
         }
         catch (error) {
             console.error("Proje silinemedi:", error);
             setError(error);
             return false; // Başarısız olduğunu belirt
         }
-        finally{
+        finally {
             setIsLoading(false);
         }
     }
-    const GetProjects=async()=>{
-      setIsLoading(true);
-       try {
-         let response = await api.get(`/Projects`);
-         if(response&&response.data)
-            {
+    const GetProjects = async () => {
+        setIsLoading(true);
+        try {
+            let response = await api.get(`/Projects`);
+            if (response && response.data) {
                 setIsLoading(false);
-                return response.data;              
+                return response.data;
             }
             else return [];
         }
@@ -95,18 +94,17 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
             setError(error);
             return [] // Başarısız olduğunu belirt
         }
-        finally{
+        finally {
             setIsLoading(false);
         }
     }
-    const GetStatusMessages=async()=>{
-      setIsLoading(true);
-       try {
-         let response = await api.get(`/ProjectStatusMessages`);
-         if(response&&response.data)
-            {
+    const GetStatusMessages = async () => {
+        setIsLoading(true);
+        try {
+            let response = await api.get(`/ProjectStatusMessages`);
+            if (response && response.data) {
                 setIsLoading(false);
-                return response.data;              
+                return response.data;
             }
             else return null;
         }
@@ -115,65 +113,80 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
             setError(error);
             return null // Başarısız olduğunu belirt
         }
-        finally{
+        finally {
             setIsLoading(false);
         }
     }
-    const GetCategories=async()=>{
-      setIsLoading(true);
-       try {
-         let response = await api.get(`/ProjectCategories`);
-         if(response&&response.data)
-            {
+    const GetCategories = async () => {
+        setIsLoading(true);
+        try {
+            let response = await api.get(`/ProjectCategories`);
+            if (response && response.data) {
                 setIsLoading(false);
-                return response.data;              
+                return response.data;
             }
             else return null;
         }
         catch (error) {
-             console.error("Proje Kategori Bilgileri getirilemedi:", error);
+            console.error("Proje Kategori Bilgileri getirilemedi:", error);
             setError(error);
             return null // Başarısız olduğunu belirt
         }
-        finally{
+        finally {
             setIsLoading(false);
         }
     }
-    const GetUserData=async(id)=>{
-     setIsLoading(true);
-       try {
-         let response = await api.get(`/Users/`+id);
-         if(response&&response.data)
-            {
+    const GetUserData = async (id) => {
+        setIsLoading(true);
+        try {
+            let response = await api.get(`/Users/` + id);
+            if (response && response.data) {
                 setIsLoading(false);
-                return response.data;              
+                return response.data;
             }
             else return null;
         }
         catch (error) {
-             console.error("Kullanıcı Bilgileri getirilemedi:", error);
+            console.error("Kullanıcı Bilgileri getirilemedi:", error);
             setError(error);
-                        
+
             return null // Başarısız olduğunu belirt
         }
-        finally{
+        finally {
             setIsLoading(false);
         }
     }
-    function MapExperiment(newExp)
-    {
-         const ExpDTO={
-       "id": newExp.id?Number(newExp.id):0,
-  "icon": newExp.icon,
-  "title": newExp.title,
-  "description": newExp.description,
-  "content": newExp.content,
-  "isAlive": newExp.isAlive,
-  "statusID": Number(newExp.statusID),
-  "date": newExp.date,
-  "categoryIds":newExp.categoryIds
+    function MapExperiment(newExp) {
+        const ExpDTO = {
+            "id": newExp.id ? Number(newExp.id) : 0,
+            "icon": newExp.icon,
+            "title": newExp.title,
+            "description": newExp.description,
+            "content": newExp.content,
+            "isAlive": newExp.isAlive,
+            "statusID": Number(newExp.statusID),
+            "date": newExp.date,
+            "categoryIds": newExp.categoryIds
+        }
+        return ExpDTO;
     }
-    return ExpDTO;
+    async function ModifyContent(id, content) {
+        setIsLoading(true);
+        setError(null);
+        const newProjectData = { id: id, content: content };
+        console.log(newProjectData);
+        try {
+            let response = await api.put(`/projects/${id}`, newProjectData);
+            if(response)
+            return true; // Başarılı olduğunu belirt
+
+        } catch (error) {
+            console.error("Proje kaydedilemedi:", error);
+            setError(error);
+            return false; // Başarısız olduğunu belirt
+        } finally {
+            setIsLoading(false);
+        }
     }
     // Çıktı isimlerini mantıklı hale getirdik
     return {
@@ -188,6 +201,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
         setExperiment,
         saveProject,
         deleteProject,
+        ModifyContent,
         MapExperiment
     };
 }
