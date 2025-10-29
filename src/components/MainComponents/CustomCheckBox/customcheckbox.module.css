@@ -1,0 +1,67 @@
+.custom-checkbox-container {
+  /* En önemli ayar: Konumlandırma için bir referans noktası sağlar */
+  position: relative;
+  display: inline-block; /* Sadece içeriği kadar yer kaplasın */
+  padding-left: 30px; /* Onay kutusu için soldan boşluk bırak */
+  cursor: pointer;
+  font-size: 16px; /* İsteğe bağlı: Metin boyutu */
+  user-select: none; /* Metin seçmeyi engelle */
+  line-height: 20px; /* Checkmark ile hizalamak için */
+}
+
+/* Gerçek input'u gizle */
+.custom-checkbox-container input[type='checkbox'] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Checkbox'ın görsel kutusu */
+.checkmark {
+  /* Kutuyu doğru konuma yerleştir */
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: transparent; /* Kutunun varsayılan rengi */
+  border-radius: 4px; /* Hafif yuvarlak köşeler */
+  border: 1px solid #00ffbb;
+  transition: all 0.2s; /* Geçiş efekti ekle */
+}
+
+/* Hover (Fare Üzerine Geldiğinde) */
+.custom-checkbox-container:hover input:not(:checked) ~ .checkmark {
+  background-color: #00aa11;
+}
+
+/* İşaretlendiğinde (Tıklandığında) kutunun rengi */
+.custom-checkbox-container input:checked ~ .checkmark {
+  background-color: #00ffbb; /* İstenen yeşil/turkuaz tonu */
+  border-color: #00ffbb;
+}
+
+/* Onay işareti (::after ile) gizli tutulur */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* İşaretlendiğinde onay işaretini göster */
+.custom-checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Onay işaretinin stili (Beyaz V işareti) */
+.custom-checkbox-container .checkmark:after {
+  left: 5px;
+  top:1px;
+  width: 5px;
+  height: 10px;
+  border: solid white; /* Onay işaretinin rengi */
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}

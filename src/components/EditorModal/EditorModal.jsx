@@ -7,11 +7,13 @@ import Subscript from '@tiptap/extension-subscript';
 import {TextStyle} from '@tiptap/extension-text-style';
 import FontFamily from '@tiptap/extension-font-family';
 import TextAlign from '@tiptap/extension-text-align';
-import Image from '@tiptap/extension-image';
+import { ResizableImage } from 'tiptap-extension-resizable-image';
 import Emoji from '@tiptap/extension-emoji';
 import { Paragraph } from '@tiptap/extension-paragraph';
 import Modal from "../Modal/Modal";
 import './styles.css';
+import 'tiptap-extension-resizable-image/styles.css';
+import CustomCheckBox from '../MainComponents/CustomCheckBox/CustomCheckBox';
 // İkonları import ediyoruz
 import {
   FaBold, FaItalic, FaUnderline, FaStrikethrough,
@@ -52,13 +54,13 @@ const MenuBar = ({ editor }) => {
   if (!editor) return null;
   const image=useRef();
   const imageurl=useRef();
-  const imageratio=useRef();
+  const [keepratio,setKeepRatio]=useState(false);
   // Fonksiyonlara (e) parametresi eklendi ve preventDefault() çağrıldı
   const addImage = (e) => {
     e.preventDefault(); // Eklendi
     let url=imageurl.current.value;
-    let ratio=String(Number(imageratio.current.value))+"%";
-    if (url) editor.chain().focus().setImage({ src: url,width:ratio,height:'auto' }).run();
+    
+    if (url) editor.chain().focus().setResizableImage({ src: url,width:'200px',height:'200px', 'data-keep-ratio': keepratio, }).run();
   };
 
   // Fonksiyonlara (e) parametresi eklendi ve preventDefault() çağrıldı
@@ -147,7 +149,7 @@ const MenuBar = ({ editor }) => {
         e.preventDefault();
         image.current.src=imageurl.current.value;
       }}></input>
-       <label>Resmin Boyutu(%):</label><input ref={imageratio} type="text" ></input>
+       <CustomCheckBox name={"Ratio"} checktext={"En/Boy oranı korunsun"} setValue={setKeepRatio}></CustomCheckBox>
       <button  onClick={(e)=>{
         onClose(e);
         addImage(e);}}>Ekle</button>
@@ -171,7 +173,10 @@ export const EditorComponent = ({ initialContent, onClose, onSave }) => {
       TextStyle,
       FontFamily,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
-      Image,
+      ResizableImage.configure({
+        defaultWidth: 200,
+        defaultHeight: 200,
+      }),
       Emoji.configure({ enableEmoticonSupport: true }),
     ],
     content: initialContent,
