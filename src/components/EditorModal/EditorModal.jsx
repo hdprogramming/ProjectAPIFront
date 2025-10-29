@@ -1,5 +1,5 @@
 import React, { useState,useRef } from 'react';
-import { useEditor, EditorContent } from '@tiptap/react';
+import { useEditor, EditorContent,useEditorState } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import Superscript from '@tiptap/extension-superscript';
@@ -19,7 +19,8 @@ import {
   FaBold, FaItalic, FaUnderline, FaStrikethrough,
   FaSuperscript, FaSubscript, FaAlignLeft, FaAlignCenter,
   FaAlignRight, FaAlignJustify,
-  FaImage, FaSmile
+  FaImage, FaSmile,
+  FaRedo,FaUndo
 } from 'react-icons/fa';
 import { TbLetterCaseToggle } from 'react-icons/tb';
 
@@ -55,6 +56,7 @@ const MenuBar = ({ editor }) => {
   const image=useRef();
   const imageurl=useRef();
   const [keepratio,setKeepRatio]=useState(false);
+  
   // Fonksiyonlara (e) parametresi eklendi ve preventDefault() çağrıldı
   const addImage = (e) => {
     e.preventDefault(); // Eklendi
@@ -89,10 +91,30 @@ const MenuBar = ({ editor }) => {
     }
     return 'p'; // Varsayılan paragraf
   };
-  
+  const editorState = useEditorState({
+    editor,
+    selector: ctx => {
+      return {
+        canUndo: ctx.editor.can().chain().undo().run() ?? false,
+        canRedo: ctx.editor.can().chain().redo().run() ?? false,
+      }
+    },
+  })
   return (
     <div className="menu-bar">
-      {/* Satır içi onClick'ler (e) alacak şekilde güncellendi */}
+      <button 
+        onClick={(e) => { e.preventDefault(); editor.chain().focus().undo().run(); }} 
+        disabled={!editorState.canUndo}
+        title="Undo">
+        <FaUndo /> {/* <-- İkonu düzeltin */}
+      </button>
+<button 
+        onClick={(e) => { e.preventDefault(); editor.chain().focus().redo().run(); }} 
+         disabled={!editorState.canRedo}
+        title="Redo">
+        <FaRedo />
+      </button>
+       {/* Satır içi onClick'ler (e) alacak şekilde güncellendi */}
       <select
         value={editor.getAttributes('textStyle').fontFamily || 'sans-serif'}
         onChange={(e) => editor.chain().focus().setFontFamily(e.target.value).run()}
@@ -154,7 +176,9 @@ const MenuBar = ({ editor }) => {
         onClose(e);
         addImage(e);}}>Ekle</button>
       </div>)}
-      </Modal>      
+      </Modal>   
+
+
       <button onClick={(e) => { e.preventDefault(); editor.chain().focus().insertContent('😊').run(); }} title="Emoji Ekle"><FaSmile /></button>
       <button onClick={toggleCase} title="Büyük/Küçük Harf"><TbLetterCaseToggle /></button>
    </div>
