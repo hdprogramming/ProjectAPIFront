@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState,useRef } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
@@ -10,6 +10,7 @@ import TextAlign from '@tiptap/extension-text-align';
 import Image from '@tiptap/extension-image';
 import Emoji from '@tiptap/extension-emoji';
 import { Paragraph } from '@tiptap/extension-paragraph';
+import Modal from "../Modal/Modal";
 import './styles.css';
 // İkonları import ediyoruz
 import {
@@ -49,19 +50,22 @@ const CustomLineHeight = Paragraph.extend({
 // --- MenuBar Bileşeni (Güncellendi) ---
 const MenuBar = ({ editor }) => {
   if (!editor) return null;
-
+  const image=useRef();
+  const imageurl=useRef();
+  const imageratio=useRef();
   // Fonksiyonlara (e) parametresi eklendi ve preventDefault() çağrıldı
   const addImage = (e) => {
     e.preventDefault(); // Eklendi
-    const url = window.prompt('Görsel URL adresini girin:');
-    if (url) editor.chain().focus().setImage({ src: url }).run();
+    let url=imageurl.current.value;
+    let ratio=String(Number(imageratio.current.value))+"%";
+    if (url) editor.chain().focus().setImage({ src: url,width:ratio,height:'auto' }).run();
   };
 
   // Fonksiyonlara (e) parametresi eklendi ve preventDefault() çağrıldı
   const toggleCase = (e) => {
     e.preventDefault(); // Eklendi
     const { from, to } = editor.state.selection;
-    const text = editor.state.doc.textBetween(from, to, ' ');
+    const text = editor.state.doc.textBetween(from, to, ' ');    
     const newText = text === text.toLowerCase() ? text.toUpperCase() : text.toLowerCase();
     editor.chain().focus().deleteRange({ from, to }).insertContent(newText).run();
   };
@@ -83,6 +87,7 @@ const MenuBar = ({ editor }) => {
     }
     return 'p'; // Varsayılan paragraf
   };
+  
   return (
     <div className="menu-bar">
       {/* Satır içi onClick'ler (e) alacak şekilde güncellendi */}
@@ -134,7 +139,20 @@ const MenuBar = ({ editor }) => {
       
 
       {/* Diğer butonlar güncellendi */}
-      <button onClick={addImage} title="Görsel Ekle"><FaImage /></button>
+      <Modal title="GörselEkle" wndtitle="Görsel Ekleme Penceresi" btntitle={<FaImage />}>
+      {(onClose)=>(
+      <div className='pictureAddDiv'>
+        <img ref={image} width="200px" height="200px"></img>
+      <label>Resmin URL'si:</label><input type="text" ref={imageurl} onChange={(e)=>{
+        e.preventDefault();
+        image.current.src=imageurl.current.value;
+      }}></input>
+       <label>Resmin Boyutu(%):</label><input ref={imageratio} type="text" ></input>
+      <button  onClick={(e)=>{
+        onClose(e);
+        addImage(e);}}>Ekle</button>
+      </div>)}
+      </Modal>      
       <button onClick={(e) => { e.preventDefault(); editor.chain().focus().insertContent('😊').run(); }} title="Emoji Ekle"><FaSmile /></button>
       <button onClick={toggleCase} title="Büyük/Küçük Harf"><TbLetterCaseToggle /></button>
    </div>

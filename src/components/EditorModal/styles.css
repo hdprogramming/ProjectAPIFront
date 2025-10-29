@@ -151,6 +151,20 @@
 
 /* Aktif butonun stili aynı */
 .menu-bar button.is-active {
-  background-color: RGB(0,80,0);
- 
+  background-color: RGB(0,80,0); 
+}
+.pictureAddDiv
+{
+ display:flex;
+ flex-wrap:wrap;
+ flex-direction: column;
+ justify-items: center; 
+ align-items: center;
+}
+.pictureAddDiv input[type=text]{
+margin:5px;
+text-align: center;
+}
+.pictureAddDiv button{
+  padding:1rem 4rem;
 }

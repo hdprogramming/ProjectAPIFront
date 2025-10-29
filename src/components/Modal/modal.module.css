@@ -1,0 +1,50 @@
+:root{
+    --background-color: rgba(0,100,0,0.5);
+}
+.OpenButton{
+    padding:0.5rem;
+    background-color: var(--background-color);
+    border:1px solid #00ff55;
+    color:#00ff55;
+    border-radius: 3px;
+}
+.OpenButton:hover{
+    border:1px solid #00ffbb;
+    color: #00ffbb;
+}
+.MainFrame{
+    display:block;
+    position:absolute;
+    left:0;
+    top:0;
+    background-color: rgba(0,0,0,0.5);
+    width:100%; 
+    height: 100vh;   
+}
+.MainFrameClose{
+    display:none;
+}
+.Content{        
+    margin:20vh 10vw;
+    height: auto;
+    padding-bottom:10px;
+    background-color: var(--background-color);
+    color:aliceblue;
+}
+.MenuBar{
+    display:flex;
+    justify-content: space-between;
+    background-color: RGBA(0,200,0,0.5);
+    padding:2px;
+}
+.MenuBar button{
+    padding:0.3rem;
+    border: none;
+    cursor:pointer;
+    background-color: transparent;
+    color:#00ff55;
+    font-weight: bold;
+}
+.MenuBar button:hover{
+    color:#00ffbb;
+}
