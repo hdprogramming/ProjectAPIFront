@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import { useAuth,domain} from "../contexts/AuthContext";
 import ModifyPage from "../pages/Modify";
 
 export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
-    const { api } = useAuth();
+    const { api} = useAuth();
     // 'experiment' yerine 'project' kullanmak daha okunaklı olabilir.
     const [experiment, setExperiment] = useState(null);
     const [error, setError] = useState(null);
@@ -188,8 +188,50 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
             setIsLoading(false);
         }
     }
+   /**
+ * Resmi ve ID'yi multipart/form-data olarak sunucuya yükler.
+ * @param {string} id - Resimle ilişkilendirilecek ID
+ * @param {File} image - Kullanıcının seçtiği 'File' nesnesi
+ */
+async function UploadImage(name, image) {
+    setIsLoading(true);
+    setError(null);
+
+    // 1. JSON nesnesi yerine bir FormData nesnesi oluşturun
+    const formData = new FormData();
+
+    // 2. Göndermek istediğiniz verileri 'append' (ekle) metoduyla ekleyin.
+    // Sunucu tarafında (backend) bu 'key' (anahtar) isimlerini bekliyor olacaksınız.
+    formData.append('name', name);
+    formData.append('image', image); // 'image' değişkeni File nesnesi olmalı
+
+    console.log("Dosya yüklenmek üzere FormData'ya eklendi...");
+    // Not: console.log(formData) size "[FormData {}]" gibi boş bir obje gösterir.
+    // İçeriğini görmek için:
+    // for (let pair of formData.entries()) {
+    //    console.log(pair[0]+ ', ' + pair[1]); 
+    // }
+
+    try {
+        // 3. 'api.post' fonksiyonunun ikinci parametresi olarak JSON yerine 'formData'yı verin.
+        let response = await api.post(`/Uploads/Image`, formData);
+        
+        if (response)
+        {
+            return domain+response.data.url // Başarılı olduğunu belirt
+        }
+
+    } catch (error) {
+        console.error("Dosya yüklenemedi:", error);
+        setError(error);
+        return ""; // Başarısız olduğunu belirt
+    } finally {
+        setIsLoading(false);
+    }
+}
     // Çıktı isimlerini mantıklı hale getirdik
     return {
+        api,
         experiment,
         isLoading,
         error,
@@ -202,6 +244,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
         saveProject,
         deleteProject,
         ModifyContent,
-        MapExperiment
+        MapExperiment,
+        UploadImage
     };
 }

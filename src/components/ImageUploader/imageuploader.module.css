@@ -1,0 +1,46 @@
+.file-upload-area {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px; /* Aralarına boşluk koy */
+  font-family: Arial, sans-serif;
+  padding: 5px;
+}
+
+/* 1. Asıl input'u TAMAMEN GİZLE */
+.realfile-input {
+  display: none;
+}
+
+/* 2. Bizim tasarladığımız 'sahte' butonu (label) stilize et */
+.button
+{
+   justify-content: flex-end;
+   margin:10px;
+   padding:8px;
+   background-color: transparent;
+   border: #00dd00 solid 2px;
+   border-radius: 3px;
+   color:#00dd00;
+}
+.button:hover
+{
+   border: #00ffbb solid 2px;
+   color:#00ffbb;
+}
+.button:active
+{
+   border: #ffffff solid 2px;
+   color:#ffffff;
+}
+.button:disabled{
+  border:red solid 2px;
+  color:red;
+}
+
+/* 3. Dosya adını gösteren metni stilize et */
+.filename {
+  color: #00ffbb;
+  font-style: italic;
+  font-size: 14px;
+}

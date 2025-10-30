@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react';
+import React, { useState,useRef, useEffect } from 'react';
 import { useEditor, EditorContent,useEditorState } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
@@ -14,6 +14,7 @@ import Modal from "../Modal/Modal";
 import './styles.css';
 import 'tiptap-extension-resizable-image/styles.css';
 import CustomCheckBox from '../MainComponents/CustomCheckBox/CustomCheckBox';
+import StyledFileInput from '../StyledFileInput/StyledFileInput';
 // İkonları import ediyoruz
 import {
   FaBold, FaItalic, FaUnderline, FaStrikethrough,
@@ -23,6 +24,7 @@ import {
   FaRedo,FaUndo
 } from 'react-icons/fa';
 import { TbLetterCaseToggle } from 'react-icons/tb';
+import ImageUploader from '../ImageUploader/ImageUploader';
 
 
 // --- Satır Yüksekliği Eklentisi (Öncekiyle aynı) ---
@@ -53,14 +55,16 @@ const CustomLineHeight = Paragraph.extend({
 // --- MenuBar Bileşeni (Güncellendi) ---
 const MenuBar = ({ editor }) => {
   if (!editor) return null;
-  const image=useRef();
-  const imageurl=useRef();
+  const [imageurl,setImageUrl]=useState("");
   const [keepratio,setKeepRatio]=useState(false);
-  
+
+  //useEffect(()=>{
+    //image.current.src=imagefilesrc;
+  //},[imagefile]);
   // Fonksiyonlara (e) parametresi eklendi ve preventDefault() çağrıldı
   const addImage = (e) => {
     e.preventDefault(); // Eklendi
-    let url=imageurl.current.value;
+    let url=imageurl;
     
     if (url) editor.chain().focus().setResizableImage({ src: url,width:'200px',height:'200px', 'data-keep-ratio': keepratio, }).run();
   };
@@ -166,15 +170,12 @@ const MenuBar = ({ editor }) => {
       <Modal title="GörselEkle" wndtitle="Görsel Ekleme Penceresi" btntitle={<FaImage />}>
       {(onClose)=>(
       <div className='pictureAddDiv'>
-        <img ref={image} width="200px" height="200px"></img>
-      <label>Resmin URL'si:</label><input type="text" ref={imageurl} onChange={(e)=>{
-        e.preventDefault();
-        image.current.src=imageurl.current.value;
-      }}></input>
-       <CustomCheckBox name={"Ratio"} checktext={"En/Boy oranı korunsun"} setValue={setKeepRatio}></CustomCheckBox>
-      <button  onClick={(e)=>{
+        <ImageUploader onAddImage={(e)=>{
         onClose(e);
-        addImage(e);}}>Ekle</button>
+        addImage(e);
+        console.log(imageurl);}} setKeepRatio={setKeepRatio} setImageUrl={setImageUrl}></ImageUploader>
+       
+      
       </div>)}
       </Modal>   
 

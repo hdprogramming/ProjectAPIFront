@@ -47,7 +47,7 @@ const ViewProject=()=>{
     return (
      <div className={styles.ExperimentContent}>
        <h2>{experiment.title} </h2> 
-       <p><div dangerouslySetInnerHTML={{__html: experiment.content}}></div></p>
+       <div dangerouslySetInnerHTML={{__html: experiment.content}}></div>
        {isLogin&&<div style={{ display:'flex',flexDirection:'row-reverse',marginTop: '10px'}}>
                        <Link to={`/deney/del/`} state={{id:experiment.id}}  className={styles.DelLink}>
                             Sil

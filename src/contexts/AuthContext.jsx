@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate} from 'react-router-dom';
-export const domain = "http://localhost:5098/api"
+export const domain ="http://localhost:5098";
+export const apidomain = "http://localhost:5098/api";
 // 1. Context objesini oluştur
 // createContext'e başlangıç değeri olarak bir obje veriyoruz
 // Bu obje, bileşenlerin tüketeceği veriyi ve fonksiyonları içerir.
 
 const api = axios.create({
-  baseURL: domain,
+  baseURL: apidomain,
   withCredentials: true,
   // Diğer ayarlar...
 });
@@ -26,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   const Navigate=useNavigate();
   const Login = async (user) => {
     let state = false;
-    await axios.post(domain + "/Auth/login", user, state).then
+    await axios.post(apidomain + "/Auth/login", user, state).then
       ((response) => {
         if (response.data) {
           setToken(response.data.token);
@@ -78,7 +79,7 @@ export const AuthProvider = ({ children }) => {
         try {
           // 1. Yeni Access Token alma isteği
           // Axios, bu isteğe HttpOnly Cookie içindeki Refresh Token'ı otomatik ekler!
-          const refreshResponse = await axios.post(`${domain}/Auth/refresh`);
+          const refreshResponse = await axios.post(`${apidomain}/Auth/refresh`);
 
           const newAccessToken = refreshResponse.data.Token;
 
