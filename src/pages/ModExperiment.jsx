@@ -24,9 +24,10 @@ const ModExperiment = () => {
         return <div className={styles.NewExperiment}>Project not found.</div>;
     }
   return(
+     <ProjectIdProvider value={id}>
     <div className={styles.NewExperiment}>
         <ProjectForm onUpdate={onUpdate} project={experiment}/>        
-        </div> 
+        </div> </ProjectIdProvider>
 )
 };
 

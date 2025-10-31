@@ -3,6 +3,7 @@ import styles from './imageuploader.module.css'; // Stilleri yandaki dosyadan ç
 import CustomCheckBox from '../MainComponents/CustomCheckBox/CustomCheckBox';
 import useExperiment from '../../utils/useExperiment';
 import StatusRenderer from '../../utils/StatusRenderer';
+import { useProjectId } from '../../utils/ProjectIDContext';
 function ImageUploader({onAddImage,setKeepRatio,setImageUrl}) {
   const [fileName, setFileName] = useState('Henüz dosya seçilmedi...');
   // 1. Önizleme URL'i için state (Bu zaten doğruydu)
@@ -13,8 +14,9 @@ function ImageUploader({onAddImage,setKeepRatio,setImageUrl}) {
   // (Not: Değişken adını 'File' yerine 'file' yaptım, 
   // 'File' JavaScript'in yerleşik bir adıdır, kafa karıştırmasın)
   const [file, setFile] = useState(null);
+  const projectid = useProjectId();
 const handleUpdateClick=async()=>{
-   let imageurl=await UploadImage(file.name,file);
+   let imageurl=await UploadImage(file.name,file,projectid);
    setImageUrl(imageurl);
    setState(false);
    

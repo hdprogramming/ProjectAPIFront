@@ -3,6 +3,7 @@ import { EditorComponent } from '../components/EditorModal/EditorModal';
 import '../components/EditorModal/styles.css'
 import useExperiment from '../utils/useExperiment';
 import StatusRenderer from '../utils/StatusRenderer';
+import { ProjectIdProvider } from '../utils/ProjectIDContext';
 const ModifyPage=()=>{
     const {isLoading,
         error,ModifyContent} = useExperiment();
@@ -32,9 +33,10 @@ const ModifyPage=()=>{
       return statusContent;
   }       
 return(
+  <ProjectIdProvider value={id}>
     <div className='modal-content'>
           <EditorComponent initialContent={content} onClose={onClose} onSave={onSave}/>
-    </div>    
+    </div>  </ProjectIdProvider>
 )
 }
 export default ModifyPage;

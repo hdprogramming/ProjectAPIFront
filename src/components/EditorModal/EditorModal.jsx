@@ -173,7 +173,7 @@ const MenuBar = ({ editor }) => {
         <ImageUploader onAddImage={(e)=>{
         onClose(e);
         addImage(e);
-        console.log(imageurl);}} setKeepRatio={setKeepRatio} setImageUrl={setImageUrl}></ImageUploader>
+        console.log(imageurl);}} setKeepRatio={setKeepRatio} setImageUrl={setImageUrl} ></ImageUploader>
        
       
       </div>)}
@@ -217,7 +217,7 @@ export const EditorComponent = ({ initialContent, onClose, onSave }) => {
 
   return (
     <>
-      <MenuBar editor={editor} />
+      <MenuBar editor={editor}  />
       <EditorContent editor={editor} />
       <div className="modal-actions">
         {/* İptal butonu güncellendi */}
@@ -231,11 +231,11 @@ export const EditorComponent = ({ initialContent, onClose, onSave }) => {
 
 
 // --- Ana Modal Bileşeni (Değişiklik yok) ---
-function EditorModal({ isOpen, onClose, onSave, initialContent }) {
+function EditorModal({ isOpen, onClose, onSave, initialContent}) {
   if (!isOpen) {
     return null;
   }
-
+  
   return (
     <div className="modal-backdrop" onMouseDown={onClose}>
       <div className="modal-content" onMouseDown={(e) => e.stopPropagation()}>

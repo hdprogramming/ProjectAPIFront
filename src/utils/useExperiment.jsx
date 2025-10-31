@@ -193,7 +193,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
  * @param {string} id - Resimle ilişkilendirilecek ID
  * @param {File} image - Kullanıcının seçtiği 'File' nesnesi
  */
-async function UploadImage(name, image) {
+async function UploadImage(name, image,projectid) {
     setIsLoading(true);
     setError(null);
 
@@ -204,7 +204,8 @@ async function UploadImage(name, image) {
     // Sunucu tarafında (backend) bu 'key' (anahtar) isimlerini bekliyor olacaksınız.
     formData.append('name', name);
     formData.append('image', image); // 'image' değişkeni File nesnesi olmalı
-
+    if(projectid)
+    formData.append('ProjectID',projectid);
     console.log("Dosya yüklenmek üzere FormData'ya eklendi...");
     // Not: console.log(formData) size "[FormData {}]" gibi boş bir obje gösterir.
     // İçeriğini görmek için:

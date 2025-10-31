@@ -5,6 +5,7 @@ import styles from '../pages/styles/ViewProject.module.css'
 import StatusRenderer from "../utils/StatusRenderer";
 import { useAuth } from "../contexts/AuthContext";
 import { useLocation} from "react-router-dom";
+import { ProjectIdProvider } from "../utils/ProjectIDContext";
 const ViewProject=()=>{
     const location=useLocation();
     const id=location.state?.id;
@@ -45,6 +46,7 @@ const ViewProject=()=>{
   }       
    
     return (
+     
      <div className={styles.ExperimentContent}>
        <h2>{experiment.title} </h2> 
        <div dangerouslySetInnerHTML={{__html: experiment.content}}></div>
