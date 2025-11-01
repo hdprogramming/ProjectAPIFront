@@ -3,12 +3,14 @@ import styles from "../Modal/modal.module.css";
 const Modal = ({ children,btntitle,wndtitle }) => {
     const [isClose,setClose]=useState(true);
     const MainFrame=useRef();
-     function onOpen()
+     function onOpen(e)
     {
+      e.preventDefault();
       MainFrame.current.className=styles.MainFrame;
     }
-    function onClose()
+    function onClose(e)
     {
+      e.preventDefault();
       MainFrame.current.className=styles.MainFrameClose;
     }
     return (

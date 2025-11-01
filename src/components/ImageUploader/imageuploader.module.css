@@ -1,10 +1,14 @@
 .file-upload-area {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 10px; /* Aralarına boşluk koy */
+  display: flex;  
+  flex-direction: row;
+  gap: 5px; /* Aralarına boşluk koy */
   font-family: Arial, sans-serif;
   padding: 5px;
+}
+.file-body-area {
+  display: flex;  
+  flex-direction: column;
+  
 }
 
 /* 1. Asıl input'u TAMAMEN GİZLE */
@@ -22,6 +26,7 @@
    border: #00dd00 solid 2px;
    border-radius: 3px;
    color:#00dd00;
+   text-align: center;
 }
 .button:hover
 {

@@ -230,6 +230,27 @@ async function UploadImage(name, image,projectid) {
         setIsLoading(false);
     }
 }
+async function GetFiles()
+{
+     setIsLoading(true);
+    setError(null);
+    try {
+        // 3. 'api.post' fonksiyonunun ikinci parametresi olarak JSON yerine 'formData'yı verin.
+        let response = await api.get(`/Uploads/MyFiles`);
+        
+        if (response)
+        {
+            return response.data // Başarılı olduğunu belirt
+        }
+
+    } catch (error) {
+        console.error("Dosyalar getirilemedi...", error);
+        setError(error);
+        return ""; // Başarısız olduğunu belirt
+    } finally {
+        setIsLoading(false);
+    }
+}
     // Çıktı isimlerini mantıklı hale getirdik
     return {
         api,
@@ -246,6 +267,7 @@ async function UploadImage(name, image,projectid) {
         deleteProject,
         ModifyContent,
         MapExperiment,
-        UploadImage
+        UploadImage,
+        GetFiles
     };
 }

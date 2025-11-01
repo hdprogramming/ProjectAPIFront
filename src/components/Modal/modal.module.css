@@ -36,14 +36,16 @@
     justify-content: space-between;
     background-color: RGBA(0,200,0,0.5);
     padding:2px;
+    
 }
 .MenuBar button{
-    padding:0.3rem;
+    padding:0.4rem;
     border: none;
     cursor:pointer;
     background-color: transparent;
     color:#00ff55;
     font-weight: bold;
+    text-align: center;
 }
 .MenuBar button:hover{
     color:#00ffbb;

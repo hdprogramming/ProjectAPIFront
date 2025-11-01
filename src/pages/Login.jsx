@@ -24,7 +24,7 @@ const LoginWindow = () => {
     };
     return (
         <>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form style={{marginTop:'10vh'}} onSubmit={handleSubmit(onSubmit)}>
             <FormInputField
                 labeltext="EMail"
                 name="email"

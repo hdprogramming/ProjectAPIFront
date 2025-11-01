@@ -25,7 +25,7 @@ import {
 } from 'react-icons/fa';
 import { TbLetterCaseToggle } from 'react-icons/tb';
 import ImageUploader from '../ImageUploader/ImageUploader';
-
+import useExperiment from '../../utils/useExperiment';
 
 // --- Satır Yüksekliği Eklentisi (Öncekiyle aynı) ---
 const CustomLineHeight = Paragraph.extend({
@@ -57,7 +57,7 @@ const MenuBar = ({ editor }) => {
   if (!editor) return null;
   const [imageurl,setImageUrl]=useState("");
   const [keepratio,setKeepRatio]=useState(false);
-
+  
   //useEffect(()=>{
     //image.current.src=imagefilesrc;
   //},[imagefile]);
@@ -170,8 +170,8 @@ const MenuBar = ({ editor }) => {
       <Modal title="GörselEkle" wndtitle="Görsel Ekleme Penceresi" btntitle={<FaImage />}>
       {(onClose)=>(
       <div className='pictureAddDiv'>
-        <ImageUploader onAddImage={(e)=>{
-        onClose(e);
+        <ImageUploader  onAddImage={(e)=>{
+                  onClose(e);
         addImage(e);
         console.log(imageurl);}} setKeepRatio={setKeepRatio} setImageUrl={setImageUrl} ></ImageUploader>
        

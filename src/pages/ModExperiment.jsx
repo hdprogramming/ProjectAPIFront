@@ -2,6 +2,7 @@ import ProjectForm from '../components/ProjectForm/ProjectForm';
 import styles from '../pages/styles/NewExperiment.module.css'
 import { useLocation } from 'react-router-dom';
 import useExperiment from '../utils/useExperiment';
+import { ProjectIdProvider } from '../utils/ProjectIDContext';
 const ModExperiment = () => { 
   const location = useLocation();
   const id=location.state?.id;
