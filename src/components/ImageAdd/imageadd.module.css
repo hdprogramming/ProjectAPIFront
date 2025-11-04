@@ -1,6 +1,6 @@
 .file-upload-area {
   display: flex;  
-  flex-direction: row;
+  flex-direction: column;
   gap: 5px; /* Aralarına boşluk koy */
   font-family: Arial, sans-serif;
   padding: 5px;
@@ -8,7 +8,7 @@
 .file-body-area {
   display: flex;  
   flex-direction: column;
-  
+  align-items: center;
 }
 
 /* 1. Asıl input'u TAMAMEN GİZLE */

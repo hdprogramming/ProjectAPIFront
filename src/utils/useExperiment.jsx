@@ -239,12 +239,54 @@ async function GetFiles()
         let response = await api.get(`/Uploads/MyFiles`);
         
         if (response)
-        {
+        {           
             return response.data // Başarılı olduğunu belirt
         }
 
     } catch (error) {
         console.error("Dosyalar getirilemedi...", error);
+        setError(error);
+        return ""; // Başarısız olduğunu belirt
+    } finally {
+        setIsLoading(false);
+    }
+}
+async function RenameFile(id,name)
+{
+       setIsLoading(true);
+    setError(null);
+    try {
+        // 3. 'api.post' fonksiyonunun ikinci parametresi olarak JSON yerine 'formData'yı verin.
+        let response = await api.put(`/Uploads/Update/${id}`,{name:name});
+        
+        if (response)
+        {           
+            return response.status // Başarılı olduğunu belirt
+        }
+
+    } catch (error) {
+        console.error("Dosya silinemedi...", error);
+        setError(error);
+        return ""; // Başarısız olduğunu belirt
+    } finally {
+        setIsLoading(false);
+    }
+}
+async function DeleteFile(id)
+{
+       setIsLoading(true);
+    setError(null);
+    try {
+        // 3. 'api.post' fonksiyonunun ikinci parametresi olarak JSON yerine 'formData'yı verin.
+        let response = await api.delete(`/Uploads/Delete/${id}`);
+        
+        if (response)
+        {           
+            return response.status // Başarılı olduğunu belirt
+        }
+
+    } catch (error) {
+        console.error("Dosya silinemedi...", error);
         setError(error);
         return ""; // Başarısız olduğunu belirt
     } finally {
@@ -268,6 +310,8 @@ async function GetFiles()
         ModifyContent,
         MapExperiment,
         UploadImage,
-        GetFiles
+        GetFiles,
+        RenameFile,
+        DeleteFile
     };
 }

@@ -145,7 +145,7 @@
   color:#00ffbb;
 }
 
-.menu-bar button:hover, .menu-bar select:hover {
+.menu-bar button:hover, .menu-bar select:hover,.menu-bar select::selection {
   background-color: var(--background-color);
 }
 

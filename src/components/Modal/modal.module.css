@@ -19,17 +19,18 @@
     top:0;
     background-color: rgba(0,0,0,0.5);
     width:100%; 
-    height: 100vh;
-    z-index: 20;   
+    height: 150%;
+    z-index: 1001;  
 }
 .MainFrameClose{
     display:none;
 }
 .Content{        
-    margin:20vh 10vw;    
+    margin:10vh 10vw;    
     padding-bottom:10px;
     background-color: var(--background-color);
     color:aliceblue;
+    
 }
 .MenuBar{
     display:flex;

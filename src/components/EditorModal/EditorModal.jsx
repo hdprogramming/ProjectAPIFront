@@ -13,8 +13,7 @@ import { Paragraph } from '@tiptap/extension-paragraph';
 import Modal from "../Modal/Modal";
 import './styles.css';
 import 'tiptap-extension-resizable-image/styles.css';
-import CustomCheckBox from '../MainComponents/CustomCheckBox/CustomCheckBox';
-import StyledFileInput from '../StyledFileInput/StyledFileInput';
+
 // İkonları import ediyoruz
 import {
   FaBold, FaItalic, FaUnderline, FaStrikethrough,
@@ -24,8 +23,8 @@ import {
   FaRedo,FaUndo
 } from 'react-icons/fa';
 import { TbLetterCaseToggle } from 'react-icons/tb';
-import ImageUploader from '../ImageUploader/ImageUploader';
-import useExperiment from '../../utils/useExperiment';
+import ImageAdd from '../ImageAdd/ImageAdd'
+
 
 // --- Satır Yüksekliği Eklentisi (Öncekiyle aynı) ---
 const CustomLineHeight = Paragraph.extend({
@@ -110,7 +109,7 @@ const MenuBar = ({ editor }) => {
         onClick={(e) => { e.preventDefault(); editor.chain().focus().undo().run(); }} 
         disabled={!editorState.canUndo}
         title="Undo">
-        <FaUndo /> {/* <-- İkonu düzeltin */}
+        <FaUndo /> 
       </button>
 <button 
         onClick={(e) => { e.preventDefault(); editor.chain().focus().redo().run(); }} 
@@ -170,10 +169,10 @@ const MenuBar = ({ editor }) => {
       <Modal title="GörselEkle" wndtitle="Görsel Ekleme Penceresi" btntitle={<FaImage />}>
       {(onClose)=>(
       <div className='pictureAddDiv'>
-        <ImageUploader  onAddImage={(e)=>{
+        <ImageAdd  onAddImage={(e)=>{
                   onClose(e);
         addImage(e);
-        console.log(imageurl);}} setKeepRatio={setKeepRatio} setImageUrl={setImageUrl} ></ImageUploader>
+        console.log(imageurl);}} setKeepRatio={setKeepRatio} setImageUrl={setImageUrl} ></ImageAdd>
        
       
       </div>)}

@@ -1,22 +1,26 @@
-import React, { useState, useEffect, Suspense } from 'react';
-import styles from './imageuploader.module.css'; // Stilleri yandaki dosyadan çekeceğiz
+import React, { useState, useEffect, Suspense ,useRef} from 'react';
+import styles from './imageadd.module.css'; // Stilleri yandaki dosyadan çekeceğiz
 import CustomCheckBox from '../MainComponents/CustomCheckBox/CustomCheckBox';
 import useExperiment from '../../utils/useExperiment';
 import StatusRenderer from '../../utils/StatusRenderer';
 import { useProjectId } from '../../utils/ProjectIDContext';
-function ImageUploader({onAddImage,setKeepRatio,setImageUrl}) {
+import {
+ 
+  FaEdit,
+  FaTrash
+} from 'react-icons/fa';
+function ImageAdd({onAddImage,setKeepRatio,setImageUrl}) {
   const [fileName, setFileName] = useState('Henüz dosya seçilmedi...');
   // 1. Önizleme URL'i için state (Bu zaten doğruydu)
   const [previewSrc, setPreviewSrc] = useState(null); 
-  const {isLoading,error,UploadImage,GetFiles}=useExperiment();
+  const {isLoading,error,UploadImage,GetFiles,DeleteFile,RenameFile}=useExperiment();
   const [disableButton,setState]=useState(true);
   // 2. Asıl 'File' nesnesini saklamak için state
   // (Not: Değişken adını 'File' yerine 'file' yaptım, 
   // 'File' JavaScript'in yerleşik bir adıdır, kafa karıştırmasın)
   const [files,setFiles]=useState([]);
-  
-  useEffect(()=>{
-   async function GetFilesServer(){
+  const [selectedImageFile,setSelectedImageFile]=useState({id:0,"name":"yok"});
+  async function GetFilesServer(){
     const fetchedfiles=await GetFiles();
     if(fetchedfiles)
     {
@@ -25,16 +29,22 @@ function ImageUploader({onAddImage,setKeepRatio,setImageUrl}) {
     }
       
    }
+  useEffect(()=>{
+   
    GetFilesServer();
   },[]); 
  
   const [file, setFile] = useState(null);
   const projectid = useProjectId();
+  const filenametextbox=useRef();
 const handleUpdateClick=async()=>{
-   let imageurl=await UploadImage(file.name,file,projectid);
+  let imagename=filenametextbox.current.value;
+  if(imagename==null || imagename=="")
+    imagename=file.name;
+   let imageurl=await UploadImage(imagename,file,projectid);
    setImageUrl(imageurl);
    setState(false);
-   
+   GetFilesServer();
 }
   // 3. Hafıza temizleme (Bu zaten doğruydu)
   useEffect(() => {
@@ -48,13 +58,16 @@ const handleUpdateClick=async()=>{
   const handleImageFilesChange=(event)=>{
                setPreviewSrc(event.target.value);
                 setImageUrl(event.target.value);
-   setState(false);
+                let SelectedItem=event.target.selectedOptions[0];                
+                setSelectedImageFile({id:SelectedItem.id,name:SelectedItem.innerText});
+                filenametextbox.current.value=SelectedItem.innerText;
+                setState(false);
   }
   const handleFileChange = async(event) => {
     if (previewSrc) {
       URL.revokeObjectURL(previewSrc);
     }
-
+     setState(true);
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {
@@ -72,6 +85,18 @@ const handleUpdateClick=async()=>{
       setFile(null);
     }
   };
+  const handleFileDelete=async()=>{
+    if(confirm("Silmek istediğinizden Eminmisiniz?"))
+    {
+      await DeleteFile(selectedImageFile.id);
+      await GetFilesServer();
+    }
+  }
+  const handleFileRename=async()=>{
+    let RenamedName=filenametextbox.current.value;
+    await RenameFile(selectedImageFile.id,RenamedName);
+    await GetFilesServer();
+  }
     const statusContent = (
     <StatusRenderer 
       isLoading={isLoading} 
@@ -119,14 +144,22 @@ const handleUpdateClick=async()=>{
      
       <CustomCheckBox name={"Ratio"} checktext={"En/Boy oranı korunsun"} setValue={setKeepRatio}></CustomCheckBox>
       </div>
-      <div style={{width:'200px'}}>
-       Yüklenmiş Dosyalarınız
-       <select onChange={handleImageFilesChange}>
+      <div style={{display:'flex',flexDirection:'column',width:'400px'}}>
+     
+       <div style={{display:'flex',flexDirection:'row'}}>
+         <label>Yüklenmiş dosyalarınız:</label>
+       <select  onChange={handleImageFilesChange}>
        {files.map((f)=>
       {
-        return <option value={f.url}>{f.name}</option>
+        return <option id={f.id} value={f.url}>{f.name}</option>
       })}
        </select>
+        <button style={{padding:'1px'}} title="Resmin Adını Değiştir" onClick={handleFileRename}><FaEdit/></button>
+        <button style={{padding:'1px'}} title="Resmi sil" onClick={handleFileDelete}><FaTrash/></button>
+        </div>
+      <div >
+      <label >Dosya Adı:</label>
+       <input type="text" ref={filenametextbox}></input></div>
       </div>
        
  
@@ -136,4 +169,4 @@ const handleUpdateClick=async()=>{
   </Suspense>);
 }
 
-export default ImageUploader;
+export default ImageAdd;
