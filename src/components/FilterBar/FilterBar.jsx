@@ -4,7 +4,7 @@ import styles from '../FilterBar/filterbar.module.css';
 // children artık bir render prop (bir fonksiyon) olarak işlev görecek
 const FilterBar = ({ children, contents }) => {
     const [sortedContent, setSortedContent] = useState([...contents]);
-    const [currentSort, setCurrentSort] = useState("TITLE_ASC"); // Varsayılan sıralama
+    const [currentSort, setCurrentSort] = useState("LASTDATE_DESC"); // Varsayılan sıralama
     
     // ... parseDate fonksiyonu aynı kalır ...
     const parseDate = (dateStr) => {

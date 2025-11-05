@@ -5,11 +5,13 @@ const Modal = ({ children,btntitle,wndtitle }) => {
     const MainFrame=useRef();
      function onOpen(e)
     {
+      if(e)
       e.preventDefault();
       MainFrame.current.className=styles.MainFrame;
     }
     function onClose(e)
     {
+      if(e)
       e.preventDefault();
       MainFrame.current.className=styles.MainFrameClose;
     }

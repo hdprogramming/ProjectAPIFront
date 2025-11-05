@@ -40,11 +40,12 @@
 .contentPreview {
   width: 100%;
   min-height: 150px;
+  max-height: 200px;
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 0.5rem 1rem;
   background-color: transparent;
-  resize: vertical;
+  /*resize: vertical;*/
   overflow-y: auto;
   margin-bottom: 0.5rem;
 }

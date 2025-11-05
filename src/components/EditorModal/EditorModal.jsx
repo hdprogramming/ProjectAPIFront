@@ -57,12 +57,8 @@ const MenuBar = ({ editor }) => {
   const [imageurl,setImageUrl]=useState("");
   const [keepratio,setKeepRatio]=useState(false);
   
-  //useEffect(()=>{
-    //image.current.src=imagefilesrc;
-  //},[imagefile]);
-  // Fonksiyonlara (e) parametresi eklendi ve preventDefault() çağrıldı
-  const addImage = (e) => {
-    e.preventDefault(); // Eklendi
+   const addImage = (e) => {
+    if(e)e.preventDefault(); // Eklendi
     let url=imageurl;
     
     if (url) editor.chain().focus().setResizableImage({ src: url,width:'200px',height:'200px', 'data-keep-ratio': keepratio, }).run();
@@ -169,9 +165,9 @@ const MenuBar = ({ editor }) => {
       <Modal title="GörselEkle" wndtitle="Görsel Ekleme Penceresi" btntitle={<FaImage />}>
       {(onClose)=>(
       <div className='pictureAddDiv'>
-        <ImageAdd  onAddImage={(e)=>{
-                  onClose(e);
-        addImage(e);
+        <ImageAdd  onAddImage={()=>{
+                  onClose();
+        addImage();
         console.log(imageurl);}} setKeepRatio={setKeepRatio} setImageUrl={setImageUrl} ></ImageAdd>
        
       

@@ -119,9 +119,7 @@
 
 /* BUTONLAR İÇİN GÜNCELLENMİŞ STİL */
 .menu-bar button {
-  margin: 0.15rem;
-  border: 1px solid #00ffbb;
-   
+  margin: 0.15rem; 
   cursor: pointer;
   border-radius: 4px;
   

@@ -67,6 +67,7 @@ const FileElement = ({ src, name, id, setSelected,onDelete, size = '50px' }) => 
 
   return (
     <div
+       id={"div"+id}
       className={styles.FileElementMain}
       onClick={() => {
         setSelected(id);
@@ -116,7 +117,10 @@ const FileElement = ({ src, name, id, setSelected,onDelete, size = '50px' }) => 
           ref={nameLabelRef} // Ref'i label'a atadık
           contentEditable={Edit} // Edit true ise düzenlenebilir
           style={{
-            width: '100px',
+            width: '90px',
+            textAlign:'center',
+             textOverflow: 'ellipsis',
+             overflow: 'hidden', 
             border: Edit ? '1px solid #00ffbb' : 'none',
           }}
           htmlFor={"Image" + id}

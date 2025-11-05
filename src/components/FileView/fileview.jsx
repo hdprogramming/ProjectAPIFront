@@ -25,7 +25,7 @@ import useExperiment from '../../utils/useExperiment';
     // setFileList çağrıldığı anda ParentComponent yeniden render edilir.
   };
   return (
-   <div >
+   <div style={{width:'40vw'}}>
       <div style={{borderBottom:'1px solid #04ff00ff'}}>
              <label>Dosyalarınız</label>
         </div>       
@@ -37,7 +37,7 @@ import useExperiment from '../../utils/useExperiment';
     display: 'flex',
     justifyContent: 'space-around',
     flexWrap: 'wrap',
-    padding: '10px',
+    padding: '5px',
     overflowY:'visible'
   }}>
 
