@@ -10,7 +10,8 @@ const Profile = () => {
    
     // 1. Veri ve Yükleme Durumları İçin State Tanımlama
     const { UserID, Logoff } = useAuth();
-    const { GetUserData, isLoading, errors, GetFiles } = useExperiment();
+    
+    const { GetUserData, isLoading, errors} = useExperiment();
     function EmailMasker(emailtext)
     {
      return "**"+String(emailtext).slice(2);

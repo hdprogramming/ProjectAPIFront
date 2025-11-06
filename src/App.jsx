@@ -5,14 +5,14 @@ import './components/project-item/Project-item'
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
-import Profile from './pages/profile';
+import Profile from './pages/Profile';
 import Navbar from './components/navbar/navbar';
 import ExperimentList from './pages/ExperimentList';
 import NewExperiment from './pages/NewExperiment';
 import ModExperiment from './pages/ModExperiment';
 import DelExperiment from './pages/DelExperiment';
 import ViewProject from './pages/ViewProject';
-import { AuthProvider,useAuth} from './contexts/AuthContext';
+
 import LoginWindow from './pages/Login';
 import LogoffWindow from './pages/Logoff';
 import { FetchUtilsProvider } from './contexts/FetchUtils';
@@ -24,8 +24,7 @@ axios.defaults.withCredentials = true;
 function App() {
   
   return (
-    <>
-    <AuthProvider>
+    <>   
       <FetchUtilsProvider>
       <div className="App" >
         <Navbar />
@@ -48,12 +47,10 @@ function App() {
             <Route path="/deney/del/" element={<DelExperiment  />} /> {/* Yeni proje güncelleme */}
             {/* 4. Opsiyonel: Eşleşen bir rota bulunamazsa (404 Not Found) gösterilir. */}
             <Route path="*" element={<h2 style={{ color: 'red' }}>404 - Sayfa Bulunamadı</h2>} />
-
           </Routes>
         </div>
-      </div></FetchUtilsProvider></AuthProvider>
+      </div></FetchUtilsProvider>
     </>
   )
 }
-
 export default App

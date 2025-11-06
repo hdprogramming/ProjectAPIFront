@@ -48,6 +48,10 @@ const ViewProject=()=>{
     return (
      
      <div className={styles.ExperimentContent}>
+      <div style={{display:'flex',justifyContent:'right'}}>
+        <Link  to="/">Geri Dön</Link>
+        </div>
+       
        <h2>{experiment.title} </h2> 
       
        <div dangerouslySetInnerHTML={{__html: experiment.content}}></div>

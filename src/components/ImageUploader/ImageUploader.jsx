@@ -13,8 +13,8 @@ function ImageUploader({ imagename, setImageUrl, setSelectedItem,projectid, onSu
     if (imagename == null || imagename == "")
       imagename = file.name;
     let imageurl = await UploadImage(imagename, file, projectid);
-    setImageUrl(imageurl);
-    setSelectedItem(imageurl);
+    setImageUrl&&setImageUrl(imageurl);
+    setSelectedItem&&setSelectedItem(imageurl);
     onSuccess();
   }
   // 2. Asıl 'File' nesnesini saklamak için state

@@ -1,6 +1,6 @@
 import { useEffect, useState,useRef } from "react";
 import styles from "../Modal/modal.module.css";
-const Modal = ({ children,btntitle,wndtitle }) => {
+const Modal = ({ children,btntitle,wndtitle,custombutton }) => {
     const [isClose,setClose]=useState(true);
     const MainFrame=useRef();
      function onOpen(e)
@@ -17,7 +17,10 @@ const Modal = ({ children,btntitle,wndtitle }) => {
     }
     return (
        <div>
-        <div><button className={styles.OpenButton} onClick={onOpen}>{btntitle}</button></div>
+        <div>
+          {custombutton?(<div onClick={onOpen}>{custombutton}</div>):(<button  className={styles.OpenButton} onClick={onOpen}>{btntitle}</button>)
+}
+          </div>
          <div ref={MainFrame} className={styles.MainFrameClose}>
           <div className={styles.Content}>
             <div className={styles.MenuBar}><label style={{margin:'3px'}}>{wndtitle}</label><button onClick={onClose}>X</button></div>

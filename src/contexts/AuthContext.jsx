@@ -21,6 +21,7 @@ const USERID_KEY = 'userID';
 export const AuthProvider = ({ children }) => {
   const initialToken = sessionStorage.getItem(TOKEN_KEY);
   const initialUserID = sessionStorage.getItem(USERID_KEY);
+ 
   const [isLogin, setIsLogin] = useState(!!initialToken);
   const [Token, setToken] = useState(initialToken);
   const [UserID, setUserID] = useState(initialUserID);
@@ -46,7 +47,7 @@ export const AuthProvider = ({ children }) => {
     setIsLogin(false);
     setToken(null);
     setUserID(null);
-    // Session Storage'ı temizle
+    
     sessionStorage.removeItem(TOKEN_KEY);
     sessionStorage.removeItem(USERID_KEY);
     Navigate("/login");
@@ -81,8 +82,7 @@ export const AuthProvider = ({ children }) => {
           // Axios, bu isteğe HttpOnly Cookie içindeki Refresh Token'ı otomatik ekler!
           const refreshResponse = await axios.post(`${apidomain}/Auth/refresh`);
 
-          const newAccessToken = refreshResponse.data.Token;
-
+          const newAccessToken = refreshResponse.data.token;          
           // 2. Yeni Access Token'ı state'e kaydet
           setToken(newAccessToken);
           setIsLogin(true);
