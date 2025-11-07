@@ -47,11 +47,12 @@ const CustomButton=()=>{
     height:'300px',overflow:'auto'}} >
 
  
-  <div style={{    
+  <div style={{ 
+    marginLeft:'25px',   
     display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'left',
     flexWrap: 'wrap',
-    padding: '5px',
+    padding: '10px',
     overflowY:'visible'
   }}>
    <Modal wndtitle="Dosya Yükle" custombutton={<CustomButton/>}>{(onClose)=>(
