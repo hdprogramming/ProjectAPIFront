@@ -54,14 +54,16 @@ function ImageAdd({onAddImage,setKeepRatio,setImageUrl}) {
                 setDisableState(false);
   }
   
-  const handleFileDelete=async()=>{
+  const handleFileDelete=async(e)=>{
+    e.preventDefault();
     if(confirm("Silmek istediğinizden Eminmisiniz?"))
     {
       await DeleteFile(selectedImageFile.id);
       await GetFilesServer();
     }
   }
-  const handleFileRename=async()=>{
+  const handleFileRename=async(e)=>{
+      e.preventDefault();
     let RenamedName=filenametextbox.current.value;
     await RenameFile(selectedImageFile.id,RenamedName);
     await GetFilesServer();

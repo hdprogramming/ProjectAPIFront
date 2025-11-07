@@ -40,13 +40,8 @@ const FileElement = ({ src, name, id, setSelected,onDelete, size = '50px' }) => 
     // 1. Yeni adı state'e kaydet (veya API/üst bileşene gönder)
     const newName = e.currentTarget.textContent;
     setCurrentName(newName);
-    RenameFile(id,newName);
-     FetchData();
-    // **ÖNEMLİ:** Buraya, dosya adını kalıcı olarak
-    // kaydetme (örneğin bir API çağrısı veya üst bileşene prop ile gönderme) 
-    // mantığınızı eklemelisiniz.
-
-    // 2. Edit modunu kapat
+    RenameFile(id,newName);   
+ 
     setEdit(false);
   };
 
@@ -127,7 +122,7 @@ const FileElement = ({ src, name, id, setSelected,onDelete, size = '50px' }) => 
           onBlur={handleEditBlur} // Odaklanma kaybolduğunda (dışarı tıklanınca) adı kaydet ve modu kapat
           onKeyDown={handleKeyDown} // Enter'a basıldığında düzenlemeyi bitir
         >
-          {currentName} {/* Prop'tan gelen adı değil, state'teki adı göster */}
+          {name} 
         </label>
       </div>
     </div>

@@ -165,7 +165,8 @@ const MenuBar = ({ editor }) => {
       <Modal title="GörselEkle" wndtitle="Görsel Ekleme Penceresi" btntitle={<FaImage />}>
       {(onClose)=>(
       <div className='pictureAddDiv'>
-        <ImageAdd  onAddImage={()=>{
+        <ImageAdd  onAddImage={(e)=>{
+          e.preventDefault();
                   onClose();
         addImage();
         console.log(imageurl);}} setKeepRatio={setKeepRatio} setImageUrl={setImageUrl} ></ImageAdd>

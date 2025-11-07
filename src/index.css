@@ -25,15 +25,15 @@
   background: #00aa00; 
 }
 body{
-  /*background-color: #1a2a1a;
-            background-image:
-                linear-gradient(to right, rgba(0, 255, 102, 0.1) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 255, 102, 0.1) 1px, transparent 1px),
-                radial-gradient(circle at 10% 20%, rgba(0, 255, 153, 0.1) 0%, transparent 50%);
-            background-size: 30px 30px, 30px 30px, cover;
-            background-attachment: fixed;*/
-            background-image: url('/public/background2.jpg');
-            background-repeat: repeat;
+   background-color: #0a2710;
+          background-image:
+    /* Yatay Çizgiler: Mavi-Gri, %10 Opaklık */
+    linear-gradient(to right, rgba(100, 100, 100, 0.2) 1px, transparent 1px),
+    /* Dikey Çizgiler: Mavi-Gri, %10 Opaklık */
+    linear-gradient(to bottom, rgba(100, 100, 100, 0.2) 1px, transparent 1px),
+    /* Dairesel Vurgu: Daha Canlı Mavi-Gri, %10 Opaklık */
+    radial-gradient(circle at 10% 20%, rgba(135, 135, 135, 0.2) 0%, transparent 50%);   background-size: 30px 30px, 30px 30px, cover;
+            background-attachment: fixed;
             
             color: #00ff66;
             /* Parlak ZnO:Zn fosfor yeşili */
@@ -69,4 +69,10 @@ button:active,input[type='submit']:active
 {
    border: #ffffff solid 2px;
    color:#ffffff;
+}
+p,h4,h5,li{
+  color:#00ff40;
+}
+h1,h2,h3,strong{
+  color:#00ff88;
 }
