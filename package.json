@@ -1,5 +1,5 @@
 {
-  "name": "blogger",
+  "name": "projectapifront",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -28,7 +28,7 @@
     "@tiptap/extensions": "^3.9.1",
     "@tiptap/react": "^3.8.0",
     "@tiptap/starter-kit": "^3.8.0",
-    "axios": "^1.12.2",
+    "axios": "^1.13.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-draggable": "^4.5.0",
