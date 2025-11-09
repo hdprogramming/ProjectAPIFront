@@ -17,13 +17,13 @@ const Modal = ({ children,btntitle,wndtitle,custombutton }) => {
     }
     return (
        <div>
-        <div>
-          {custombutton?(<div onClick={onOpen}>{custombutton}</div>):(<button  className={styles.OpenButton} onClick={onOpen}>{btntitle}</button>)
+        <div >
+          {custombutton?(<div  key={"UploadBtn"} id="UploadBtn" onClick={onOpen}>{custombutton}</div>):(<button  className={styles.OpenButton} onClick={onOpen}>{btntitle}</button>)
 }
           </div>
          <div ref={MainFrame} className={styles.MainFrameClose}>
           <div className={styles.Content}>
-            <div className={styles.MenuBar}><label style={{margin:'3px'}}>{wndtitle}</label><button onClick={onClose}>X</button></div>
+            <div className={styles.MenuBar}><label style={{margin:'5px'}}>{wndtitle}</label><button onClick={onClose}>X</button></div>
             <div style={{margin:'10px'}}>
           {children(onClose)}
            </div>

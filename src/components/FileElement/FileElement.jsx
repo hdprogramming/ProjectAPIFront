@@ -63,6 +63,7 @@ const FileElement = ({ src, name, id, setSelected,onDelete, size = '50px' }) => 
   return (
     <div
        id={"div"+id}
+       key={"div"+id}
       className={styles.FileElementMain}
       onClick={() => {
         setSelected(id);
@@ -74,9 +75,11 @@ const FileElement = ({ src, name, id, setSelected,onDelete, size = '50px' }) => 
     >
       {isBigImage && (
         <div className={styles.BigImageContainer} >
-          <span className={styles.CloseBtn} onClick={() => {
+          <div className={styles.BigImageMenu}>
+            <label>{name}</label>
+            <span className={styles.CloseBtn} onClick={() => {
             setBigImage(false);
-          }}>X</span>
+          }}>X</span></div>
           <img
             id={"Image" + id}
             src={src}
@@ -90,8 +93,9 @@ const FileElement = ({ src, name, id, setSelected,onDelete, size = '50px' }) => 
         <img
           style={{ width: size, height: size }}
           id={"Image" + id}
+          key={"Image" + id}
           src={src}
-          onDoubleClick={() => { setBigImage(true) }}
+          onClick={() => { setBigImage(true) }}
         />
 
         {isMenuOpen && (

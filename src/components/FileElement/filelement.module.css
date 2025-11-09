@@ -35,6 +35,24 @@ position:relative;
   width: 50%;
   height: 70%;
   z-index: 9999;
+  animation-name: animation1;
+  animation-duration: 0.5s;
+}
+@keyframes animation1 {
+  from{
+   width: 30%;
+  height: 50%;
+    left:calc(50vw - 15%);
+  top:calc(50vh - 25%); 
+  opacity: 0;
+  }
+  to{
+    width: 50%;
+  height: 70%; 
+  left:calc(50vw - 25%);
+  top:calc(50vh - 35%); 
+  opacity: 1px;
+  }
 }
 .BigImageContainer img{
   width:100%;
@@ -45,7 +63,15 @@ position:relative;
   flex-direction: column;
   align-items: center;  
 }
-.CloseBtn{
+.BigImageMenu{
+  background-color: #004f00;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2px;
+}
+.CloseBtn{  
+  margin:3px;
   color:#00aa00;
   position:relative;
   display:flex;

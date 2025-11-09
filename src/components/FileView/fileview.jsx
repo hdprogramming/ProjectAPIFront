@@ -9,7 +9,7 @@ const CustomButton=()=>{
   return(
     
 <button style={{border:'none',display:'flex',flexDirection:'column',
-  alignItems:'center'
+  alignItems:'center',margin:'-5px'
 }}><img width='50px' src='../src/assets/imageadd.png'/>
 <label>Resim Yükle</label>
 </button>
@@ -48,7 +48,7 @@ const CustomButton=()=>{
 
  
   <div style={{ 
-    marginLeft:'25px',   
+    marginLeft:'35px',   
     display: 'flex',
     justifyContent: 'left',
     flexWrap: 'wrap',

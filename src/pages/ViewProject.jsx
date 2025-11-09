@@ -12,14 +12,15 @@ const ViewProject=()=>{
     const { isLogin, api } = useAuth();
     const [isLoading,setIsLoading]=useState(true);
     const [experiment,setExperiment]=useState(null);
-    const [error,setError]=useState(null);
+    const [error,setError]=useState(null); 
+      
     useEffect(()=>{
         const FetchProject=async(id)=>{
           try {
             const response=await api.get("projects/"+id);
           if(response&&response.data)
           {
-             setExperiment(response.data);
+             setExperiment(response.data);            
              setIsLoading(false);
           }
           } catch (error) {
@@ -47,14 +48,14 @@ const ViewProject=()=>{
    
     return (
      
-     <div className={styles.ExperimentContent}>
+     <div  className={styles.ExperimentContent}>
       <div style={{display:'flex',justifyContent:'right'}}>
         <Link  to="/">Geri Dön</Link>
         </div>
        
        <h2>{experiment.title} </h2> 
       
-       <div dangerouslySetInnerHTML={{__html: experiment.content}}></div>
+       <div  dangerouslySetInnerHTML={{__html: experiment.content}}></div>
        {isLogin&&<div style={{ display:'flex',flexDirection:'row-reverse',marginTop: '10px'}}>
                        <Link to={`/deney/del/`} state={{id:experiment.id}}  className={styles.DelLink}>
                             Sil
@@ -62,9 +63,10 @@ const ViewProject=()=>{
                         <Link to={`/deney/modifycontent/`} state={{id:experiment.id,content:experiment.content}} className={styles.ModLink}>
                             Düzenle
                         </Link>
-                        
+                       
                     </div>}
-       <Link to="/">Geri Dön</Link>
+                    
+       {String(experiment.content).length>1500&&<Link to="/">Geri Dön</Link>}
      </div>
     );
 };

@@ -30,16 +30,27 @@
     padding-bottom:10px;
     background-color: var(--background-color);
     color:aliceblue;
-    
+    animation-name: myAnimation;
+  animation-duration: 1s;
+}
+@keyframes myAnimation {
+  from {
+    opacity: 0;
+    margin:20vh 20vw;  
+}
+  to {
+    opacity: 1;
+    margin:10vh 10vw;  
+}
 }
 .MenuBar{
     display:flex;
     justify-content: space-between;
     background-color: RGBA(0,200,0,0.5);
-    padding:2px;
+    padding:5px;
     
 }
-.MenuBar button{
+.MenuBar button,label{
     padding:0.4rem;
     border: none;
     cursor:pointer;
@@ -49,5 +60,7 @@
     text-align: center;
 }
 .MenuBar button:hover{
+    border:none;
+    transform: scale(1.1);
     color:#00ffbb;
 }

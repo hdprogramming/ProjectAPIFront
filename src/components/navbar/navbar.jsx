@@ -27,7 +27,7 @@ const Navbar = () => {
       
          <div className={styles.navLogo}>
             <Link to="/"  >
-        <img width='50px'src='./public/logo.png'></img>
+        <img width='50px'src='../public/Logo.png'></img>
         <div  >Project Explorer</div>
       </Link>
         </div>
