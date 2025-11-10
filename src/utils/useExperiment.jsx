@@ -79,10 +79,10 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
             setIsLoading(false);
         }
     }
-    const GetProjects = async () => {
+    const GetProjects = async (page=1,length=10) => {
         setIsLoading(true);
         try {
-            let response = await api.get(`/Projects`);
+            let response = await api.get(`/Projects/?page=${page}&length=${length}`);
             if (response && response.data) {
                 setIsLoading(false);
                 return response.data;

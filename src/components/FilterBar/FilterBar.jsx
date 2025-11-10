@@ -85,8 +85,7 @@ const FilterBar = ({ children, contents }) => {
                     <option value="DATE_DESC">Tarihe Göre (Önce En Yeni)</option>
                     <option value="DATE_ASC">Tarihe Göre (Önce En Eski)</option>
                 </select>
-            </div>
-           
+            </div>            
             <div className={styles.FilterBar}>
                 {typeof children === 'function' ? children(sortedContent) : children}
             </div>

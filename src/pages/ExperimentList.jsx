@@ -14,10 +14,22 @@ const ExperimentList = () => {
     const { isLoading, error, GetProjects } = useExperiment();
     const [experiments, setExperiments] = useState(null);
     const { getCategoryNameById, getStatusMessageNameById } = useFetchUtils();
-    useEffect(() => {
-        async function FetchProjects() {
-            setExperiments(await GetProjects());
+    const [currentPage,setCurrentPage]=useState(1);
+    const pagelength=5;
+    function NextPage()
+    {
+        setCurrentPage(currentPage+1);
+        FetchProjects(currentPage+1,pagelength);
+    }
+     function BackPage()
+    {
+        setCurrentPage(currentPage-1);
+        FetchProjects(currentPage-1,pagelength);
+    }
+    async function FetchProjects(page=1,length=10) {
+            setExperiments(await GetProjects(page,length));
         }
+    useEffect(() => {       
         FetchProjects();
     }, [])
 
@@ -43,10 +55,11 @@ const ExperimentList = () => {
             <Link to="/deney/yeni" className={styles.NewExperimentButton}
             >+ Yeni Deney Ekle
             </Link>
-
-            <FilterBar contents={experiments}>
+             {experiments.length<2&& <div>Görüntülenecek proje yok</div>}
+            {experiments.length>0&&<FilterBar contents={experiments}>
             {(sortedExperiments) => (
             <ul style={{ listStyle: 'none', padding: 0 }}>
+               
                 {sortedExperiments.map((exp) => (
                     <li
                         key={exp.id}
@@ -106,7 +119,11 @@ const ExperimentList = () => {
                 ))}
             </ul>
             )}
-            </FilterBar>
+            </FilterBar>}
+            <div>
+               {experiments.length>0&&<button onClick={()=>{NextPage()}}>Daha fazlasını Getir</button>}
+           {currentPage>1&&<button onClick={()=>{BackPage()}}>Geri</button>
+}</div>
         </div>
     );
 };

@@ -18,7 +18,7 @@ const Home = () => {
   useEffect(()=>{
     async function FetchProjects()
     {
-      exp=await GetProjects();
+      exp=await GetProjects(1,25);
       setExperiments(exp);
     }
     if(exp===null)
