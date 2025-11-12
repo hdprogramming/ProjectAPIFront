@@ -52,3 +52,51 @@ a{
     padding:6px;
     cursor:pointer;
 }
+/* === Minimalist Sayfalama Stilleri === */
+
+.paginationControls {
+  display: flex;
+  /* Butonları birbirinden ayırmak için 'justify-content' kullanıyoruz */
+  justify-content: space-between; 
+  align-items: center;
+  margin-top: 0px;
+  padding: 10px 0;
+  /* Genellikle 'Geri' solda, 'İleri' sağda olur */
+}
+
+/* "Daha Fazlasını Getir" (Minimal Ana Buton) */
+.loadMoreButton {
+  background-color: transparent;
+  border:none;
+  color: #00ff66;
+  padding: 5px 10px;
+  text-shadow: 0 0 30px black;
+  font-size: 1.1rem; 
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Üzerine gelince renkleri tersine çevir (Invert) */
+.loadMoreButton:hover {
+    border:none;
+  color:#00ffaa; /* Koyu arka plan için */
+  transform: translateY(5px);
+}
+
+/* "Geri" (Minimal İkincil Buton - Sadece Metin) */
+.backButton {
+  background-color: transparent;
+  border: none;
+  color: #cccccc; /* Daha az dikkat çeken bir renk */
+  font-size: 1rem;
+  font-weight: 500; /* Daha ince */
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: color 0.2s ease;
+}
+
+.backButton:hover {
+    border:none;
+  color: #00ffff; /* Üzerine gelince ana renge dönsün */
+   rotate: 10deg;
+}

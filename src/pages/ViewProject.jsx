@@ -6,6 +6,7 @@ import StatusRenderer from "../utils/StatusRenderer";
 import { useAuth } from "../contexts/AuthContext";
 import { useLocation} from "react-router-dom";
 import { ProjectIdProvider } from "../utils/ProjectIDContext";
+import { useFetchUtils } from "../contexts/FetchUtils";
 const ViewProject=()=>{
     const location=useLocation();
     const id=location.state?.id;
@@ -13,7 +14,7 @@ const ViewProject=()=>{
     const [isLoading,setIsLoading]=useState(true);
     const [experiment,setExperiment]=useState(null);
     const [error,setError]=useState(null); 
-      
+    const {getCategoryNameById}=useFetchUtils();
     useEffect(()=>{
         const FetchProject=async(id)=>{
           try {
@@ -31,8 +32,15 @@ const ViewProject=()=>{
       FetchProject(id);
       setIsLoading(true);
     },[api,id])
+    function DateParse(date)
+    {
+      let ds=String(date).split('-');
+      if(ds.length>0)
+      return (ds[2]+"."+ds[1]+"."+ds[0])
+    else return date;
+    }
     // 1. Durumu render et
-  const statusContent = (
+    const statusContent = (
     <StatusRenderer 
       isLoading={isLoading} 
       error={error} 
@@ -52,20 +60,26 @@ const ViewProject=()=>{
       <div style={{display:'flex',justifyContent:'right'}}>
         <Link  to="/">Geri Dön</Link>
         </div>
-       
+        <div style={{display:'flex',justifyContent:'left'}}><label>Tarih:{DateParse(experiment.date)}</label></div> 
        <h2>{experiment.title} </h2> 
       
        <div  dangerouslySetInnerHTML={{__html: experiment.content}}></div>
-       {isLogin&&<div style={{ display:'flex',flexDirection:'row-reverse',marginTop: '10px'}}>
+     
+       {isLogin&&<div style={{ display:'flex',justifyContent:'space-between',marginTop: '10px'}}>
+                       <div style={{display:'flex',justifyContent:'left'}}>{experiment.categoryIds.map(cat=>{
+                return <label   className={styles.TagsBox}>{getCategoryNameById(cat)}</label>
+              })}</div>  
+              <div>
+                    <Link to={`/deney/modifycontent/`} state={{id:experiment.id,content:experiment.content}} className={styles.ModLink}>
+                            Düzenle
+                        </Link>  
                        <Link to={`/deney/del/`} state={{id:experiment.id}}  className={styles.DelLink}>
                             Sil
                         </Link>
-                        <Link to={`/deney/modifycontent/`} state={{id:experiment.id,content:experiment.content}} className={styles.ModLink}>
-                            Düzenle
-                        </Link>
-                       
+                       </div>
+                        
                     </div>}
-                    
+                 
        {String(experiment.content).length>1500&&<Link to="/">Geri Dön</Link>}
      </div>
     );

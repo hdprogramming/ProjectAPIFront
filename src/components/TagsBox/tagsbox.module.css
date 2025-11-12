@@ -9,10 +9,9 @@
     margin: 5px;
     padding: 3px 8px;
     border: 1px solid lime;
-    border-radius: 12px;
+    border-radius: 10px;
     background-color: transparent;
-    cursor: pointer; 
-
+    cursor: pointer;
 }
 
 .select{

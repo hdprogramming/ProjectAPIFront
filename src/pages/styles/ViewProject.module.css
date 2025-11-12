@@ -30,3 +30,12 @@
 .ExperimentContent .DelLink:hover{
     color:#ff0000;
 }
+.TagsBox {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px 10px;
+    border: 1px solid lime;
+    border-radius: 12px;
+    background-color: transparent;
+    cursor: zoom-in;
+}

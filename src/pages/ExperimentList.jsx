@@ -120,9 +120,9 @@ const ExperimentList = () => {
             </ul>
             )}
             </FilterBar>}
-            <div>
-               {experiments.length>0&&<button onClick={()=>{NextPage()}}>Daha fazlasını Getir</button>}
-           {currentPage>1&&<button onClick={()=>{BackPage()}}>Geri</button>
+            <div className={styles.paginationControls}>
+               {experiments.length>0&&<button className={styles.loadMoreButton} onClick={()=>{NextPage()}}>Daha fazlasını Getir</button>}
+           {currentPage>1&&<button className={styles.backButton}  onClick={()=>{BackPage()}}>Geri</button>
 }</div>
         </div>
     );
