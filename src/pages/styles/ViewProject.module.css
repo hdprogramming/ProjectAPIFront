@@ -4,6 +4,10 @@
   flex-direction: column;
    color:#00ff66;
 }
+.ExperimentTitle{
+    color:#00ffbb;
+    font-weight: bolder;
+}
 .ExperimentContent a{
   margin-top:10px;  
   text-decoration: none;

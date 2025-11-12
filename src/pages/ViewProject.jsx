@@ -57,28 +57,29 @@ const ViewProject=()=>{
     return (
      
      <div  className={styles.ExperimentContent}>
-      <div style={{display:'flex',justifyContent:'right'}}>
+      
+      <div style={{display:'flex',justifyContent:'space-between',marginBottom:'20px'}}>
+        <div style={{display:'flex',justifyContent:'left'}}>
+        {experiment.categoryIds.map(cat=>{
+                return <label   className={styles.TagsBox}>{getCategoryNameById(cat)}</label>
+              })}</div>
         <Link  to="/">Geri Dön</Link>
         </div>
-        <div style={{display:'flex',justifyContent:'left'}}><label>Tarih:{DateParse(experiment.date)}</label></div> 
-       <h2>{experiment.title} </h2> 
-      
+        <h2 className={styles.ExperimentTitle}>{experiment.title}</h2>        
        <div  dangerouslySetInnerHTML={{__html: experiment.content}}></div>
      
-       {isLogin&&<div style={{ display:'flex',justifyContent:'space-between',marginTop: '10px'}}>
-                       <div style={{display:'flex',justifyContent:'left'}}>{experiment.categoryIds.map(cat=>{
-                return <label   className={styles.TagsBox}>{getCategoryNameById(cat)}</label>
-              })}</div>  
-              <div>
+       <div style={{ display:'flex',justifyContent:'space-between',marginTop: '10px'}}>
+                        
+              {isLogin??<div>
                     <Link to={`/deney/modifycontent/`} state={{id:experiment.id,content:experiment.content}} className={styles.ModLink}>
                             Düzenle
                         </Link>  
                        <Link to={`/deney/del/`} state={{id:experiment.id}}  className={styles.DelLink}>
                             Sil
                         </Link>
-                       </div>
+                       </div>}
                         
-                    </div>}
+                    </div>
                  
        {String(experiment.content).length>1500&&<Link to="/">Geri Dön</Link>}
      </div>
