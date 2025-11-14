@@ -55,29 +55,31 @@ const ViewProject = () => {
   return (
 
     <div className={styles.ExperimentContent}>
-
+     
       <div style={{ display: 'flex', justifyContent: 'right', marginBottom: '20px' }}>
 
-        <Link to="/">Geri Dön</Link>
+        <Link to="/" className={styles.ExperimentBack}>Geri Dön</Link>
+        
       </div>
-      <h2 className={styles.ExperimentTitle}>{experiment.title}</h2>
-      <div dangerouslySetInnerHTML={{ __html: experiment.content }}></div>
-      <div style={{ display: 'flex', alignContent: 'right' }}>
-        {experiment.categoryIds.map(cat => {
-          return <label className={styles.TagsBox}>{getCategoryNameById(cat)}</label>
-        })}</div>
-      <div style={{ display: 'flex', justifyContent: 'right', marginTop: '10px' }}>
-        {isLogin && <div>
+        {isLogin && <div style={{ display: 'flex', justifyContent: 'right', marginTop: '10px' }}>
+      <div>
           <Link to={`/deney/modifycontent/`} state={{ id: experiment.id, content: experiment.content }} className={styles.ModLink}>
             Düzenle
           </Link>
           <Link to={`/deney/del/`} state={{ id: experiment.id }} className={styles.DelLink}>
             Sil
           </Link>
-        </div>}
-      </div>
+        </div></div>}
+      <h2 className={styles.ExperimentTitle}>{experiment.title}</h2>
+      <div dangerouslySetInnerHTML={{ __html: experiment.content }}></div>
+      <div style={{ display: 'flex', alignContent: 'right' }}>
+        {experiment.categoryIds.map(cat => {
+          return <label className={styles.TagsBox}>{getCategoryNameById(cat)}</label>
+        })}</div>
+       
+      
 
-      {String(experiment.content).length > 1500 && <Link to="/">Geri Dön</Link>}
+      {String(experiment.content).length > 1500 && <Link to="/" className={styles.ExperimentBack}>Geri Dön</Link>}
     </div>
   );
 };

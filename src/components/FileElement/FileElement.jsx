@@ -1,16 +1,18 @@
 import { useState, useRef, useEffect } from 'react';
 import styles from '../FileElement/filelement.module.css';
 import useExperiment from '../../utils/useExperiment';
+import { ESModulesEvaluator } from 'vite/module-runner';
 
 
 // Varsayılan olarak size prop'u eklendi
 // Yeni adın kaydedilmesi için 'onRename' veya 'onChange' gibi bir prop eklenmesi *önerilir*
-const FileElement = ({ src, name, id, setSelected,onDelete, size = '50px' }) => {
+const FileElement = ({ src, name, id, selectedFileID,setSelected,onDelete, size = '50px' }) => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBigImage, setBigImage] = useState(false);
   const [Edit, setEdit] = useState(false);
   const [currentName, setCurrentName] = useState(name); // Dosya adını state'te tutalım
+  const [isSelected,setSelectedFile]=useState(false);
   const {RenameFile,DeleteFile}=useExperiment();
   // label elementine erişmek için useRef kullanalım
   const nameLabelRef = useRef(null);
@@ -22,7 +24,11 @@ const FileElement = ({ src, name, id, setSelected,onDelete, size = '50px' }) => 
       nameLabelRef.current.focus(); // label'ı otomatik odakla
     }
   }, [Edit]);
-
+ useEffect(()=>{
+ if(selectedFileID==id)
+  setSelectedFile(true);
+else setSelectedFile(false);
+ },[setSelected])
   // Sağ tık olayını ele alan fonksiyon
   const handleContextMenu = (e) => {
 
@@ -59,14 +65,16 @@ const FileElement = ({ src, name, id, setSelected,onDelete, size = '50px' }) => 
      onDelete(id);
       }
   }
-
+  let style={ border:isSelected?'1px dashed aqua':'none'}
   return (
     <div
        id={"div"+id}
        key={"div"+id}
       className={styles.FileElementMain}
+      style={style}
       onClick={() => {
-        setSelected(id);
+        setSelected({id:id,src:src,name:name});
+        
         setEdit(false); // Normal tıklamada edit modunu kapat
       }}
       onContextMenu={handleContextMenu}
@@ -95,7 +103,7 @@ const FileElement = ({ src, name, id, setSelected,onDelete, size = '50px' }) => 
           id={"Image" + id}
           key={"Image" + id}
           src={src}
-          onClick={() => { setBigImage(true) }}
+          onDoubleClick={() => { setBigImage(true) }}
         />
 
         {isMenuOpen && (

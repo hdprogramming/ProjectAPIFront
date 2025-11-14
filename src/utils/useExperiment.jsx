@@ -8,7 +8,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
     const [experiment, setExperiment] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true); // Başlangıçta true olmalı
-
+    const minpasswordlength=4;
     // 1. VERİ ÇEKME İŞLEMİNİ useEffect İÇİNDE OTOMATİK BAŞLAT
     useEffect(() => {
         const fetchProject = async () => {
@@ -170,6 +170,32 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
         }
         return ExpDTO;
     }
+    function ValidateFormValue(val)
+    {
+        if(val==undefined)
+            return false;
+        else if(val=="")
+            return false;
+        else if(val.length<2)
+            return false;
+        else 
+            return true;
+    }
+    function MapUser(newUserData) {
+        
+        const UserDTO = {
+           }
+           if(ValidateFormValue(newUserData.userName))
+           UserDTO.userName=newUserData.userName;
+         if(ValidateFormValue(newUserData.bio))
+           UserDTO.bio=newUserData.bio;
+         if(ValidateFormValue(newUserData.password))
+           UserDTO.password=newUserData.password;
+          if(ValidateFormValue(newUserData.ProfileImageUrl))
+           UserDTO.ProfileImageUrl=newUserData.ProfileImageUrl;
+        
+        return UserDTO;
+    }
     async function ModifyContent(id, content) {
         setIsLoading(true);
         setError(null);
@@ -293,6 +319,34 @@ async function DeleteFile(id)
         setIsLoading(false);
     }
 }
+async function UserUpdate(userdata,UserID)
+{
+
+    if(userdata)
+    {
+            setIsLoading(true);
+    setError(null);
+        try {
+            let response=await api.put(`/Users/TargetUserID`,MapUser(userdata),
+        { 
+    params: {
+      TargetUserID: UserID 
+    }
+  });
+           if(response)
+           {
+            return response.status;
+           }
+          
+        } catch (error) {
+            console.log(error);
+            setError(error);
+        }
+        finally{
+            setIsLoading(false);
+        }
+    }
+}
     // Çıktı isimlerini mantıklı hale getirdik
     return {
         api,
@@ -312,6 +366,7 @@ async function DeleteFile(id)
         UploadImage,
         GetFiles,
         RenameFile,
-        DeleteFile
+        DeleteFile,
+        UserUpdate
     };
 }

@@ -17,10 +17,11 @@ const CustomButton=()=>{
   )
 }
 
-   const FileView=({defaultFiles})=>{
+   const FileView=({selectedFileID,setSelectFile})=>{
     const {GetFiles}=useExperiment();
-  const [isSelected,setSelected]=useState(0);
+  
   const [Files, setUserFiles] = useState([]);
+  
    async function FetchUserFiles() {
             const response = await GetFiles();
             if (response)
@@ -62,7 +63,7 @@ const CustomButton=()=>{
     }}></ImageUploader>
    )}</Modal>
    {Files.map(f=>{
-        return <FileElement src={f.url} name={f.name} id={f.id} setSelected={setSelected} onDelete={handleFileDelete}></FileElement>
+        return <FileElement src={f.url} name={f.name} id={f.id} setSelected={setSelectFile} selectedFileID={selectedFileID} onDelete={handleFileDelete}></FileElement>
        })}
 
   </div>

@@ -8,6 +8,8 @@
     color:#00ffbb;
     font-weight: bolder;
 }
+
+
 .ExperimentContent a{
   margin-top:10px;  
   text-decoration: none;
@@ -33,6 +35,12 @@
 }
 .ExperimentContent .DelLink:hover{
     color:#ff0000;
+}
+.ExperimentContent .ExperimentBack{
+    color:#006633;
+}
+.ExperimentContent .ExperimentBack:hover{
+    color:#00ffbb;
 }
 .TagsBox {
     display: inline-block;

@@ -8,6 +8,7 @@ cursor: pointer; /* Fare imlecini tıklanabilir olduğunu belirten el ikonuna d�
 position:relative; 
 }
 
+
 .FileSelector{
    position:absolute; 
   background-color: #009900dd;

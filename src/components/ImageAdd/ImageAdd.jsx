@@ -26,8 +26,7 @@ function ImageAdd({onAddImage,setKeepRatio,setImageUrl}) {
     const fetchedfiles=await GetFiles();
     if(fetchedfiles)
     {
-      setFiles(fetchedfiles);
-      console.log(fetchedfiles);
+      setFiles(fetchedfiles);      
     }
       
    }

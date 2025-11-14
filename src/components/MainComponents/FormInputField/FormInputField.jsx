@@ -26,9 +26,12 @@ const FormInputField = ({
       element = (
         <textarea
           className={styles.textarea}
-          id={name}
+          id={name}          
+        
           {...register(name, validationRules)}
-        />
+        >
+          
+          </textarea>
       );
       break;
 

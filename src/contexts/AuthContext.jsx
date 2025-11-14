@@ -37,9 +37,9 @@ export const AuthProvider = ({ children }) => {
           sessionStorage.setItem(TOKEN_KEY, response.data.token);
           sessionStorage.setItem(USERID_KEY, response.data.userID);
           state = true;
-        }
+        }   
       }
-      );
+      ).catch((error)=>console.log(error));
     return state;
 
   };
