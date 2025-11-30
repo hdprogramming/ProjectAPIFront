@@ -4,24 +4,12 @@ import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { useAuth } from '../../contexts/AuthContext';
-
+import { useScroll } from '../../contexts/ScrollContext';
 const Navbar = () => {
  const { isLogin} = useAuth();
- const [scrolled,setScrolled]=useState(false);
- const handleScrolled=()=>{
-  const offset=window.scrollY;
- if(offset>50)
- {
-  setScrolled(true);
- }else setScrolled(false);
- }
- useEffect(()=>{
- window.addEventListener('scroll',handleScrolled);
- return () => {
-      window.removeEventListener('scroll', handleScrolled);
-    };
- },[])
- const navbarClasses = `${styles.Navbar} ${scrolled ? styles.NavbarScrolled : ''}`;
+ const ScrollY=useScroll();
+ const isScrolled = ScrollY > 50;
+ const navbarClasses = `${styles.Navbar} ${isScrolled ? styles.NavbarScrolled : ''}`;
   return (
     <nav className={navbarClasses}>
       

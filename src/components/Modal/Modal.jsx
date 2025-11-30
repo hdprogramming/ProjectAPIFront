@@ -1,8 +1,9 @@
-import { useEffect, useState,useRef } from "react";
+import { useRef } from "react";
 import styles from "../Modal/modal.module.css";
+
+
 const Modal = ({ children,btntitle,wndtitle,custombutton }) => {
-    const [isClose,setClose]=useState(true);
-    const MainFrame=useRef();
+     const MainFrame=useRef();
      function onOpen(e)
     {
       if(e)
@@ -22,8 +23,8 @@ const Modal = ({ children,btntitle,wndtitle,custombutton }) => {
 }
           </div>
          <div ref={MainFrame} className={styles.MainFrameClose}>
-          <div className={styles.Content}>
-            <div className={styles.MenuBar}><label style={{margin:'5px'}}>{wndtitle}</label><button onClick={onClose}>X</button></div>
+          <div  className={styles.Content}>
+            <div className={styles.MenuBar}><label style={{margin:'5px'}}>{wndtitle}</label><button className={styles.closeButton} onClick={onClose}>X</button></div>
             <div style={{margin:'10px'}}>
           {children(onClose)}
            </div>

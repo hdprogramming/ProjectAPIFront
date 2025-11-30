@@ -5,7 +5,7 @@ import './components/project-item/Project-item'
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
-import Profile from './pages/Profile';
+import Profile from './pages/profile';
 import Navbar from './components/navbar/navbar';
 import ExperimentList from './pages/ExperimentList';
 import NewExperiment from './pages/NewExperiment';
@@ -19,19 +19,21 @@ import { FetchUtilsProvider } from './contexts/FetchUtils';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import ModifyPage from './pages/Modify';
+import { ScrollProvider } from './contexts/ScrollContext';
 axios.defaults.withCredentials = true;
 
 function App() {
-  
+ 
   return (
     <>   
+    <ScrollProvider>
       <FetchUtilsProvider>
-      <div className="App" >
+      <div className="App"  >
         <Navbar />
         {/* <Routes> içine tanımladığımız tüm <Route> bileşenleri
         gözetim altında tutulur ve URL'ye göre eşleştirilir.
       */}
-        <div className="MainContentArea">
+        <div className="MainContentArea" >
           <Routes>
 
             <Route path="/" element={<Home />} />
@@ -49,7 +51,7 @@ function App() {
             <Route path="*" element={<h2 style={{ color: 'red' }}>404 - Sayfa Bulunamadı</h2>} />
           </Routes>
         </div>
-      </div></FetchUtilsProvider>
+      </div></FetchUtilsProvider></ScrollProvider>
     </>
   )
 }

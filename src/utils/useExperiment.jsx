@@ -8,7 +8,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
     const [experiment, setExperiment] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true); // Başlangıçta true olmalı
-    const minpasswordlength=4;
+    
     // 1. VERİ ÇEKME İŞLEMİNİ useEffect İÇİNDE OTOMATİK BAŞLAT
     useEffect(() => {
         const fetchProject = async () => {
@@ -202,7 +202,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
         const newProjectData = { id: id, content: content };
         console.log(newProjectData);
         try {
-            let response = await api.put(`/projects/${id}`, newProjectData);
+            let response = await api.patch(`/projects/${id}`, newProjectData);
             if(response)
             return true; // Başarılı olduğunu belirt
 
@@ -233,12 +233,7 @@ async function UploadImage(name, image,projectid) {
     if(projectid)
     formData.append('ProjectID',projectid);
     console.log("Dosya yüklenmek üzere FormData'ya eklendi...");
-    // Not: console.log(formData) size "[FormData {}]" gibi boş bir obje gösterir.
-    // İçeriğini görmek için:
-    // for (let pair of formData.entries()) {
-    //    console.log(pair[0]+ ', ' + pair[1]); 
-    // }
-
+   
     try {
         // 3. 'api.post' fonksiyonunun ikinci parametresi olarak JSON yerine 'formData'yı verin.
         let response = await api.post(`/Uploads/Image`, formData);
@@ -327,7 +322,7 @@ async function UserUpdate(userdata,UserID)
             setIsLoading(true);
     setError(null);
         try {
-            let response=await api.put(`/Users/TargetUserID`,MapUser(userdata),
+            let response=await api.patch(`/Users/TargetUserID`,MapUser(userdata),
         { 
     params: {
       TargetUserID: UserID 

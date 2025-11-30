@@ -7,20 +7,21 @@ import useExperiment from "../utils/useExperiment";
 import FileView from '../components/FileView/fileview'
 import FormInputField from '../components/MainComponents/FormInputField/FormInputField';
 import { useForm} from 'react-hook-form';
-import ImageUploader from '../components/ImageUploader/ImageUploader';
+import { useScroll } from '../contexts/ScrollContext';
 const Profile = () => {
 
     const [UserData, setUserData] = useState();
     // 1. Veri ve Yükleme Durumları İçin State Tanımlama
-    const { UserID, Logoff } = useAuth();
-    const [lockSubmit, setLockSubmit] = useState(false);
+    const { UserID, Logoff } = useAuth();    
     const { GetUserData, UserUpdate, isLoading, errors } = useExperiment();
     const [isPasswordUpdate,setPasswordUpdate]=useState(false);
     const [selectedFileID,setSelectedFile]=useState();
     const [selectedFileName,setSelectedFileName]=useState("Seçilmemiş");
+    
     function EmailMasker(emailtext) {
         return "**" + String(emailtext).slice(2);
     }
+   
     async function FetchUserData(id) {
         const response = await GetUserData(id);
         if (response)
@@ -29,9 +30,7 @@ const Profile = () => {
             Logoff();
         }
     }
-
     useEffect(() => {
-
         FetchUserData(UserID);
     }, []);
     const statusContent = (
@@ -45,9 +44,7 @@ const Profile = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors: err },
-        trigger,
-        control,
+        formState: { errors: err },        
         setValue,
     } = useForm({
         defaultValues: {
@@ -56,7 +53,6 @@ const Profile = () => {
             password:undefined,
             bio:undefined
         }
-
     });
     const UpdateUser = async (data) => {
         
@@ -72,7 +68,7 @@ const Profile = () => {
                             }); 
         setSelectedFile(file.id);
         setSelectedFileName(file.name);
-        console.log(file);
+        //console.log(file);
     }
     // 2. Eğer yükleniyor veya hata varsa, sadece durumu göster
     if (isLoading || errors) {
@@ -80,7 +76,7 @@ const Profile = () => {
     }
     // 4. Veri Yüklendikten Sonra İçeriği Gösterme
     return (
-        <div style={{ display: 'flex', flexDirection: "column", gap: '5px' }}>
+        <div style={{ display: 'flex', flexDirection: "column", gap: '5px' }} >
             <div style={{ padding: '20px', border: '1px solid #00ff66' }}>
 
                 <h1>Profiliniz</h1>
@@ -88,7 +84,7 @@ const Profile = () => {
                 <p><strong>Adınız:</strong> {UserData.userName}</p>
                 <p><strong>E-posta:</strong> {EmailMasker(UserData.email)}</p>
                 <p><strong>Hakkında:</strong> {UserData.bio ? UserData.bio : "yok"}</p>
-
+              
             </div>
             <div style={{ border: '1px solid #00ff66' }}>
                 <h3 style={{ display: 'flex', justifyContent: 'center', margin: '10px' }}>Kullanıcı Bilgilerini Güncelle</h3>
@@ -116,8 +112,7 @@ const Profile = () => {
                            minLength: { value: 8, message: 'Minimum 8 karakter olmalı.' }
                         }}
                     ></FormInputField>
-                    }
-                    
+                    }                    
                     <FormInputField
                         labeltext="Bio"
                         register={register}
@@ -127,24 +122,9 @@ const Profile = () => {
                     >
                     </FormInputField>
                     <input type="hidden" name="ProfileImageUrl" ></input>
-
                     <label>Profil Resminiz:{selectedFileName}</label>
-                    <ImageUploader
-                        // ImageUploader URL'yi ürettiğinde bu fonksiyonu çağıracak
-                        onSuccess={async (generatedUrl) => {
-                            setLockSubmit(true);
-                            setValue('ProfileImageUrl', await generatedUrl, {
-                                shouldValidate: true, // Opsiyonel: Değer değişince validasyon çalışsın
-                                shouldDirty: true   // Opsiyonel: Formun "değiştiğini" (kirli) işaretle
-                            }); 
-                            setLockSubmit(false);
-                        }}
-                    />
-
-                    <input disabled={lockSubmit} type="submit" value={lockSubmit ? "Lütfen Bekleyiniz" : "Güncelle"}></input>
+                    <input  type="submit" value={ "Güncelle"}></input>
                 </form>
-
-
             </div>
             <div style={{ border: '1px solid #00ff66' }}>
                 <FileView selectedFileID={selectedFileID} setSelectFile={setSelectFile}>
