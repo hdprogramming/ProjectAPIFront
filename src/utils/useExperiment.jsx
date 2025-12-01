@@ -46,7 +46,7 @@ export default function useExperiment(id) { // Fonksiyon tanımını düzelttik
                 response = await api.post("/Projects", newProjectData); // POST: ID genellikle dışarıda kalır
             else {
                 newProjectData.id = id;
-                response = await api.put(`/projects/${id}`, newProjectData);
+                response = await api.patch(`/projects/${id}`, newProjectData);
             }
 
             // API'den dönen veriyi (veya gönderdiğimiz veriyi) state'e set et
